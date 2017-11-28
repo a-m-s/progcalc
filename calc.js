@@ -26,7 +26,7 @@ var template='\
 	  <td><input onInput="intchanged(this, 10)" placeholder="0" class="udecbox"></input></td> \n\
 	</tr> \n\
 	<tr> \n\
-	  <td>Float32:</td> \n\
+	  <td>Float:</td> \n\
 	  <td><input onInput="floatchanged(this)" placeholder="0" class="floatbox"></input></td> \n\
 	</tr> \n\
 	<tr> \n\
@@ -49,6 +49,39 @@ var rowcount = 0;
 var rowarray = [];
 var optab = [];
 
+function zeropad(s, width) {
+  var out = "";
+  for (var l = width - s.length; l > 0; l--)
+    out += "0";
+  return out + s;
+}
+
+function writevalues8 (row, svalue, isFloat) {
+  var intvalue = new Int8Array(1);
+  var uintvalue = new Uint8Array(intvalue.buffer);
+
+  intvalue[0] = svalue;
+
+  row.hexbox.value = zeropad(uintvalue[0].toString(16), 2);
+  row.octbox.value = zeropad(uintvalue[0].toString(8), 3);
+  row.sdecbox.value = intvalue[0].toString(10);
+  row.udecbox.value = uintvalue[0].toString(10);
+  row.binbox.value = zeropad(uintvalue[0].toString(2), 8);
+}
+
+function writevalues16 (row, svalue, isFloat) {
+  var intvalue = new Int16Array(1);
+  var uintvalue = new Uint16Array(intvalue.buffer);
+
+  intvalue[0] = svalue;
+
+  row.hexbox.value = zeropad(uintvalue[0].toString(16), 4);
+  row.octbox.value = zeropad(uintvalue[0].toString(8), 6);
+  row.sdecbox.value = intvalue[0].toString(10);
+  row.udecbox.value = uintvalue[0].toString(10);
+  row.binbox.value = zeropad(uintvalue[0].toString(2), 16);
+}
+
 function writevalues32 (row, svalue, isFloat) {
   var intvalue = new Int32Array(1);
   var uintvalue = new Uint32Array(intvalue.buffer);
@@ -59,26 +92,60 @@ function writevalues32 (row, svalue, isFloat) {
   else
     intvalue[0] = svalue;
 
-  row.hexbox.value = uintvalue[0].toString(16);
-  row.octbox.value = uintvalue[0].toString(8);
+  row.hexbox.value = zeropad(uintvalue[0].toString(16), 8);
+  row.octbox.value = zeropad(uintvalue[0].toString(8), 11);
   row.sdecbox.value = intvalue[0].toString(10);
   row.udecbox.value = uintvalue[0].toString(10);
   row.floatbox.value = floatvalue[0].toString();
-  row.binbox.value = uintvalue[0].toString(2);
+  row.binbox.value = zeropad(uintvalue[0].toString(2), 32);
 }
 
+function writevalues64 (row, svalue, isFloat) {
+  var floatvalue = new Float64Array(1);
+  var intvalue = new Int32Array(floatvalue.buffer);
+  var uintvalue = new Uint32Array(floatvalue.buffer);
+
+  if (isFloat)
+    floatvalue[0] = svalue;
+  else {
+    intvalue[0] = svalue;
+    intvalue[1] = (svalue / 0x100000000);
+  }
+
+  row.hexbox.value = (zeropad(uintvalue[1].toString(16), 8)
+		      + zeropad(uintvalue[0].toString(16), 8));
+  row.octbox.value = (zeropad(uintvalue[1].toString(8), 11)
+                      + zeropad(uintvalue[0].toString(8), 11));
+  row.sdecbox.value = intvalue[0].toString(10);
+  row.udecbox.value = uintvalue[0].toString(10);
+  row.floatbox.value = floatvalue[0].toString();
+  row.binbox.value = (zeropad(uintvalue[1].toString(2), 32)
+                      + zeropad(uintvalue[0].toString(2), 32));
+}
+
+optab[1] = {
+  size: 8,
+  writevalues: writevalues8
+};
+optab[2] = {
+  size: 16,
+  writevalues: writevalues16
+};
 optab[3] = {
+  size: 32,
   writevalues: writevalues32
+};
+optab[4] = {
+  size: 64,
+  writevalues: writevalues64
 };
 
 function intchanged (box, radix) {
-  var op = box.row.size;
-  optab[op].writevalues (box.row, parseInt(box.value, radix), false);
+  box.row.op.writevalues (box.row, parseInt(box.value, radix), false);
 }
 
 function floatchanged (box) {
-  var op = box.row.size;
-  optab[op].writevalues (box.row, box.value, true);
+  box.row.op.writevalues (box.row, box.value, true);
 }
 
 function rowname (index) {
@@ -112,6 +179,7 @@ function addrow (size) {
   // Initialize new row data
   row.labelpara.innerHTML = row.name;
   row.sizepara.innerHTML = Math.pow(2, size+2).toString() + "-bit";
+  row.op = optab[size];
   row.size = size;
 
   // Save row object
