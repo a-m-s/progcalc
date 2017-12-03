@@ -12,11 +12,16 @@
     <table id="calculator" class="calctable">
     </table>
 
-    <button onClick="addrow(1)" class="addbutton">Add 8-bit value</button>
-    <button onClick="addrow(2)" class="addbutton">Add 16-bit value</button>
-    <button onClick="addrow(3)" class="addbutton">Add 32-bit value</button>
-    <button onClick="addrow(4)" class="addbutton">Add 64-bit value</button>
+    <button onClick="addrow(8)" class="addbutton">Add 8-bit value</button>
+    <button onClick="addrow(16)" class="addbutton">Add 16-bit value</button>
+    <button onClick="addrow(32)" class="addbutton">Add 32-bit value</button>
+    <button onClick="addrow(64)" class="addbutton">Add 64-bit value</button>
 
+    <script src="util.js"></script>
+    <script src="8bit.js"></script>
+    <script src="16bit.js"></script>
+    <script src="32bit.js"></script>
+    <script src="64bit.js"></script>
     <script src="calc.js"></script>
     <p class="footnote">* 64-bit integer <em>input</em> is currently limited to 53-bits.</p>
   </body>

@@ -49,78 +49,54 @@ var rowcount = 0;
 var rowarray = [];
 var optab = [];
 
-function zeropad(s, width) {
-  var out = "";
-  for (var l = width - s.length; l > 0; l--)
-    out += "0";
-  return out + s;
-}
-
 function writevalues8 (row, svalue, isFloat) {
-  var intvalue = new Int8Array(1);
-  var uintvalue = new Uint8Array(intvalue.buffer);
+  row.val.i8[0] = svalue;
 
-  intvalue[0] = svalue;
-
-  row.hexbox.value = zeropad(uintvalue[0].toString(16), 2);
-  row.octbox.value = zeropad(uintvalue[0].toString(8), 3);
-  row.sdecbox.value = intvalue[0].toString(10);
-  row.udecbox.value = uintvalue[0].toString(10);
-  row.binbox.value = zeropad(uintvalue[0].toString(2), 8);
+  row.hexbox.value = row.val.toHex();
+  row.octbox.value = row.val.toOct();
+  row.sdecbox.value = row.val.toSDec();
+  row.udecbox.value = row.val.toUDec();
+  row.binbox.value = row.val.toBin();
 }
 
 function writevalues16 (row, svalue, isFloat) {
-  var intvalue = new Int16Array(1);
-  var uintvalue = new Uint16Array(intvalue.buffer);
+  row.val.i16[0] = svalue;
 
-  intvalue[0] = svalue;
-
-  row.hexbox.value = zeropad(uintvalue[0].toString(16), 4);
-  row.octbox.value = zeropad(uintvalue[0].toString(8), 6);
-  row.sdecbox.value = intvalue[0].toString(10);
-  row.udecbox.value = uintvalue[0].toString(10);
-  row.binbox.value = zeropad(uintvalue[0].toString(2), 16);
+  row.hexbox.value = row.val.toHex();
+  row.octbox.value = row.val.toOct();
+  row.sdecbox.value = row.val.toSDec();
+  row.udecbox.value = row.val.toUDec();
+  row.binbox.value = row.val.toBin();
 }
 
 function writevalues32 (row, svalue, isFloat) {
-  var intvalue = new Int32Array(1);
-  var uintvalue = new Uint32Array(intvalue.buffer);
-  var floatvalue = new Float32Array(intvalue.buffer);
-
   if (isFloat)
-    floatvalue[0] = svalue;
+    row.val.f32[0] = svalue;
   else
-    intvalue[0] = svalue;
+    row.val.i32[0] = svalue;
 
-  row.hexbox.value = zeropad(uintvalue[0].toString(16), 8);
-  row.octbox.value = zeropad(uintvalue[0].toString(8), 11);
-  row.sdecbox.value = intvalue[0].toString(10);
-  row.udecbox.value = uintvalue[0].toString(10);
-  row.floatbox.value = floatvalue[0].toString();
-  row.binbox.value = zeropad(uintvalue[0].toString(2), 32);
+  row.hexbox.value = row.val.toHex();
+  row.octbox.value = row.val.toOct();
+  row.sdecbox.value = row.val.toSDec();
+  row.udecbox.value = row.val.toUDec();
+  row.floatbox.value = row.val.f32[0].toString();
+  row.binbox.value = row.val.toBin();
 }
 
 function writevalues64 (row, svalue, isFloat) {
-  var floatvalue = new Float64Array(1);
-  var intvalue = new Int32Array(floatvalue.buffer);
-  var uintvalue = new Uint32Array(floatvalue.buffer);
-
   if (isFloat)
-    floatvalue[0] = svalue;
+    row.val.f64[0] = svalue;
   else {
-    intvalue[0] = svalue;
-    intvalue[1] = (svalue / 0x100000000);
+    row.val.i32[0] = svalue;
+    row.val.i32[1] = (svalue / 0x100000000);
   }
 
-  row.hexbox.value = (zeropad(uintvalue[1].toString(16), 8)
-		      + zeropad(uintvalue[0].toString(16), 8));
-  row.octbox.value = (zeropad(uintvalue[1].toString(8), 11)
-                      + zeropad(uintvalue[0].toString(8), 11));
-  row.sdecbox.value = intvalue[0].toString(10);
-  row.udecbox.value = uintvalue[0].toString(10);
-  row.floatbox.value = floatvalue[0].toString();
-  row.binbox.value = (zeropad(uintvalue[1].toString(2), 32)
-                      + zeropad(uintvalue[0].toString(2), 32));
+  row.hexbox.value = row.val.toHex();
+  row.octbox.value = row.val.toOct();
+  row.sdecbox.value = row.val.toSDec();
+  row.udecbox.value = row.val.toUDec();
+  row.floatbox.value = row.val.f64[0].toString();
+  row.binbox.value = row.val.toBin();
 }
 
 optab[1] = {
@@ -178,13 +154,18 @@ function addrow (size) {
 
   // Initialize new row data
   row.labelpara.innerHTML = row.name;
-  row.sizepara.innerHTML = Math.pow(2, size+2).toString() + "-bit";
-  row.op = optab[size];
+  row.sizepara.innerHTML = size.toString() + "-bit";
   row.size = size;
+  switch (size) {
+    case 8:  row.op = optab[1]; row.val = new Op8();  break;
+    case 16: row.op = optab[2]; row.val = new Op16(); break;
+    case 32: row.op = optab[3]; row.val = new Op32(); break;
+    case 64: row.op = optab[4]; row.val = new Op64(); break;
+  }
 
   // Save row object
   rowarray[rowcount] = row;
   rowcount++;
 }
 
-addrow (3);
+addrow (32);
