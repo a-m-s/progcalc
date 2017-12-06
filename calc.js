@@ -11,27 +11,39 @@ var template='\
       <table class="convtable"> \n\
 	<tr> \n\
 	  <td>Hexadecimal:</td> \n\
-	  <td><input onInput="intchanged(this, 16)" placeholder="0" class="hexbox"></input></td> \n\
+	  <td><input onInput="valchanged(this, \'Hex\', true)" \n\
+		     onChange="valchanged(this, \'Hex\', false)" \n\
+		     placeholder="0" class="hexbox"></input></td> \n\
 	</tr> \n\
 	<tr> \n\
 	  <td>Octal:</td> \n\
-	  <td><input onInput="intchanged(this, 8)" placeholder="0" class="octbox"></input></td> \n\
+	  <td><input onInput="valchanged(this, \'Oct\', true)" \n\
+		     onChange="valchanged(this, \'Oct\', false)" \n\
+                     placeholder="0" class="octbox"></input></td> \n\
 	</tr> \n\
 	<tr> \n\
 	  <td>Signed Decimal:</td> \n\
-	  <td><input onInput="intchanged(this, 10)" placeholder="0" class="sdecbox"></input></td> \n\
+	  <td><input onInput="valchanged(this, \'SDec\', true)" \n\
+		     onChange="valchanged(this, \'SDec\', false)" \n\
+		     placeholder="0" class="sdecbox"></input></td> \n\
 	</tr> \n\
 	<tr> \n\
 	  <td>Unsigned Decimal:</td> \n\
-	  <td><input onInput="intchanged(this, 10)" placeholder="0" class="udecbox"></input></td> \n\
+	  <td><input onInput="valchanged(this, \'UDec\', true)" \n\
+		     onChange="valchanged(this, \'UDec\', false)" \n\
+		     placeholder="0" class="udecbox"></input></td> \n\
 	</tr> \n\
 	<tr> \n\
 	  <td>Float:</td> \n\
-	  <td><input onInput="floatchanged(this)" placeholder="0" class="floatbox"></input></td> \n\
+	  <td><input onInput="valchanged(this, \'Float\', true)" \n\
+		     onChange="valchanged(this, \'Float\', false)" \n\
+		     placeholder="0" class="floatbox"></input></td> \n\
 	</tr> \n\
 	<tr> \n\
 	  <td>Binary:</td> \n\
-	  <td><input onInput="intchanged(this, 2)" placeholder="0" class="binbox"></input></td> \n\
+	  <td><input onInput="valchanged(this, \'Bin\', true)" \n\
+		     onChange="valchanged(this, \'Bin\', false)" \n\
+		     placeholder="0" class="binbox"></input></td> \n\
 	</tr> \n\
       </table> \n\
     </td> \n\
@@ -47,81 +59,27 @@ var update = 0;
 var calculatorui = document.getElementById("calculator");
 var rowcount = 0;
 var rowarray = [];
-var optab = [];
 
-function writevalues8 (row, svalue, isFloat) {
-  row.val.i8[0] = svalue;
+function valchanged (box, radix, focused) {
+  var row = box.row;
 
-  row.hexbox.value = row.val.toHex();
-  row.octbox.value = row.val.toOct();
-  row.sdecbox.value = row.val.toSDec();
-  row.udecbox.value = row.val.toUDec();
-  row.binbox.value = row.val.toBin();
-}
+  // Convert the string, and report error state to CSS
+  var ok = row.val["from"+radix] && row.val["from"+radix](box.value);
+  box.classList.toggle ("error", focused && !ok);
 
-function writevalues16 (row, svalue, isFloat) {
-  row.val.i16[0] = svalue;
-
-  row.hexbox.value = row.val.toHex();
-  row.octbox.value = row.val.toOct();
-  row.sdecbox.value = row.val.toSDec();
-  row.udecbox.value = row.val.toUDec();
-  row.binbox.value = row.val.toBin();
-}
-
-function writevalues32 (row, svalue, isFloat) {
-  if (isFloat)
-    row.val.f32[0] = svalue;
-  else
-    row.val.i32[0] = svalue;
-
-  row.hexbox.value = row.val.toHex();
-  row.octbox.value = row.val.toOct();
-  row.sdecbox.value = row.val.toSDec();
-  row.udecbox.value = row.val.toUDec();
-  row.floatbox.value = row.val.f32[0].toString();
-  row.binbox.value = row.val.toBin();
-}
-
-function writevalues64 (row, svalue, isFloat) {
-  if (isFloat)
-    row.val.f64[0] = svalue;
-  else {
-    row.val.i32[0] = svalue;
-    row.val.i32[1] = (svalue / 0x100000000);
-  }
-
-  row.hexbox.value = row.val.toHex();
-  row.octbox.value = row.val.toOct();
-  row.sdecbox.value = row.val.toSDec();
-  row.udecbox.value = row.val.toUDec();
-  row.floatbox.value = row.val.f64[0].toString();
-  row.binbox.value = row.val.toBin();
-}
-
-optab[1] = {
-  size: 8,
-  writevalues: writevalues8
-};
-optab[2] = {
-  size: 16,
-  writevalues: writevalues16
-};
-optab[3] = {
-  size: 32,
-  writevalues: writevalues32
-};
-optab[4] = {
-  size: 64,
-  writevalues: writevalues64
-};
-
-function intchanged (box, radix) {
-  box.row.op.writevalues (box.row, parseInt(box.value, radix), false);
-}
-
-function floatchanged (box) {
-  box.row.op.writevalues (box.row, box.value, true);
+  // Update all boxes except the focused one
+  if (!focused || row.hexbox !== box)
+    row.hexbox.value = row.val.toHex();
+  if (!focused || row.octbox !== box)
+    row.octbox.value = row.val.toOct();
+  if (!focused || row.sdecbox !== box)
+    row.sdecbox.value = row.val.toSDec();
+  if (!focused || row.udecbox !== box)
+    row.udecbox.value = row.val.toUDec();
+  if ((!focused || row.floatbox !== box) && row.val.toFloat)
+    row.floatbox.value = row.val.toFloat();
+  if (!focused || row.binbox !== box)
+    row.binbox.value = row.val.toBin();
 }
 
 function rowname (index) {
@@ -157,10 +115,10 @@ function addrow (size) {
   row.sizepara.innerHTML = size.toString() + "-bit";
   row.size = size;
   switch (size) {
-    case 8:  row.op = optab[1]; row.val = new Op8();  break;
-    case 16: row.op = optab[2]; row.val = new Op16(); break;
-    case 32: row.op = optab[3]; row.val = new Op32(); break;
-    case 64: row.op = optab[4]; row.val = new Op64(); break;
+    case 8:  row.val = new Op8();  break;
+    case 16: row.val = new Op16(); break;
+    case 32: row.val = new Op32(); break;
+    case 64: row.val = new Op64(); break;
   }
 
   // Save row object
