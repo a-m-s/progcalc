@@ -10,45 +10,48 @@ var template='\
     <td> \n\
       <table class="convtable"> \n\
 	<tr> \n\
-	  <td>Hexadecimal:</td> \n\
 	  <td><input onInput="valchanged(this, \'Hex\', true)" \n\
 		     onChange="valchanged(this, \'Hex\', false)" \n\
-		     placeholder="0" class="hexbox"></input></td> \n\
+		     placeholder="Hexadecimal" title="Hexadecimal" \n\
+		     class="hexbox" size=64></input></td> \n\
 	</tr> \n\
 	<tr> \n\
-	  <td>Octal:</td> \n\
 	  <td><input onInput="valchanged(this, \'Oct\', true)" \n\
 		     onChange="valchanged(this, \'Oct\', false)" \n\
-                     placeholder="0" class="octbox"></input></td> \n\
+                     placeholder="Octal" title="Octal" \n\
+		     class="octbox" size=64></input></td> \n\
 	</tr> \n\
 	<tr> \n\
-	  <td>Signed Decimal:</td> \n\
 	  <td><input onInput="valchanged(this, \'SDec\', true)" \n\
 		     onChange="valchanged(this, \'SDec\', false)" \n\
-		     placeholder="0" class="sdecbox"></input></td> \n\
+		     placeholder="Signed Decimal" title="Signed Decimal" \n\
+		     class="sdecbox" size=64></input></td> \n\
 	</tr> \n\
 	<tr> \n\
-	  <td>Unsigned Decimal:</td> \n\
 	  <td><input onInput="valchanged(this, \'UDec\', true)" \n\
 		     onChange="valchanged(this, \'UDec\', false)" \n\
-		     placeholder="0" class="udecbox"></input></td> \n\
+		     placeholder="Unsigned Decimal" \n\
+		     title="Unsigned Decimal" \n\
+		     class="udecbox" size=64></input></td> \n\
 	</tr> \n\
 	<tr> \n\
-	  <td>Float:</td> \n\
 	  <td><input onInput="valchanged(this, \'Float\', true)" \n\
 		     onChange="valchanged(this, \'Float\', false)" \n\
-		     placeholder="0" class="floatbox"></input></td> \n\
+		     placeholder="Floating Point Decimal" \n\
+		     title="Floating Point Decimal" \n\
+		     class="floatbox" size=64></input></td> \n\
 	</tr> \n\
 	<tr> \n\
-	  <td>Binary:</td> \n\
 	  <td><input onInput="valchanged(this, \'Bin\', true)" \n\
 		     onChange="valchanged(this, \'Bin\', false)" \n\
-		     placeholder="0" class="binbox"></input></td> \n\
+		     placeholder="Binary" title="Binary" \n\
+		     class="binbox" size=64></input></td> \n\
 	</tr> \n\
       </table> \n\
     </td> \n\
     <td> \n\
       <input type="radio" class="leftop">Left Operand</input> \n\
+      <br> \n\
       <input type="radio" class="rightop">Right Operand</input> \n\
     </td> \n\
 ';
@@ -120,6 +123,11 @@ function addrow (size) {
     case 32: row.val = new Op32(); break;
     case 64: row.val = new Op64(); break;
   }
+
+  if (!row.val.fromFloat)
+    row.floatbox.disabled = true;
+
+  row.binbox.scrollIntoView();
 
   // Save row object
   rowarray[rowcount] = row;

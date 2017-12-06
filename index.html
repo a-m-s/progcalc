@@ -3,6 +3,7 @@
     <title>
       Programmers' Calculator
     </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <h1>Programmers' Calculator</h2>
@@ -12,10 +13,13 @@
     <table id="calculator" class="calctable">
     </table>
 
-    <button onClick="addrow(8)" class="addbutton">Add 8-bit value</button>
-    <button onClick="addrow(16)" class="addbutton">Add 16-bit value</button>
-    <button onClick="addrow(32)" class="addbutton">Add 32-bit value</button>
-    <button onClick="addrow(64)" class="addbutton">Add 64-bit value</button>
+    <div class="operators">
+      <button onClick="addrow(8)" class="addbutton">Add 8-bit value</button>
+      <button onClick="addrow(16)" class="addbutton">Add 16-bit value</button>
+      <button onClick="addrow(32)" class="addbutton">Add 32-bit value</button>
+      <button onClick="addrow(64)" class="addbutton">Add 64-bit value</button>
+    </div>
+    <p class="smallprint">&copy; Andrew Stubbs</p>
 
     <script src="util.js"></script>
     <script src="8bit.js"></script>
