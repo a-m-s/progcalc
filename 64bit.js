@@ -297,6 +297,12 @@ Op64.prototype.add = function(a, b) {
   return this;
 }
 
+// FP add
+Op64.prototype.addfp = function(a, b) {
+  this.f64[0] = a.f64[0] + b.f64[0];
+  return this;
+}
+
 // Bitwise left shift
 Op64.prototype.leftshift = function(a, bits) {
   if (bits < 0)

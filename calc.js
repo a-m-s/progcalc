@@ -50,18 +50,31 @@ var template='\
       </table> \n\
     </td> \n\
     <td> \n\
-      <input type="radio" class="leftop">Left Operand</input> \n\
+      <input type="radio" class="leftop" name="leftop" \n\
+	onChange="selectop()"> \n\
+	Left Operand \n\
+      </input> \n\
       <br> \n\
-      <input type="radio" class="rightop">Right Operand</input> \n\
+      <input type="radio" class="rightop" name="rightop" \n\
+        onChange="selectop()"> \n\
+	Right Operand \n\
+      </input> \n\
     </td> \n\
 ';
-var elements = ["labelpara", "sizepara", "hexbox", "octbox", "sdecbox",
-		"udecbox", "floatbox", "binbox"];
+var elements = ["labelpara", "oppara", "sizepara",
+		"hexbox", "octbox", "sdecbox", "udecbox", "floatbox",
+                "binbox",
+		"leftop", "rightop"];
+var operators = {
+  add: {type: "binop", symbol: " + "},
+  addfp: {type: "binop", symbol: " +<sub>fp</sub> "},
+};
 
-var update = 0;
 var calculatorui = document.getElementById("calculator");
 var rowcount = 0;
 var rowarray = [];
+var left = null;
+var right = null;
 
 function valchanged (box, radix, focused) {
   var row = box.row;
@@ -70,19 +83,55 @@ function valchanged (box, radix, focused) {
   var ok = row.val["from"+radix] && row.val["from"+radix](box.value);
   box.classList.toggle ("error", focused && !ok);
 
+  updateboxes(row, focused ? box : null);
+}
+
+function updateboxes (row, exceptbox) {
   // Update all boxes except the focused one
-  if (!focused || row.hexbox !== box)
+  if (row.hexbox !== exceptbox)
     row.hexbox.value = row.val.toHex();
-  if (!focused || row.octbox !== box)
+  if (row.octbox !== exceptbox)
     row.octbox.value = row.val.toOct();
-  if (!focused || row.sdecbox !== box)
+  if (row.sdecbox !== exceptbox)
     row.sdecbox.value = row.val.toSDec();
-  if (!focused || row.udecbox !== box)
+  if (row.udecbox !== exceptbox)
     row.udecbox.value = row.val.toUDec();
-  if ((!focused || row.floatbox !== box) && row.val.toFloat)
+  if ((row.floatbox !== exceptbox) && row.val.toFloat)
     row.floatbox.value = row.val.toFloat();
-  if (!focused || row.binbox !== box)
+  if (row.binbox !== exceptbox)
     row.binbox.value = row.val.toBin();
+
+  for (var dep of row.dependencies)
+    updateval(dep);
+}
+
+function updateval(row) {
+  row.val[row.op](row.left.val, row.right ? row.right.val : null);
+  updateboxes (row, null);
+}
+
+function selectop() {
+  var elm = document.querySelector('input[name="leftop"]:checked');
+  if (elm)
+    left = elm.row;
+  elm = document.querySelector('input[name="rightop"]:checked');
+  if (elm)
+    right = elm.row;
+
+  // Enable or disable the operator buttons.
+  for (var op in operators) {
+    switch (operators[op].type) {
+      case "unop":
+        document.getElementById(op).disabled =
+	  (!left || !left.val[op]);
+	break;
+      case "binop":
+        document.getElementById(op).disabled =
+	  (!left || !right || left.size != right.size
+	   || !left.val[op]);
+	break;
+    }
+  }
 }
 
 function rowname (index) {
@@ -106,11 +155,12 @@ function addrow (size) {
     "index": rowcount,
     "name": rowname(rowcount),
     "tr": tr,
+    "dependencies": []
   };
-  for (var cls in elements) {
-    var elm = tr.querySelector("." + elements[cls]);
+  for (var cls of elements) {
+    var elm = tr.querySelector("." + cls);
     elm.row = row;
-    row[elements[cls]] = elm;
+    row[cls] = elm;
   }
 
   // Initialize new row data
@@ -123,6 +173,7 @@ function addrow (size) {
     case 32: row.val = new Op32(); break;
     case 64: row.val = new Op64(); break;
   }
+  row.val.row = row;
 
   if (!row.val.fromFloat)
     row.floatbox.disabled = true;
@@ -132,6 +183,37 @@ function addrow (size) {
   // Save row object
   rowarray[rowcount] = row;
   rowcount++;
+
+  return row;
+}
+
+function addrow_op(op) {
+  var row = addrow (left.size);
+  row.left = left;
+  row.right = right;
+  row.op = op;
+  left.dependencies.push(row);
+  if (left !== right)
+    right.dependencies.push(row);
+
+  switch (operators[op].type) {
+    case "unop":
+      row.oppara.innerHTML = operators[op].symbol + left.name;
+      break;
+    case "binop":
+      row.oppara.innerHTML =
+	left.name + operators[op].symbol + right.name;
+      break;
+  }
+
+  for (var elm of elements) {
+    if (row[elm].tagName == "INPUT"
+        && row[elm].type == "text")
+      row[elm].readOnly = true;
+  }
+
+  updateval(row);
 }
 
 addrow (32);
+selectop ();

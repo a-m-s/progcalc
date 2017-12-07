@@ -24,6 +24,7 @@ table {
   border-bottom-left-radius: 1em;
   padding-left: 1em;
   padding-right: 1em;
+  line-height: 250%;
 }
 
 .calctable > tbody > tr > td:last-child {
@@ -53,6 +54,11 @@ input.error {
   font-style: italic;
   font-weight: bold;
   font-size: 140%;
+}
+
+.oppara {
+  font-family: serif;
+  font-style: italic;
 }
 
 .sizepara {
