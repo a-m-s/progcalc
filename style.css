@@ -10,10 +10,11 @@ table {
 .calctable > tbody > tr {
   border-bottom: 5px solid;
   border-color: white;
+  font-family: sans-serif;
 }
 
 .calctable > tbody > tr > td {
-  background-color: lightgrey;
+  background-color: lightsteelblue;
   overflow: hidden;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
@@ -24,7 +25,6 @@ table {
   border-bottom-left-radius: 1em;
   padding-left: 1em;
   padding-right: 1em;
-  line-height: 250%;
 }
 
 .calctable > tbody > tr > td:last-child {
@@ -34,8 +34,8 @@ table {
   padding-right: 1em;
 }
 
-.calctable > tbody > tr:hover {
-  background-color: grey;
+.calctable > tbody > tr:hover > td {
+  background-color: steelblue;
 }
 
 .convtable input {
@@ -43,6 +43,18 @@ table {
   border-color: white;
   border-radius: 0.4em;
   font-family: monospace;
+}
+
+input:focus {
+  border-color: lightgreen;
+}
+
+input:read-only:focus {
+  border-color: grey;
+}
+
+input:-moz-read-only:focus {
+  border-color: grey;
 }
 
 input.error {
@@ -54,15 +66,22 @@ input.error {
   font-style: italic;
   font-weight: bold;
   font-size: 140%;
+  margin-bottom: 0;
 }
 
 .oppara {
   font-family: serif;
+  margin-top: 0;
+}
+
+.operand {
   font-style: italic;
 }
 
+.operator {
+}
+
 .sizepara {
-  font-family: sans-serif;
   font-size: 75%;
   color: grey;
 }

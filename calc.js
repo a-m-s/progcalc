@@ -198,11 +198,15 @@ function addrow_op(op) {
 
   switch (operators[op].type) {
     case "unop":
-      row.oppara.innerHTML = operators[op].symbol + left.name;
+      row.oppara.innerHTML =
+	"= <span class='operator'>" + operators[op].symbol + "</span>"
+	+ "<span class='operand'>" + left.name + "</span>";
       break;
     case "binop":
       row.oppara.innerHTML =
-	left.name + operators[op].symbol + right.name;
+	"= <span class='operand'>" + left.name + "</span>"
+	+ "<span class='operator'>" + operators[op].symbol + "</span>"
+	+ "<span class='operand'>" + right.name + "</span>";
       break;
   }
 

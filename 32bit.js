@@ -82,3 +82,42 @@ Op32.prototype.fromBin = function(str) {
 Op32.prototype.toBin = function() {
   return zeropad(this.u32[0].toString(2), 32);
 }
+
+/* Operator functions.
+ 
+   Each function takes one or more Op32 values, and updates itself
+   with the result.
+
+   I.e.   this = otherA <op> otherB
+
+          ***not***  this <op>= other
+
+   Each function return "this", to allow composition.
+
+   E.g. "v = ~a & b"
+   
+         v = new Op32.and(new Op32.not(a), b);
+
+   However, each function must only update itself last, to allow
+   self reference.
+
+   E.g. the following will invert itself:
+   
+        this.not(this);
+
+   It is also permissible to use non-Op32 constants (e.g. {u32: [1, 0]}),
+   and conversion operators may take Op32, Op16, or Op8.
+
+   The operators are in alphabetical order.  */
+
+// Integer add
+Op32.prototype.add = function(a, b) {
+  this.u32[0] = a.u32[0] + b.u32[0];
+  return this;
+}
+
+// FP add
+Op32.prototype.addfp = function(a, b) {
+  this.f32[0] = a.f32[0] + b.f32[0];
+  return this;
+}
