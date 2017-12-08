@@ -4,7 +4,8 @@ var template='\
       <p class="oppara"></p> \n\
       <p class="sizepara"></p> \n\
       <p> \n\
-        <button class="deletebutton">Delete</button> \n\
+        <button class="deletebutton" \n\
+          onClick="deleterow(this)">Delete</button> \n\
       </p> \n\
     </td> \n\
     <td> \n\
@@ -61,7 +62,7 @@ var template='\
       </input> \n\
     </td> \n\
 ';
-var elements = ["labelpara", "oppara", "sizepara",
+var elements = ["labelpara", "oppara", "sizepara", "deletebutton",
 		"hexbox", "octbox", "sdecbox", "udecbox", "floatbox",
                 "binbox",
 		"leftop", "rightop"];
@@ -87,19 +88,21 @@ function valchanged (box, radix, focused) {
 }
 
 function updateboxes (row, exceptbox) {
-  // Update all boxes except the focused one
-  if (row.hexbox !== exceptbox)
-    row.hexbox.value = row.val.toHex();
-  if (row.octbox !== exceptbox)
-    row.octbox.value = row.val.toOct();
-  if (row.sdecbox !== exceptbox)
-    row.sdecbox.value = row.val.toSDec();
-  if (row.udecbox !== exceptbox)
-    row.udecbox.value = row.val.toUDec();
-  if ((row.floatbox !== exceptbox) && row.val.toFloat)
-    row.floatbox.value = row.val.toFloat();
-  if (row.binbox !== exceptbox)
-    row.binbox.value = row.val.toBin();
+  if (row.deleted == false) {
+    // Update all boxes except the focused one
+    if (row.hexbox !== exceptbox)
+      row.hexbox.value = row.val.toHex();
+    if (row.octbox !== exceptbox)
+      row.octbox.value = row.val.toOct();
+    if (row.sdecbox !== exceptbox)
+      row.sdecbox.value = row.val.toSDec();
+    if (row.udecbox !== exceptbox)
+      row.udecbox.value = row.val.toUDec();
+    if ((row.floatbox !== exceptbox) && row.val.toFloat)
+      row.floatbox.value = row.val.toFloat();
+    if (row.binbox !== exceptbox)
+      row.binbox.value = row.val.toBin();
+  }
 
   for (var dep of row.dependencies)
     updateval(dep);
@@ -155,7 +158,8 @@ function addrow (size) {
     "index": rowcount,
     "name": rowname(rowcount),
     "tr": tr,
-    "dependencies": []
+    "dependencies": [],
+    "deleted": false
   };
   for (var cls of elements) {
     var elm = tr.querySelector("." + cls);
@@ -217,6 +221,11 @@ function addrow_op(op) {
   }
 
   updateval(row);
+}
+
+function deleterow(button) {
+  button.row.tr.innerHTML = "";
+  button.row.deleted = true;
 }
 
 addrow (32);
