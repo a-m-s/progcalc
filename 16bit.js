@@ -66,3 +66,36 @@ Op16.prototype.fromBin = function(str) {
 Op16.prototype.toBin = function() {
   return zeropad(this.u16[0].toString(2), 16);
 }
+
+/* Operator functions.
+ 
+   Each function takes one or more Op16 values, and updates itself
+   with the result.
+
+   I.e.   this = otherA <op> otherB
+
+          ***not***  this <op>= other
+
+   Each function return "this", to allow composition.
+
+   E.g. "v = ~a & b"
+   
+         v = new Op16.and(new Op16.not(a), b);
+
+   However, each function must only update itself last, to allow
+   self reference.
+
+   E.g. the following will invert itself:
+   
+        this.not(this);
+
+   It is also permissible to use non-Op16 constants (e.g. {u16: [1, 0]}),
+   and conversion operators may take Op64, Op32, or Op8.
+
+   The operators are in alphabetical order.  */
+
+// Integer add
+Op16.prototype.add = function(a, b) {
+  this.u16[0] = a.u16[0] + b.u16[0];
+  return this;
+}

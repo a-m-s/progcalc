@@ -64,3 +64,36 @@ Op8.prototype.fromBin = function(str) {
 Op8.prototype.toBin = function() {
   return zeropad(this.u8[0].toString(2), 8);
 }
+
+/* Operator functions.
+ 
+   Each function takes one or more Op8 values, and updates itself
+   with the result.
+
+   I.e.   this = otherA <op> otherB
+
+          ***not***  this <op>= other
+
+   Each function return "this", to allow composition.
+
+   E.g. "v = ~a & b"
+   
+         v = new Op8.and(new Op8.not(a), b);
+
+   However, each function must only update itself last, to allow
+   self reference.
+
+   E.g. the following will invert itself:
+   
+        this.not(this);
+
+   It is also permissible to use non-Op8 constants (e.g. {u8: [1, 0]}),
+   and conversion operators may take Op64, Op32, or Op16.
+
+   The operators are in alphabetical order.  */
+
+// Integer add
+Op8.prototype.add = function(a, b) {
+  this.u8[0] = a.u8[0] + b.u8[0];
+  return this;
+}

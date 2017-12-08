@@ -106,7 +106,7 @@ Op32.prototype.toBin = function() {
         this.not(this);
 
    It is also permissible to use non-Op32 constants (e.g. {u32: [1, 0]}),
-   and conversion operators may take Op32, Op16, or Op8.
+   and conversion operators may take Op64, Op16, or Op8.
 
    The operators are in alphabetical order.  */
 
