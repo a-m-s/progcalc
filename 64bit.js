@@ -355,6 +355,12 @@ Op64.prototype.multiply = function(a, b) {
   return this;
 }
 
+// FP multiply
+Op64.prototype.multiplyfp = function(a, b) {
+  this.f64[0] = a.f64[0] * b.f64[0];
+  return this;
+}
+
 // Integer two's complement negate
 Op64.prototype.neg = function(a) {
   var not_a = new Op64().not(a);
@@ -368,3 +374,16 @@ Op64.prototype.not = function(a) {
   this.u32[1] = ~a.u32[1];
   return this;
 }
+
+// Integer subtract
+Op64.prototype.subtract = function(a, b) {
+  var negb = new Op64().neg(b);
+  return this.add(a, negb);
+}
+
+// FP subtract
+Op64.prototype.subtractfp = function(a, b) {
+  this.f64[0] = a.f64[0] - b.f64[0];
+  return this;
+}
+

@@ -85,6 +85,10 @@ var elements = ["labelpara", "oppara", "sizepara", "deletebutton",
 var operators = {
   add: {type: "binop", symbol: " + "},
   addfp: {type: "binop", symbol: " +<sub>fp</sub> "},
+  subtract: {type: "binop", symbol: " - "},
+  subtractfp: {type: "binop", symbol: " -<sub>fp</sub> "},
+  multiply: {type: "binop", symbol: " * "},
+  multiplyfp: {type: "binop", symbol: " *<sub>fp</sub> "},
 };
 
 var calculatorui = document.getElementById("calculator");

@@ -113,3 +113,15 @@ Op8.prototype.add = function(a, b) {
   this.u8[0] = a.u8[0] + b.u8[0];
   return this;
 }
+
+// Integer multiply
+Op8.prototype.multiply = function(a, b) {
+  this.u8[0] = a.u8[0] * b.u8[0];
+  return this;
+}
+
+// Integer subtract
+Op8.prototype.subtract = function(a, b) {
+  this.u8[0] = a.u8[0] - b.u8[0];
+  return this;
+}

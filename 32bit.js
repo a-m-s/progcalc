@@ -137,3 +137,28 @@ Op32.prototype.addfp = function(a, b) {
   this.f32[0] = a.f32[0] + b.f32[0];
   return this;
 }
+
+// Integer multiply
+Op32.prototype.multiply = function(a, b) {
+  this.u32[0] = a.u32[0] * b.u32[0];
+  return this;
+}
+
+// FP multiply
+Op32.prototype.multiplyfp = function(a, b) {
+  this.f32[0] = a.f32[0] * b.f32[0];
+  return this;
+}
+
+// Integer subtract
+Op32.prototype.subtract = function(a, b) {
+  this.u32[0] = a.u32[0] - b.u32[0];
+  return this;
+}
+
+// FP subtract
+Op32.prototype.subtractfp = function(a, b) {
+  this.f32[0] = a.f32[0] - b.f32[0];
+  return this;
+}
+
