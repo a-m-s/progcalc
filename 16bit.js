@@ -116,6 +116,12 @@ Op16.prototype.add = function(a, b) {
   return this;
 }
 
+// Integer divide
+Op16.prototype.divide = function(a, b) {
+  this.u16[0] = a.u16[0] / b.u16[0];
+  return this;
+}
+
 // Integer multiply
 Op16.prototype.multiply = function(a, b) {
   this.u16[0] = a.u16[0] * b.u16[0];

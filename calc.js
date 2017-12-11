@@ -89,6 +89,8 @@ var operators = {
   subtractfp: {type: "binop", symbol: " -<sub>fp</sub> "},
   multiply: {type: "binop", symbol: " * "},
   multiplyfp: {type: "binop", symbol: " *<sub>fp</sub> "},
+  divide: {type: "binop", symbol: " / "},
+  dividefp: {type: "binop", symbol: " /<sub>fp</sub> "},
 };
 
 var calculatorui = document.getElementById("calculator");

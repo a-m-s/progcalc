@@ -319,6 +319,58 @@ Op64.prototype.addfp = function(a, b) {
   return this;
 }
 
+// Integer divide
+Op64.prototype.divide = function(a, b) {
+  if (b.u32[0] == 0 && b.u32[1] == 0) {
+    // Division by 0
+    this.f64[0] = 0;
+    return this;
+  }
+
+  // This long division algorithm is taken straight from wikipedia.
+  // I've unrolled the high and low word loops to keep the array
+  // and bit indices simple to read.
+
+  var quotient = new Op64();
+  var remainder = new Op64();
+
+  // High word
+  for (var i=31; i>0; i--) {
+    remainder.leftshift(remainder, 1);
+    if (a.u32[1] & (1 << i))
+      remainder.u32[0] |= 1;
+    if (remainder.u32[1] > b.u32[1]
+        || (remainder.u32[1] == b.u32[1]
+	    && remainder.u32[0] >= b.u32[0])) {
+      remainder.subtract(remainder, b);
+      quotient.u32[1] |= (1 << i);
+    }
+  }
+
+  // Low word
+  for (var i=31; i>0; i--) {
+    remainder.leftshift(remainder, 1);
+    if (a.u32[0] & (1 << i))
+      remainder.u32[0] |= 1;
+    if (remainder.u32[1] > b.u32[1]
+        || (remainder.u32[1] == b.u32[1]
+	    && remainder.u32[0] >= b.u32[0])) {
+      remainder.subtract(remainder, b);
+      quotient.u32[0] |= (1 << i);
+    }
+  }
+
+  this.u32[0] = quotient.u32[0];
+  this.u32[1] = quotient.u32[1];
+  return this;
+}
+
+// FP divide
+Op64.prototype.dividefp = function(a, b) {
+  this.f64[0] = a.f64[0] / b.f64[0];
+  return this;
+}
+
 // Bitwise left shift
 Op64.prototype.leftshift = function(a, bits) {
   if (bits < 0)

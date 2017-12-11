@@ -138,6 +138,18 @@ Op32.prototype.addfp = function(a, b) {
   return this;
 }
 
+// Integer divide
+Op32.prototype.divide = function(a, b) {
+  this.u32[0] = a.u32[0] / b.u32[0];
+  return this;
+}
+
+// FP divide
+Op32.prototype.dividefp = function(a, b) {
+  this.f32[0] = a.f32[0] / b.f32[0];
+  return this;
+}
+
 // Integer multiply
 Op32.prototype.multiply = function(a, b) {
   this.u32[0] = a.u32[0] * b.u32[0];
