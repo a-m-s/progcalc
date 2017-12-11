@@ -107,6 +107,23 @@ input.error {
   bottom: 1em;
 }
 
+.addbutton {
+  margin: 0.25em;
+}
+
+.opbutton {
+  line-height: 2em;
+  height: 2.5em;
+  margin: 0.25em;
+  width: 3em;
+  padding: 0;
+  align-items: top;
+}
+
+sub {
+  font-size: 50%;
+}
+
 .smallprint {
   font-size: 60%;
 }
