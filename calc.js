@@ -83,16 +83,16 @@ var elements = ["labelpara", "oppara", "sizepara", "deletebutton",
                 "binbox",
 		"leftop", "rightop"];
 var operators = {
-  add: {type: "binop", symbol: " + "},
-  addfp: {type: "binop", symbol: " +<sub>fp</sub> "},
-  subtract: {type: "binop", symbol: " - "},
-  subtractfp: {type: "binop", symbol: " -<sub>fp</sub> "},
-  multiply: {type: "binop", symbol: " * "},
-  multiplyfp: {type: "binop", symbol: " *<sub>fp</sub> "},
-  divide: {type: "binop", symbol: " / "},
-  dividefp: {type: "binop", symbol: " /<sub>fp</sub> "},
-  negate: {type: "binop", symbol: " &#8723; "},
-  negatefp: {type: "binop", symbol: " &#8723;<sub>fp</sub> "},
+  add: {type: "binop", symbol: " &plus; "},
+  addfp: {type: "binop", symbol: " &plus;<sub>fp</sub> "},
+  subtract: {type: "binop", symbol: " &minus; "},
+  subtractfp: {type: "binop", symbol: " &minus;<sub>fp</sub> "},
+  multiply: {type: "binop", symbol: " &times; "},
+  multiplyfp: {type: "binop", symbol: " &times;<sub>fp</sub> "},
+  divide: {type: "binop", symbol: " &divide; "},
+  dividefp: {type: "binop", symbol: " &divide;<sub>fp</sub> "},
+  negate: {type: "unop", symbol: "&minus;"},
+  negatefp: {type: "unop", symbol: "&minus;<sub>fp</sub> "},
 };
 
 var calculatorui = document.getElementById("calculator");
@@ -221,7 +221,7 @@ function addrow_op(op) {
   row.right = right;
   row.op = op;
   left.dependencies.push(row);
-  if (left !== right)
+  if (left !== right && right)
     right.dependencies.push(row);
 
   switch (operators[op].type) {
