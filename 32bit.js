@@ -162,6 +162,18 @@ Op32.prototype.multiplyfp = function(a, b) {
   return this;
 }
 
+// Integer two's complement negate
+Op32.prototype.negate = function(a) {
+  this.u32[0] = -a.u32[0];
+  return this;
+}
+
+// FP negate
+Op32.prototype.negatefp = function(a) {
+  this.u32[0] = a.u32[0] ^ 0x80000000;
+  return this;
+}
+
 // Integer subtract
 Op32.prototype.subtract = function(a, b) {
   this.u32[0] = a.u32[0] - b.u32[0];

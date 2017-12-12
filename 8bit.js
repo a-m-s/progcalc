@@ -126,6 +126,12 @@ Op8.prototype.multiply = function(a, b) {
   return this;
 }
 
+// Integer two's complement negate
+Op8.prototype.negate = function(a) {
+  this.u8[0] = -a.u8[0];
+  return this;
+}
+
 // Integer subtract
 Op8.prototype.subtract = function(a, b) {
   this.u8[0] = a.u8[0] - b.u8[0];

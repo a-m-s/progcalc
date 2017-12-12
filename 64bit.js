@@ -73,7 +73,7 @@ Op64.prototype.fromHex = function(str) {
   }
 
   if (neg)
-    this.neg(this);
+    this.negate(this);
 
   return bits <= 64;
 }
@@ -112,7 +112,7 @@ Op64.prototype.fromOct = function(str) {
   }
 
   if (neg)
-    this.neg(this);
+    this.negate(this);
 
   return bits <= 64;
 }
@@ -149,7 +149,7 @@ Op64.prototype.fromSDec = function(str) {
   }
 
   if (neg)
-    this.neg(this);
+    this.negate(this);
 
   return (this.toSDec() === str);
 }
@@ -158,7 +158,7 @@ Op64.prototype.toSDec = function() {
   var sign = !!(this.u32[1] & 0x80000000);
   var magnitude = new Op64();
   if (sign) {
-    magnitude.neg(this);
+    magnitude.negate(this);
   } else {
     magnitude.u32[0] = this.u32[0];
     magnitude.u32[1] = this.u32[1];
@@ -266,7 +266,7 @@ Op64.prototype.fromBin = function(str) {
   }
 
   if (neg)
-    this.neg(this);
+    this.negate(this);
 
   return bits <= 64;
 }
@@ -414,9 +414,15 @@ Op64.prototype.multiplyfp = function(a, b) {
 }
 
 // Integer two's complement negate
-Op64.prototype.neg = function(a) {
+Op64.prototype.negate = function(a) {
   var not_a = new Op64().not(a);
   this.add(not_a, {u32: [1, 0]});
+  return this;
+}
+
+// FP negate
+Op64.prototype.negatefp = function(a) {
+  this.u32[1] = a.u32[1] ^ 0x80000000;
   return this;
 }
 
@@ -429,7 +435,7 @@ Op64.prototype.not = function(a) {
 
 // Integer subtract
 Op64.prototype.subtract = function(a, b) {
-  var negb = new Op64().neg(b);
+  var negb = new Op64().negate(b);
   return this.add(a, negb);
 }
 

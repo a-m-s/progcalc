@@ -128,6 +128,12 @@ Op16.prototype.multiply = function(a, b) {
   return this;
 }
 
+// Integer two's complement negate
+Op16.prototype.negate = function(a) {
+  this.u16[0] = -a.u16[0];
+  return this;
+}
+
 // Integer subtract
 Op16.prototype.subtract = function(a, b) {
   this.u16[0] = a.u16[0] - b.u16[0];
