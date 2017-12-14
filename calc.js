@@ -85,6 +85,7 @@ var elements = ["labelpara", "oppara", "sizepara", "deletebutton",
 var operators = {
   add: {type: "binop", symbol: " &plus; "},
   addfp: {type: "binop", symbol: " &plus;<sub>fp</sub> "},
+  and: {type: "binop", symbol: " &and; "},
   subtract: {type: "binop", symbol: " &minus; "},
   subtractfp: {type: "binop", symbol: " &minus;<sub>fp</sub> "},
   multiply: {type: "binop", symbol: " &times; "},

@@ -319,6 +319,13 @@ Op64.prototype.addfp = function(a, b) {
   return this;
 }
 
+// Bitwise and
+Op64.prototype.and = function(a, b) {
+  this.u32[0] = a.u32[0] & b.u32[0];
+  this.u32[1] = a.u32[1] & b.u32[1];
+  return this;
+}
+
 // Integer divide
 Op64.prototype.divide = function(a, b) {
   if (b.u32[0] == 0 && b.u32[1] == 0) {

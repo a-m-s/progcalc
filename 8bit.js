@@ -114,6 +114,12 @@ Op8.prototype.add = function(a, b) {
   return this;
 }
 
+// Bitwise and
+Op8.prototype.and = function(a, b) {
+  this.u8[0] = a.u8[0] & b.u8[0];
+  return this;
+}
+
 // Integer divide
 Op8.prototype.divide = function(a, b) {
   this.u8[0] = a.u8[0] / b.u8[0];
