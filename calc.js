@@ -93,6 +93,7 @@ var operators = {
   dividefp: {type: "binop", symbol: " &divide;<sub>fp</sub> "},
   negate: {type: "unop", symbol: "&minus;"},
   negatefp: {type: "unop", symbol: "&minus;<sub>fp</sub> "},
+  not: {type: "unop", symbol: "&not;"},
 };
 
 var calculatorui = document.getElementById("calculator");

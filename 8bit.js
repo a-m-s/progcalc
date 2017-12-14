@@ -132,6 +132,12 @@ Op8.prototype.negate = function(a) {
   return this;
 }
 
+// Bitwise not
+Op8.prototype.not = function(a) {
+  this.u8[0] = ~a.u8[0];
+  return this;
+}
+
 // Integer subtract
 Op8.prototype.subtract = function(a, b) {
   this.u8[0] = a.u8[0] - b.u8[0];

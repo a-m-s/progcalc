@@ -174,6 +174,12 @@ Op32.prototype.negatefp = function(a) {
   return this;
 }
 
+// Bitwise not
+Op32.prototype.not = function(a) {
+  this.u32[0] = ~a.u32[0];
+  return this;
+}
+
 // Integer subtract
 Op32.prototype.subtract = function(a, b) {
   this.u32[0] = a.u32[0] - b.u32[0];
