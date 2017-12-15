@@ -14,70 +14,70 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-var template='\
-    <td> \n\
-      <p class="labelpara"></p> \n\
-      <p class="oppara"></p> \n\
-      <p class="sizepara"></p> \n\
-      <p> \n\
-        <button class="deletebutton" \n\
-          onClick="deleterow(this)">Delete</button> \n\
-      </p> \n\
-    </td> \n\
-    <td> \n\
-      <table class="convtable"> \n\
-	<tr> \n\
-	  <td><input onInput="valchanged(this, \'Hex\', true)" \n\
-		     onChange="valchanged(this, \'Hex\', false)" \n\
-		     placeholder="Hexadecimal" title="Hexadecimal" \n\
-		     class="hexbox" size=64></input></td> \n\
-	</tr> \n\
-	<tr> \n\
-	  <td><input onInput="valchanged(this, \'Oct\', true)" \n\
-		     onChange="valchanged(this, \'Oct\', false)" \n\
-                     placeholder="Octal" title="Octal" \n\
-		     class="octbox" size=64></input></td> \n\
-	</tr> \n\
-	<tr> \n\
-	  <td><input onInput="valchanged(this, \'SDec\', true)" \n\
-		     onChange="valchanged(this, \'SDec\', false)" \n\
-		     placeholder="Signed Decimal" title="Signed Decimal" \n\
-		     class="sdecbox" size=64></input></td> \n\
-	</tr> \n\
-	<tr> \n\
-	  <td><input onInput="valchanged(this, \'UDec\', true)" \n\
-		     onChange="valchanged(this, \'UDec\', false)" \n\
-		     placeholder="Unsigned Decimal" \n\
-		     title="Unsigned Decimal" \n\
-		     class="udecbox" size=64></input></td> \n\
-	</tr> \n\
-	<tr> \n\
-	  <td><input onInput="valchanged(this, \'Float\', true)" \n\
-		     onChange="valchanged(this, \'Float\', false)" \n\
-		     placeholder="Floating Point Decimal" \n\
-		     title="Floating Point Decimal" \n\
-		     class="floatbox" size=64></input></td> \n\
-	</tr> \n\
-	<tr> \n\
-	  <td><input onInput="valchanged(this, \'Bin\', true)" \n\
-		     onChange="valchanged(this, \'Bin\', false)" \n\
-		     placeholder="Binary" title="Binary" \n\
-		     class="binbox" size=64></input></td> \n\
-	</tr> \n\
-      </table> \n\
-    </td> \n\
-    <td> \n\
-      <input type="radio" class="leftop" name="leftop" \n\
-	onChange="selectop()"> \n\
-	Left Operand \n\
-      </input> \n\
-      <br> \n\
-      <input type="radio" class="rightop" name="rightop" \n\
-        onChange="selectop()"> \n\
-	Right Operand \n\
-      </input> \n\
-    </td> \n\
-';
+var template=`
+    <td>
+      <p class="labelpara"></p>
+      <p class="oppara"></p>
+      <p class="sizepara"></p>
+      <p>
+        <button class="deletebutton"
+          onClick="deleterow(this)">Delete</button>
+      </p>
+    </td>
+    <td>
+      <table class="convtable">
+	<tr>
+	  <td><input onInput="valchanged(this, \'Hex\', true)"
+		     onChange="valchanged(this, \'Hex\', false)"
+		     placeholder="Hexadecimal" title="Hexadecimal"
+		     class="hexbox" size=64></input></td>
+	</tr>
+	<tr>
+	  <td><input onInput="valchanged(this, \'Oct\', true)"
+		     onChange="valchanged(this, \'Oct\', false)"
+                     placeholder="Octal" title="Octal"
+		     class="octbox" size=64></input></td>
+	</tr>
+	<tr>
+	  <td><input onInput="valchanged(this, \'SDec\', true)"
+		     onChange="valchanged(this, \'SDec\', false)"
+		     placeholder="Signed Decimal" title="Signed Decimal"
+		     class="sdecbox" size=64></input></td>
+	</tr>
+	<tr>
+	  <td><input onInput="valchanged(this, \'UDec\', true)"
+		     onChange="valchanged(this, \'UDec\', false)"
+		     placeholder="Unsigned Decimal"
+		     title="Unsigned Decimal"
+		     class="udecbox" size=64></input></td>
+	</tr>
+	<tr>
+	  <td><input onInput="valchanged(this, \'Float\', true)"
+		     onChange="valchanged(this, \'Float\', false)"
+		     placeholder="Floating Point Decimal"
+		     title="Floating Point Decimal"
+		     class="floatbox" size=64></input></td>
+	</tr>
+	<tr>
+	  <td><input onInput="valchanged(this, \'Bin\', true)"
+		     onChange="valchanged(this, \'Bin\', false)"
+		     placeholder="Binary" title="Binary"
+		     class="binbox" size=64></input></td>
+	</tr>
+      </table>
+    </td>
+    <td>
+      <input type="radio" class="leftop" name="leftop"
+	onChange="selectop()">
+	Left Operand
+      </input>
+      <br>
+      <input type="radio" class="rightop" name="rightop"
+        onChange="selectop()">
+	Right Operand
+      </input>
+    </td>
+`;
 var elements = ["labelpara", "oppara", "sizepara", "deletebutton",
 		"hexbox", "octbox", "sdecbox", "udecbox", "floatbox",
                 "binbox",
