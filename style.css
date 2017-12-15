@@ -111,6 +111,12 @@ input.error {
   margin: 0.25em;
 }
 
+.operators p {
+  margin: 0;
+  font-size: 75%;
+  font-family: sans-serif;
+}
+
 .opbutton {
   line-height: 2em;
   height: 2.5em;

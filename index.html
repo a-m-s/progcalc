@@ -34,43 +34,40 @@
       ><button onClick="addrow(16)" class="addbutton">Add 16-bit value</button
       ><button onClick="addrow(32)" class="addbutton">Add 32-bit value</button
       ><button onClick="addrow(64)" class="addbutton">Add 64-bit value</button>
-      <div>
-	<button id="add" onClick="addrow_op('add')" title="Integer Add"
-	  class="opbutton">&plus;</button
-	><button id="addfp" onClick="addrow_op('addfp')" 
-	  title="Floating Point Add" class="opbutton">
-	  &plus;<sub>fp</sub>
-	</button
-	><button id="subtract" onClick="addrow_op('subtract')" title="Integer Subtract"
-	  class="opbutton">&minus;</button
+      <p>Integer:
+	<button id="add" onClick="addrow_op('add')"
+	  title="Integer Add" class="opbutton">&plus;</button
+	><button id="subtract" onClick="addrow_op('subtract')"
+	  title="Integer Subtract" class="opbutton">&minus;</button
+	><button id="multiply" onClick="addrow_op('multiply')"
+	  title="Integer Multiply" class="opbutton">&times;</button
+	><button id="divide" onClick="addrow_op('divide')"
+	  title="Integer Divide" class="opbutton">&divide;</button
+	><button id="negate" onClick="addrow_op('negate')"
+	  title="Integer Negate" class="opbutton">&#8723;</button>
+      </p>
+
+      <p>Floating Point:
+	<button id="addfp" onClick="addrow_op('addfp')" 
+	  title="Floating Point Add" class="opbutton">&plus;</button
 	><button id="subtractfp" onClick="addrow_op('subtractfp')" 
-	  title="Floating Point Subtract" class="opbutton">
-	  &minus;<sub>fp</sub>
-	</button
-	><button id="multiply" onClick="addrow_op('multiply')" title="Integer Multiply"
-	  class="opbutton">&times;</button
+	  title="Floating Point Subtract" class="opbutton">&minus;</button
 	><button id="multiplyfp" onClick="addrow_op('multiplyfp')" 
-	  title="Floating Point Multiply" class="opbutton">
-	  &times;<sub>fp</sub>
-	</button
-	><button id="divide" onClick="addrow_op('divide')" title="Integer Divide"
-	  class="opbutton">&divide;</button
+	  title="Floating Point Multiply" class="opbutton">&times;</button
 	><button id="dividefp" onClick="addrow_op('dividefp')" 
-	  title="Floating Point Devide" class="opbutton">
-	  &divide;<sub>fp</sub>
-	</button
-	><button id="negate" onClick="addrow_op('negate')" title="Integer Negate"
-	  class="opbutton">&#8723;</button
+	  title="Floating Point Devide" class="opbutton">&divide;</button
 	><button id="negatefp" onClick="addrow_op('negatefp')" 
-	  title="Floating Point Negate" class="opbutton">
-	  &#8723;<sub>fp</sub>
-	</button
-	><button id="not" onClick="addrow_op('not')" title="Bitwise Not"
-	  class="opbutton">&not;</button
-	><button id="and" onClick="addrow_op('and')" title="Bitwise And"
-	  class="opbutton">&and;</button
-	><span style="font-size:50%">More soon...</span>
-      </div>
+	  title="Floating Point Negate" class="opbutton">&#8723;</button>
+      </p>
+
+      <p>Bitwise:
+	<button id="not" onClick="addrow_op('not')"
+	  title="Bitwise Not" class="opbutton">&not;</button
+	><button id="and" onClick="addrow_op('and')"
+	  title="Bitwise And" class="opbutton">&and;</button>
+      </p>
+
+      <p style="font-size:50%">More soon...</p>
     </div>
     <p class="smallprint">
       &copy; Andrew Stubbs. AGPLv3.

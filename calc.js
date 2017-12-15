@@ -83,17 +83,19 @@ var elements = ["labelpara", "oppara", "sizepara", "deletebutton",
                 "binbox",
 		"leftop", "rightop"];
 var operators = {
-  add: {type: "binop", symbol: " &plus; "},
-  addfp: {type: "binop", symbol: " &plus;<sub>fp</sub> "},
-  and: {type: "binop", symbol: " &and; "},
-  subtract: {type: "binop", symbol: " &minus; "},
-  subtractfp: {type: "binop", symbol: " &minus;<sub>fp</sub> "},
-  multiply: {type: "binop", symbol: " &times; "},
-  multiplyfp: {type: "binop", symbol: " &times;<sub>fp</sub> "},
-  divide: {type: "binop", symbol: " &divide; "},
-  dividefp: {type: "binop", symbol: " &divide;<sub>fp</sub> "},
+  add: {type: "binop", symbol: "&plus;"},
+  divide: {type: "binop", symbol: "&divide;"},
+  multiply: {type: "binop", symbol: "&times;"},
   negate: {type: "unop", symbol: "&minus;"},
-  negatefp: {type: "unop", symbol: "&minus;<sub>fp</sub> "},
+  subtract: {type: "binop", symbol: "&minus;"},
+
+  addfp: {type: "binop", symbol: "&plus;", fp1: true, fp2: true},
+  dividefp: {type: "binop", symbol: "&divide;", fp1: true, fp2: true},
+  multiplyfp: {type: "binop", symbol: "&times;", fp1: true, fp2: true},
+  negatefp: {type: "unop", symbol: "&minus;", fp1: true, fp2: true},
+  subtractfp: {type: "binop", symbol: "&minus;", fp1: true, fp2: true},
+
+  and: {type: "binop", symbol: "&and;"},
   not: {type: "unop", symbol: "&not;"},
 };
 
@@ -226,17 +228,20 @@ function addrow_op(op) {
   if (left !== right && right)
     right.dependencies.push(row);
 
+  var fp1 = (operators[op].fp1) ? "<sub>fp</sub>" : "";
+  var fp2 = (operators[op].fp2) ? "<sub>fp</sub>" : "";
+
   switch (operators[op].type) {
     case "unop":
       row.oppara.innerHTML =
-	"= <span class='operator'>" + operators[op].symbol + "</span>"
-	+ "<span class='operand'>" + left.name + "</span>";
+	`= <span class='operator'>${operators[op].symbol}</span>`
+	+ `<span class='operand'>${left.name}${fp1}</span>`;
       break;
     case "binop":
       row.oppara.innerHTML =
-	"= <span class='operand'>" + left.name + "</span>"
-	+ "<span class='operator'>" + operators[op].symbol + "</span>"
-	+ "<span class='operand'>" + right.name + "</span>";
+	`= <span class='operand'>${left.name}${fp1}</span>`
+	+ ` <span class='operator'>${operators[op].symbol}</span> `
+	+ `<span class='operand'>${right.name}${fp2}</span>`;
       break;
   }
 
