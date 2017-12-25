@@ -440,6 +440,12 @@ Op64.prototype.not = function(a) {
   return this;
 }
 
+// FP round to nearest
+Op64.prototype.roundfp = function(a) {
+  this.f64[0] = Math.round(a.f64[0]);
+  return this;
+}
+
 // Integer subtract
 Op64.prototype.subtract = function(a, b) {
   var negb = new Op64().negate(b);

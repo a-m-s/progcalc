@@ -186,6 +186,12 @@ Op32.prototype.not = function(a) {
   return this;
 }
 
+// FP round to nearest
+Op32.prototype.roundfp = function(a) {
+  this.f32[0] = Math.round(a.f32[0]);
+  return this;
+}
+
 // Integer subtract
 Op32.prototype.subtract = function(a, b) {
   this.u32[0] = a.u32[0] - b.u32[0];

@@ -57,7 +57,13 @@
 	><button id="dividefp" onClick="addrow_op('dividefp')" 
 	  title="Floating Point Devide" class="opbutton">&divide;</button
 	><button id="negatefp" onClick="addrow_op('negatefp')" 
-	  title="Floating Point Negate" class="opbutton">&#8723;</button>
+	  title="Floating Point Negate" class="opbutton">&#8723;</button
+	><select id="fpfn" onChange="this.value != '' && addrow_op(this.value);
+	    document.getElementById('fpdefault').selected=true" class="opselect">
+	  <option id="fpdefault" value="" selected>Function ...</option>
+	  <option id="roundfp" value="roundfp"
+	   title="Floating Point Round To Nearest">Round</option>
+	</select>
       </p>
 
       <p>Bitwise:

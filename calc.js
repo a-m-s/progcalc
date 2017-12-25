@@ -92,8 +92,9 @@ var operators = {
   addfp: {type: "binop", symbol: "&plus;", fp1: true, fp2: true},
   dividefp: {type: "binop", symbol: "&divide;", fp1: true, fp2: true},
   multiplyfp: {type: "binop", symbol: "&times;", fp1: true, fp2: true},
-  negatefp: {type: "unop", symbol: "&minus;", fp1: true, fp2: true},
+  negatefp: {type: "unop", symbol: "&minus;", fp1: true},
   subtractfp: {type: "binop", symbol: "&minus;", fp1: true, fp2: true},
+  roundfp: {type: "unop", symbol: "round ", fp1: true},
 
   and: {type: "binop", symbol: "&and;"},
   not: {type: "unop", symbol: "&not;"},
@@ -163,6 +164,7 @@ function selectop() {
 	break;
     }
   }
+  document.getElementById("fpfn").disabled = !left;
 }
 
 function rowname (index) {
