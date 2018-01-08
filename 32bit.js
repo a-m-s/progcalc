@@ -144,6 +144,12 @@ Op32.prototype.and = function(a, b) {
   return this;
 }
 
+// FP round up
+Op32.prototype.ceilfp = function(a) {
+  this.f32[0] = Math.ceil(a.f32[0]);
+  return this;
+}
+
 // Integer divide
 Op32.prototype.divide = function(a, b) {
   this.u32[0] = a.u32[0] / b.u32[0];
@@ -153,6 +159,12 @@ Op32.prototype.divide = function(a, b) {
 // FP divide
 Op32.prototype.dividefp = function(a, b) {
   this.f32[0] = a.f32[0] / b.f32[0];
+  return this;
+}
+
+// FP round down
+Op32.prototype.floorfp = function(a) {
+  this.f32[0] = Math.floor(a.f32[0]);
   return this;
 }
 

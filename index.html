@@ -61,6 +61,10 @@
 	><select id="fpfn" onChange="this.value != '' && addrow_op(this.value);
 	    document.getElementById('fpdefault').selected=true" class="opselect">
 	  <option id="fpdefault" value="" selected>Function ...</option>
+	  <option id="ceilfp" value="ceilfp"
+	   title="Floating Point Round up">Ceil</option>
+	  <option id="floorfp" value="floorfp"
+	   title="Floating Point Round Down">Floor</option>
 	  <option id="roundfp" value="roundfp"
 	   title="Floating Point Round To Nearest">Round</option>
 	</select>

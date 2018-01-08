@@ -90,7 +90,9 @@ var operators = {
   subtract: {type: "binop", symbol: "&minus;"},
 
   addfp: {type: "binop", symbol: "&plus;", fp1: true, fp2: true},
+  ceilfp: {type: "unop", symbol: "ceil ", fp1: true},
   dividefp: {type: "binop", symbol: "&divide;", fp1: true, fp2: true},
+  floorfp: {type: "unop", symbol: "floor ", fp1: true},
   multiplyfp: {type: "binop", symbol: "&times;", fp1: true, fp2: true},
   negatefp: {type: "unop", symbol: "&minus;", fp1: true},
   subtractfp: {type: "binop", symbol: "&minus;", fp1: true, fp2: true},
