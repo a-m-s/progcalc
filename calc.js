@@ -100,7 +100,8 @@ var operators = {
 
   and: {type: "binop", symbol: "&and;"},
   not: {type: "unop", symbol: "&not;"},
-  or: {type: "unop", symbol: "&or;"},
+  or: {type: "binop", symbol: "&or;"},
+  xor: {type: "binop", symbol: "xor"},
 };
 
 var calculatorui = document.getElementById("calculator");

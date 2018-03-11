@@ -157,3 +157,9 @@ Op16.prototype.subtract = function(a, b) {
   this.u16[0] = a.u16[0] - b.u16[0];
   return this;
 }
+
+// Bitwise xor
+Op16.prototype.xor = function(a, b) {
+  this.u16[0] = a.u16[0] ^ b.u16[0];
+  return this;
+}

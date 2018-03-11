@@ -222,3 +222,8 @@ Op32.prototype.subtractfp = function(a, b) {
   return this;
 }
 
+// Bitwise xor
+Op32.prototype.xor = function(a, b) {
+  this.u32[0] = a.u32[0] ^ b.u32[0];
+  return this;
+}

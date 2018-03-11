@@ -155,3 +155,9 @@ Op8.prototype.subtract = function(a, b) {
   this.u8[0] = a.u8[0] - b.u8[0];
   return this;
 }
+
+// Bitwise xor
+Op8.prototype.xor = function(a, b) {
+  this.u8[0] = a.u8[0] ^ b.u8[0];
+  return this;
+}
