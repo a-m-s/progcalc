@@ -146,6 +146,12 @@ Op16.prototype.not = function(a) {
   return this;
 }
 
+// Bitwise or
+Op16.prototype.or = function(a, b) {
+  this.u16[0] = a.u16[0] | b.u16[0];
+  return this;
+}
+
 // Integer subtract
 Op16.prototype.subtract = function(a, b) {
   this.u16[0] = a.u16[0] - b.u16[0];

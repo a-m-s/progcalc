@@ -144,6 +144,12 @@ Op8.prototype.not = function(a) {
   return this;
 }
 
+// Bitwise or
+Op8.prototype.or = function(a, b) {
+  this.u8[0] = a.u8[0] | b.u8[0];
+  return this;
+}
+
 // Integer subtract
 Op8.prototype.subtract = function(a, b) {
   this.u8[0] = a.u8[0] - b.u8[0];

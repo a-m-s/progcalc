@@ -452,6 +452,13 @@ Op64.prototype.not = function(a) {
   return this;
 }
 
+// Bitwise or
+Op64.prototype.or = function(a, b) {
+  this.u32[0] = a.u32[0] | b.u32[0];
+  this.u32[1] = a.u32[1] | b.u32[1];
+  return this;
+}
+
 // FP round to nearest
 Op64.prototype.roundfp = function(a) {
   this.f64[0] = Math.round(a.f64[0]);
