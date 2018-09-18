@@ -168,7 +168,9 @@ function selectop() {
 	break;
     }
   }
+  document.getElementById("intfn").disabled = !left;
   document.getElementById("fpfn").disabled = !left;
+  document.getElementById("binfn").disabled = !left;
 }
 
 function rowname (index) {

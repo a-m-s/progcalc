@@ -34,53 +34,69 @@
       ><button onClick="addrow(16)" class="addbutton">Add 16-bit value</button
       ><button onClick="addrow(32)" class="addbutton">Add 32-bit value</button
       ><button onClick="addrow(64)" class="addbutton">Add 64-bit value</button>
-      <p>Integer:
-	<button id="add" onClick="addrow_op('add')"
-	  title="Integer Add" class="opbutton">&plus;</button
-	><button id="subtract" onClick="addrow_op('subtract')"
-	  title="Integer Subtract" class="opbutton">&minus;</button
-	><button id="multiply" onClick="addrow_op('multiply')"
-	  title="Integer Multiply" class="opbutton">&times;</button
-	><button id="divide" onClick="addrow_op('divide')"
-	  title="Integer Divide" class="opbutton">&divide;</button
-	><button id="negate" onClick="addrow_op('negate')"
-	  title="Integer Negate" class="opbutton">&#8723;</button>
-      </p>
-
-      <p>Floating Point:
-	<button id="addfp" onClick="addrow_op('addfp')" 
-	  title="Floating Point Add" class="opbutton">&plus;</button
-	><button id="subtractfp" onClick="addrow_op('subtractfp')" 
-	  title="Floating Point Subtract" class="opbutton">&minus;</button
-	><button id="multiplyfp" onClick="addrow_op('multiplyfp')" 
-	  title="Floating Point Multiply" class="opbutton">&times;</button
-	><button id="dividefp" onClick="addrow_op('dividefp')" 
-	  title="Floating Point Devide" class="opbutton">&divide;</button
-	><button id="negatefp" onClick="addrow_op('negatefp')" 
-	  title="Floating Point Negate" class="opbutton">&#8723;</button
-	><select id="fpfn" onChange="this.value != '' && addrow_op(this.value);
-	    document.getElementById('fpdefault').selected=true" class="opselect">
-	  <option id="fpdefault" value="" selected>Function ...</option>
-	  <option id="ceilfp" value="ceilfp"
-	   title="Floating Point Round up">Ceil</option>
-	  <option id="floorfp" value="floorfp"
-	   title="Floating Point Round Down">Floor</option>
-	  <option id="roundfp" value="roundfp"
-	   title="Floating Point Round To Nearest">Round</option>
-	</select>
-      </p>
-
-      <p>Bitwise:
-	<button id="not" onClick="addrow_op('not')"
-	  title="Bitwise Not" class="opbutton">&not;</button
-	><button id="and" onClick="addrow_op('and')"
-	  title="Bitwise And" class="opbutton">&and;</button
-	><button id="or" onClick="addrow_op('or')"
-	  title="Bitwise Or" class="opbutton">&or;</button
-	><button id="xor" onClick="addrow_op('xor')"
-	  title="Bitwise Exclusive Or" class="opbutton">xor</button>
-      </p>
-
+      <table>
+	<tr>
+	  <td align=right>Integer:</td>
+	  <td>
+	    <button id="add" onClick="addrow_op('add')"
+	      title="Integer Add" class="opbutton">&plus;</button
+	    ><button id="subtract" onClick="addrow_op('subtract')"
+	      title="Integer Subtract" class="opbutton">&minus;</button
+	    ><button id="multiply" onClick="addrow_op('multiply')"
+	      title="Integer Multiply" class="opbutton">&times;</button
+	    ><button id="divide" onClick="addrow_op('divide')"
+	      title="Integer Divide" class="opbutton">&divide;</button
+	    ><button id="negate" onClick="addrow_op('negate')"
+	      title="Integer Negate" class="opbutton">&#8723;</button
+	    ><select id="intfn" onChange="this.value != '' && addrow_op(this.value);
+		document.getElementById('intdefault').selected=true" class="opselect">
+	      <option id="intdefault" value="" selected>Function ...</option>
+	    </select>
+	  </td>
+	</tr>
+	<tr>
+	  <td align=right>Floating Point:</td>
+	  <td>
+	    <button id="addfp" onClick="addrow_op('addfp')" 
+	      title="Floating Point Add" class="opbutton">&plus;</button
+	    ><button id="subtractfp" onClick="addrow_op('subtractfp')" 
+	      title="Floating Point Subtract" class="opbutton">&minus;</button
+	    ><button id="multiplyfp" onClick="addrow_op('multiplyfp')" 
+	      title="Floating Point Multiply" class="opbutton">&times;</button
+	    ><button id="dividefp" onClick="addrow_op('dividefp')" 
+	      title="Floating Point Devide" class="opbutton">&divide;</button
+	    ><button id="negatefp" onClick="addrow_op('negatefp')" 
+	      title="Floating Point Negate" class="opbutton">&#8723;</button
+	    ><select id="fpfn" onChange="this.value != '' && addrow_op(this.value);
+		document.getElementById('fpdefault').selected=true" class="opselect">
+	      <option id="fpdefault" value="" selected>Function ...</option>
+	      <option id="ceilfp" value="ceilfp"
+	       title="Floating Point Round up">Ceil</option>
+	      <option id="floorfp" value="floorfp"
+	       title="Floating Point Round Down">Floor</option>
+	      <option id="roundfp" value="roundfp"
+	       title="Floating Point Round To Nearest">Round</option>
+	    </select>
+	  </td>
+	</tr>
+	<tr>
+	  <td align=right>Bitwise:</td>
+	  <td>
+	    <button id="not" onClick="addrow_op('not')"
+	      title="Bitwise Not" class="opbutton">&not;</button
+	    ><button id="and" onClick="addrow_op('and')"
+	      title="Bitwise And" class="opbutton">&and;</button
+	    ><button id="or" onClick="addrow_op('or')"
+	      title="Bitwise Or" class="opbutton">&or;</button
+	    ><button id="xor" onClick="addrow_op('xor')"
+	      title="Bitwise Exclusive Or" class="opbutton">xor</button
+	    ><select id="binfn" onChange="this.value != '' && addrow_op(this.value);
+		document.getElementById('bindefault').selected=true" class="opselect">
+	      <option id="bindefault" value="" selected>Function ...</option>
+	    </select>
+	  </td>
+	</tr>
+      </table>
       <p style="font-size:50%">More soon...</p>
     </div>
     <p class="smallprint">
