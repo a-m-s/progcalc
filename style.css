@@ -102,6 +102,12 @@ input.error {
   color: grey;
 }
 
+.warning {
+  margin-bottom: 1em;
+  color: red;
+  text-align: center;
+}
+
 .operators {
   position: sticky;
   bottom: 1em;
@@ -140,4 +146,8 @@ sub {
 
 .smallprint {
   font-size: 60%;
+}
+
+.hidden {
+  display: none;
 }

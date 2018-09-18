@@ -152,6 +152,7 @@ Op32.prototype.ceilfp = function(a) {
 
 // Integer divide
 Op32.prototype.divide = function(a, b) {
+  if (b.u32[0] === 0) this.warning = "Divide by zero!"
   this.u32[0] = a.u32[0] / b.u32[0];
   return this;
 }

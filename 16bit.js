@@ -124,6 +124,7 @@ Op16.prototype.and = function(a, b) {
 
 // Integer divide
 Op16.prototype.divide = function(a, b) {
+  if (b.u16[0] === 0) this.warning = "Divide by zero!"
   this.u16[0] = a.u16[0] / b.u16[0];
   return this;
 }

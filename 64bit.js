@@ -335,7 +335,7 @@ Op64.prototype.ceilfp = function(a) {
 // Integer divide
 Op64.prototype.divide = function(a, b) {
   if (b.u32[0] == 0 && b.u32[1] == 0) {
-    // Division by 0
+    this.warning = "Divide by zero!"
     this.f64[0] = 0;
     return this;
   }

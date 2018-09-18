@@ -67,6 +67,7 @@ var template=`
       </table>
     </td>
     <td>
+      <div class="warning hidden">Err</div>
       <input type="radio" class="leftop" name="leftop"
 	onChange="selectop()">
 	Left Operand
@@ -81,7 +82,7 @@ var template=`
 var elements = ["labelpara", "oppara", "sizepara", "deletebutton",
 		"hexbox", "octbox", "sdecbox", "udecbox", "floatbox",
                 "binbox",
-		"leftop", "rightop"];
+		"warning", "leftop", "rightop"];
 var operators = {
   add: {type: "binop", symbol: "&plus;"},
   divide: {type: "binop", symbol: "&divide;"},
@@ -135,6 +136,12 @@ function updateboxes (row, exceptbox) {
       row.floatbox.value = row.val.toFloat();
     if (row.binbox !== exceptbox)
       row.binbox.value = row.val.toBin();
+    if (row.val.warning) {
+      row.warning.classList.remove("hidden");
+      row.warning.innerHTML = row.val.warning;
+    } else {
+      row.warning.classList.add("hidden");
+    }
   }
 
   for (var dep of row.dependencies)
@@ -142,6 +149,7 @@ function updateboxes (row, exceptbox) {
 }
 
 function updateval(row) {
+  row.val.warning = null;
   row.val[row.op](row.left.val, row.right ? row.right.val : null);
   updateboxes (row, null);
 }

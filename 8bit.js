@@ -122,6 +122,7 @@ Op8.prototype.and = function(a, b) {
 
 // Integer divide
 Op8.prototype.divide = function(a, b) {
+  if (b.u8[0] === 0) this.warning = "Divide by zero!"
   this.u8[0] = a.u8[0] / b.u8[0];
   return this;
 }
