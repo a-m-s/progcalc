@@ -89,6 +89,9 @@ var operators = {
   multiply: {type: "binop", symbol: "&times;"},
   negate: {type: "unop", symbol: "&minus;"},
   subtract: {type: "binop", symbol: "&minus;"},
+  modulus: {type: "binop", symbol: "mod"},
+  udivide: {type: "binop", symbol: "&divide;<sub>u</sub>"},
+  umodulus: {type: "binop", symbol: "mod<sub>u</sub>"},
 
   addfp: {type: "binop", symbol: "&plus;", fp1: true, fp2: true},
   ceilfp: {type: "unop", symbol: "ceil ", fp1: true},

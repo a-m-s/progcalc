@@ -150,15 +150,16 @@ Op32.prototype.ceilfp = function(a) {
   return this;
 }
 
-// Integer divide
+// Integer signed divide
 Op32.prototype.divide = function(a, b) {
   if (b.u32[0] === 0) this.warning = "Divide by zero!"
-  this.u32[0] = a.u32[0] / b.u32[0];
+  this.i32[0] = a.i32[0] / b.i32[0];
   return this;
 }
 
 // FP divide
 Op32.prototype.dividefp = function(a, b) {
+  if (b.f32[0] === 0) this.warning = "Divide by zero!"
   this.f32[0] = a.f32[0] / b.f32[0];
   return this;
 }
@@ -166,6 +167,13 @@ Op32.prototype.dividefp = function(a, b) {
 // FP round down
 Op32.prototype.floorfp = function(a) {
   this.f32[0] = Math.floor(a.f32[0]);
+  return this;
+}
+
+// Integer signed modulus
+Op32.prototype.modulus = function(a, b) {
+  if (b.u32[0] === 0) this.warning = "Divide by zero!"
+  this.i32[0] = a.i32[0] % b.i32[0];
   return this;
 }
 
@@ -220,6 +228,20 @@ Op32.prototype.subtract = function(a, b) {
 // FP subtract
 Op32.prototype.subtractfp = function(a, b) {
   this.f32[0] = a.f32[0] - b.f32[0];
+  return this;
+}
+
+// Integer unsigned divide
+Op32.prototype.udivide = function(a, b) {
+  if (b.u32[0] === 0) this.warning = "Divide by zero!"
+  this.u32[0] = a.u32[0] / b.u32[0];
+  return this;
+}
+
+// Integer unsigned modulus
+Op32.prototype.umodulus = function(a, b) {
+  if (b.u32[0] === 0) this.warning = "Divide by zero!"
+  this.u32[0] = a.u32[0] % b.u32[0];
   return this;
 }
 

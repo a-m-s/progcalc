@@ -45,12 +45,15 @@
 	    ><button id="multiply" onClick="addrow_op('multiply')"
 	      title="Integer Multiply" class="opbutton">&times;</button
 	    ><button id="divide" onClick="addrow_op('divide')"
-	      title="Integer Divide" class="opbutton">&divide;</button
+	      title="Integer Signed Divide" class="opbutton">&divide;</button
 	    ><button id="negate" onClick="addrow_op('negate')"
 	      title="Integer Negate" class="opbutton">&#8723;</button
 	    ><select id="intfn" onChange="this.value != '' && addrow_op(this.value);
 		document.getElementById('intdefault').selected=true" class="opselect">
 	      <option id="intdefault" value="" selected>Function ...</option>
+	      <option id="modulus" value="modulus">Signed Modulus</option>
+	      <option id="udivide" value="udivide">Unsigned Divide</option>
+	      <option id="umodulus" value="umodulus">Unsigned Modulus</option>
 	    </select>
 	  </td>
 	</tr>

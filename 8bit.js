@@ -120,10 +120,17 @@ Op8.prototype.and = function(a, b) {
   return this;
 }
 
-// Integer divide
+// Integer signed divide
 Op8.prototype.divide = function(a, b) {
   if (b.u8[0] === 0) this.warning = "Divide by zero!"
-  this.u8[0] = a.u8[0] / b.u8[0];
+  this.i8[0] = a.i8[0] / b.i8[0];
+  return this;
+}
+
+// Integer signed modulus
+Op8.prototype.modulus = function(a, b) {
+  if (b.u8[0] === 0) this.warning = "Divide by zero!"
+  this.i8[0] = a.i8[0] % b.i8[0];
   return this;
 }
 
@@ -154,6 +161,20 @@ Op8.prototype.or = function(a, b) {
 // Integer subtract
 Op8.prototype.subtract = function(a, b) {
   this.u8[0] = a.u8[0] - b.u8[0];
+  return this;
+}
+
+// Integer unsigned divide
+Op8.prototype.udivide = function(a, b) {
+  if (b.u8[0] === 0) this.warning = "Divide by zero!"
+  this.u8[0] = a.u8[0] / b.u8[0];
+  return this;
+}
+
+// Integer unsigned modulus
+Op8.prototype.umodulus = function(a, b) {
+  if (b.u8[0] === 0) this.warning = "Divide by zero!"
+  this.u8[0] = a.u8[0] % b.u8[0];
   return this;
 }
 

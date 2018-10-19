@@ -16,16 +16,21 @@
 
 // Constructor
 
- var Op64 = function() {
-   this.f64 = new Float64Array(1);
-   this.f32 = new Float32Array(this.f64.buffer);
-   this.i32 = new Int32Array(this.f64.buffer);
-   this.i16 = new Int16Array(this.f64.buffer);
-   this.i8 = new Int8Array(this.f64.buffer);
-   this.u32 = new Uint32Array(this.f64.buffer);
-   this.u16 = new Uint16Array(this.f64.buffer);
-   this.u8 = new Uint8Array(this.f64.buffer);
-   this.f64[0] = 0;
+var Op64 = function() {
+  this.f64 = new Float64Array(1);
+  this.f32 = new Float32Array(this.f64.buffer);
+  this.i32 = new Int32Array(this.f64.buffer);
+  this.i16 = new Int16Array(this.f64.buffer);
+  this.i8 = new Int8Array(this.f64.buffer);
+  this.u32 = new Uint32Array(this.f64.buffer);
+  this.u16 = new Uint16Array(this.f64.buffer);
+  this.u8 = new Uint8Array(this.f64.buffer);
+  this.f64[0] = 0;
+}
+
+Op64.prototype.copy = function(o) {
+  this.f64[0] = o.f64[0];
+  return this;
 }
 
 /* String conversion routines.
@@ -276,6 +281,46 @@ Op64.prototype.toBin = function() {
           + zeropad(this.u32[0].toString(2), 32));
 }
 
+/* Helper functions.  */
+
+function udiv64(a, b) {
+  // This long division algorithm is taken straight from wikipedia.
+  // https://en.wikipedia.org/wiki/Division_algorithm
+  // I've unrolled the high and low word loops to keep the array
+  // and bit indices simple to read.
+
+  var quotient = new Op64();
+  var remainder = new Op64();
+
+  // High word
+  for (var i=31; i>=0; i--) {
+    remainder.leftshift(remainder, 1);
+    if (a.u32[1] & (1 << i))
+      remainder.u32[0] |= 1;
+    if (remainder.u32[1] > b.u32[1]
+        || (remainder.u32[1] == b.u32[1]
+	    && remainder.u32[0] >= b.u32[0])) {
+      remainder.subtract(remainder, b);
+      quotient.u32[1] |= (1 << i);
+    }
+  }
+
+  // Low word
+  for (var i=31; i>=0; i--) {
+    remainder.leftshift(remainder, 1);
+    if (a.u32[0] & (1 << i))
+      remainder.u32[0] |= 1;
+    if (remainder.u32[1] > b.u32[1]
+        || (remainder.u32[1] == b.u32[1]
+	    && remainder.u32[0] >= b.u32[0])) {
+      remainder.subtract(remainder, b);
+      quotient.u32[0] |= (1 << i);
+    }
+  }
+
+  return {quotient: quotient, remainder: remainder};
+}
+
 /* Operator functions.
  
    Each function takes one or more Op64 values, and updates itself
@@ -332,7 +377,7 @@ Op64.prototype.ceilfp = function(a) {
   return this;
 }
 
-// Integer divide
+// Integer signed divide
 Op64.prototype.divide = function(a, b) {
   if (b.u32[0] == 0 && b.u32[1] == 0) {
     this.warning = "Divide by zero!"
@@ -340,41 +385,22 @@ Op64.prototype.divide = function(a, b) {
     return this;
   }
 
-  // This long division algorithm is taken straight from wikipedia.
-  // I've unrolled the high and low word loops to keep the array
-  // and bit indices simple to read.
+  var A = new Op64().copy(a);
+  var B = new Op64().copy(b);
 
-  var quotient = new Op64();
-  var remainder = new Op64();
+  if (a.u32[1] & 0x80000000)
+    A.negate(a);
+  if (b.u32[1] & 0x80000000)
+    B.negate(b);
 
-  // High word
-  for (var i=31; i>0; i--) {
-    remainder.leftshift(remainder, 1);
-    if (a.u32[1] & (1 << i))
-      remainder.u32[0] |= 1;
-    if (remainder.u32[1] > b.u32[1]
-        || (remainder.u32[1] == b.u32[1]
-	    && remainder.u32[0] >= b.u32[0])) {
-      remainder.subtract(remainder, b);
-      quotient.u32[1] |= (1 << i);
-    }
-  }
+  var res = udiv64(A, B);
 
-  // Low word
-  for (var i=31; i>0; i--) {
-    remainder.leftshift(remainder, 1);
-    if (a.u32[0] & (1 << i))
-      remainder.u32[0] |= 1;
-    if (remainder.u32[1] > b.u32[1]
-        || (remainder.u32[1] == b.u32[1]
-	    && remainder.u32[0] >= b.u32[0])) {
-      remainder.subtract(remainder, b);
-      quotient.u32[0] |= (1 << i);
-    }
-  }
+  if ((a.u32[1] & 0x80000000 || b.u32[1] & 0x80000000)
+      && (a.u32[1] & 0x80000000) != (b.u32[1] & 0x80000000))
+    res.quotient.negate(res.quotient);
 
-  this.u32[0] = quotient.u32[0];
-  this.u32[1] = quotient.u32[1];
+  this.u32[0] = res.quotient.u32[0];
+  this.u32[1] = res.quotient.u32[1];
   return this;
 }
 
@@ -408,6 +434,32 @@ Op64.prototype.leftshift = function(a, bits) {
     this.u32[0] = 0;
     this.u32[1] = 0;
   }
+  return this;
+}
+
+// Integer signed modulus
+Op64.prototype.modulus = function(a, b) {
+  if (b.u32[0] == 0 && b.u32[1] == 0) {
+    this.warning = "Divide by zero!"
+    this.f64[0] = 0;
+    return this;
+  }
+
+  var A = new Op64().copy(a);
+  var B = new Op64().copy(b);
+
+  if (a.u32[1] & 0x80000000)
+    A.negate(a);
+  if (b.u32[1] & 0x80000000)
+    B.negate(b);
+
+  var res = udiv64(A, B);
+
+  if (a.u32[1] & 0x80000000)
+    res.remainder.negate(res.remainder);
+
+  this.u32[0] = res.remainder.u32[0];
+  this.u32[1] = res.remainder.u32[1];
   return this;
 }
 
@@ -474,6 +526,34 @@ Op64.prototype.subtract = function(a, b) {
 // FP subtract
 Op64.prototype.subtractfp = function(a, b) {
   this.f64[0] = a.f64[0] - b.f64[0];
+  return this;
+}
+
+// Integer unsigned divide
+Op64.prototype.udivide = function(a, b) {
+  if (b.u32[0] == 0 && b.u32[1] == 0) {
+    this.warning = "Divide by zero!"
+    this.f64[0] = 0;
+    return this;
+  }
+
+  var res = udiv64(a, b);
+  this.u32[0] = res.quotient.u32[0];
+  this.u32[1] = res.quotient.u32[1];
+  return this;
+}
+
+// Integer unsigned modulus
+Op64.prototype.umodulus = function(a, b) {
+  if (b.u32[0] == 0 && b.u32[1] == 0) {
+    this.warning = "Divide by zero!"
+    this.f64[0] = 0;
+    return this;
+  }
+
+  var res = udiv64(a, b);
+  this.u32[0] = res.remainder.u32[0];
+  this.u32[1] = res.remainder.u32[1];
   return this;
 }
 

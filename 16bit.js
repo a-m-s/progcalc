@@ -122,10 +122,17 @@ Op16.prototype.and = function(a, b) {
   return this;
 }
 
-// Integer divide
+// Integer signed divide
 Op16.prototype.divide = function(a, b) {
   if (b.u16[0] === 0) this.warning = "Divide by zero!"
-  this.u16[0] = a.u16[0] / b.u16[0];
+  this.i16[0] = a.i16[0] / b.i16[0];
+  return this;
+}
+
+// Integer signed modulus
+Op16.prototype.modulus = function(a, b) {
+  if (b.u16[0] === 0) this.warning = "Divide by zero!"
+  this.i16[0] = a.i16[0] % b.i16[0];
   return this;
 }
 
@@ -156,6 +163,20 @@ Op16.prototype.or = function(a, b) {
 // Integer subtract
 Op16.prototype.subtract = function(a, b) {
   this.u16[0] = a.u16[0] - b.u16[0];
+  return this;
+}
+
+// Integer unsigned divide
+Op16.prototype.udivide = function(a, b) {
+  if (b.u16[0] === 0) this.warning = "Divide by zero!"
+  this.u16[0] = a.u16[0] / b.u16[0];
+  return this;
+}
+
+// Integer unsigned modulus
+Op16.prototype.umodulus = function(a, b) {
+  if (b.u16[0] === 0) this.warning = "Divide by zero!"
+  this.u16[0] = a.u16[0] % b.u16[0];
   return this;
 }
 
