@@ -23,6 +23,14 @@
    this.u8 = new Uint8Array(this.i16.buffer);
 }
 
+Op16.prototype.size = 16;
+
+Op16.prototype.valid_conversion = function(op, size) {
+  if (op === "sext16" || op === "zext16")
+    return size === 8;
+  return false;
+}
+
 /* String conversion routines.
 
    from<radix>
@@ -160,6 +168,12 @@ Op16.prototype.or = function(a, b) {
   return this;
 }
 
+// Integer sign extend
+Op16.prototype.sext16 = function(a) {
+  this.i16[0] = a.i8[0];
+  return this;
+}
+
 // Integer subtract
 Op16.prototype.subtract = function(a, b) {
   this.u16[0] = a.u16[0] - b.u16[0];
@@ -183,5 +197,11 @@ Op16.prototype.umodulus = function(a, b) {
 // Bitwise xor
 Op16.prototype.xor = function(a, b) {
   this.u16[0] = a.u16[0] ^ b.u16[0];
+  return this;
+}
+
+// Integer zero extend
+Op16.prototype.zext16 = function(a) {
+  this.u16[0] = a.u8[0];
   return this;
 }

@@ -92,6 +92,12 @@ var operators = {
   modulus: {type: "binop", symbol: "mod"},
   udivide: {type: "binop", symbol: "&divide;<sub>u</sub>"},
   umodulus: {type: "binop", symbol: "mod<sub>u</sub>"},
+  sext16: {type: "unop", symbol: "sext", output: new Op16()},
+  sext32: {type: "unop", symbol: "sext", output: new Op32()},
+  sext64: {type: "unop", symbol: "sext", output: new Op64()},
+  zext16: {type: "unop", symbol: "zext", output: new Op16()},
+  zext32: {type: "unop", symbol: "zext", output: new Op32()},
+  zext64: {type: "unop", symbol: "zext", output: new Op64()},
 
   addfp: {type: "binop", symbol: "&plus;", fp1: true, fp2: true},
   ceilfp: {type: "unop", symbol: "ceil ", fp1: true},
@@ -170,7 +176,10 @@ function selectop() {
     switch (operators[op].type) {
       case "unop":
         document.getElementById(op).disabled =
-	  (!left || !left.val[op]);
+	  (!left
+	   || (operators[op].output
+	       ? !operators[op].output.valid_conversion(op, left.size)
+	       : !left.val[op]));
 	break;
       case "binop":
         document.getElementById(op).disabled =
@@ -239,7 +248,8 @@ function addrow (size) {
 }
 
 function addrow_op(op) {
-  var row = addrow (left.size);
+  var row = addrow (operators[op].output
+		    ? operators[op].output.size : left.size);
   row.left = left;
   row.right = right;
   row.op = op;

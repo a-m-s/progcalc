@@ -21,6 +21,12 @@ var Op8 = function() {
    this.u8 = new Uint8Array(this.i8.buffer);
 }
 
+Op8.prototype.size = 8;
+
+Op8.prototype.valid_conversion = function(op, size) {
+  return false;
+}
+
 /* String conversion routines.
 
    from<radix>

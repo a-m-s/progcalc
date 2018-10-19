@@ -26,6 +26,14 @@
    this.u8 = new Uint8Array(this.f32.buffer);
 }
 
+Op32.prototype.size = 32;
+
+Op32.prototype.valid_conversion = function(op, size) {
+  if (op === "sext32" || op === "zext32")
+    return size < 32;
+  return false;
+}
+
 /* String conversion routines.
 
    from<radix>
@@ -219,6 +227,15 @@ Op32.prototype.roundfp = function(a) {
   return this;
 }
 
+// Integer sign extend
+Op32.prototype.sext32 = function(a) {
+  if (a.size === 16)
+    this.i32[0] = a.i16[0];
+  else
+    this.i32[0] = a.i8[0];
+  return this;
+}
+
 // Integer subtract
 Op32.prototype.subtract = function(a, b) {
   this.u32[0] = a.u32[0] - b.u32[0];
@@ -248,5 +265,14 @@ Op32.prototype.umodulus = function(a, b) {
 // Bitwise xor
 Op32.prototype.xor = function(a, b) {
   this.u32[0] = a.u32[0] ^ b.u32[0];
+  return this;
+}
+
+// Integer zero extend
+Op32.prototype.zext32 = function(a) {
+  if (a.size === 16)
+    this.u32[0] = a.u16[0];
+  else
+    this.u32[0] = a.u8[0];
   return this;
 }

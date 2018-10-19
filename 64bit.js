@@ -28,9 +28,17 @@ var Op64 = function() {
   this.f64[0] = 0;
 }
 
+Op64.prototype.size = 64;
+
 Op64.prototype.copy = function(o) {
   this.f64[0] = o.f64[0];
   return this;
+}
+
+Op64.prototype.valid_conversion = function(op, size) {
+  if (op === "sext64" || op === "zext64")
+    return true;
+  return false;
 }
 
 /* String conversion routines.
@@ -517,6 +525,18 @@ Op64.prototype.roundfp = function(a) {
   return this;
 }
 
+// Integer sign extend
+Op64.prototype.sext64 = function(a) {
+  if (a.size === 32)
+    this.i32[0] = a.i32[0];
+  if (a.size === 16)
+    this.i32[0] = a.i16[0];
+  else
+    this.i32[0] = a.i8[0];
+  this.i32[1] = (this.u32[0] & 0x80000000 ? -1 : 0);
+  return this;
+}
+
 // Integer subtract
 Op64.prototype.subtract = function(a, b) {
   var negb = new Op64().negate(b);
@@ -561,5 +581,17 @@ Op64.prototype.umodulus = function(a, b) {
 Op64.prototype.xor = function(a, b) {
   this.u32[0] = a.u32[0] ^ b.u32[0];
   this.u32[1] = a.u32[1] ^ b.u32[1];
+  return this;
+}
+
+// Integer zero extend
+Op64.prototype.zext64 = function(a) {
+  if (a.size === 32)
+    this.u32[0] = a.u32[0];
+  else if (a.size === 16)
+    this.u32[0] = a.u16[0];
+  else
+    this.u32[0] = a.u8[0];
+  this.u32[1] = 0;
   return this;
 }
