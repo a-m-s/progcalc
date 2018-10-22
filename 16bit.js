@@ -28,6 +28,8 @@ Op16.prototype.size = 16;
 Op16.prototype.valid_conversion = function(op, size) {
   if (op === "sext16" || op === "zext16")
     return size === 8;
+  if (op === "trunc16")
+    return size > 16;
   return false;
 }
 
@@ -177,6 +179,12 @@ Op16.prototype.sext16 = function(a) {
 // Integer subtract
 Op16.prototype.subtract = function(a, b) {
   this.u16[0] = a.u16[0] - b.u16[0];
+  return this;
+}
+
+// Truncate
+Op16.prototype.trunc16 = function(a) {
+  this.u16[0] = a.u16[0];
   return this;
 }
 

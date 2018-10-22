@@ -37,7 +37,7 @@ Op64.prototype.copy = function(o) {
 
 Op64.prototype.valid_conversion = function(op, size) {
   if (op === "sext64" || op === "zext64")
-    return true;
+    return size < 64;
   return false;
 }
 

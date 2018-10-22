@@ -24,6 +24,8 @@ var Op8 = function() {
 Op8.prototype.size = 8;
 
 Op8.prototype.valid_conversion = function(op, size) {
+  if (op === "trunc8")
+    return size > 8;
   return false;
 }
 
@@ -167,6 +169,12 @@ Op8.prototype.or = function(a, b) {
 // Integer subtract
 Op8.prototype.subtract = function(a, b) {
   this.u8[0] = a.u8[0] - b.u8[0];
+  return this;
+}
+
+// Truncate
+Op8.prototype.trunc8 = function(a) {
+  this.u8[0] = a.u8[0];
   return this;
 }
 

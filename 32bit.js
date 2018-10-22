@@ -31,6 +31,8 @@ Op32.prototype.size = 32;
 Op32.prototype.valid_conversion = function(op, size) {
   if (op === "sext32" || op === "zext32")
     return size < 32;
+  if (op === "trunc32")
+    return size === 64;
   return false;
 }
 
@@ -245,6 +247,12 @@ Op32.prototype.subtract = function(a, b) {
 // FP subtract
 Op32.prototype.subtractfp = function(a, b) {
   this.f32[0] = a.f32[0] - b.f32[0];
+  return this;
+}
+
+// Truncate
+Op32.prototype.trunc32 = function(a) {
+  this.u32[0] = a.u32[0];
   return this;
 }
 
