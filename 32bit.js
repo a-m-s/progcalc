@@ -94,9 +94,12 @@ Op32.prototype.fromFloat = function(val) {
 Op32.prototype.toFloat = function() {
   // Javascript outputs "0", not "-0", so do it ourselves
   if (this.f32[0] == 0.0 && this.u32[0] & 0x80000000)
-    return "-0";
+    return "-0.0";
 
-  return this.f32[0];
+  var s = this.f32[0].toString();
+  if (/^-?\d+$/.test(s))
+    s += ".0";
+  return s;
 }
 
 Op32.prototype.fromBin = function(str) {

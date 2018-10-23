@@ -54,6 +54,18 @@ table {
   background-color: steelblue;
 }
 
+.expandable .hideable {
+  display: none;
+}
+
+.expandable:hover .hideable {
+  display: inline-block;
+}
+
+.hideable:focus, .hideable.primary {
+  display: inline-block;
+}
+
 .convtable input {
   border: 0.2em solid;
   border-color: white;

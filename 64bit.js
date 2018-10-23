@@ -245,9 +245,12 @@ Op64.prototype.fromFloat = function(val) {
 Op64.prototype.toFloat = function() {
   // Javascript outputs "0", not "-0", so do it ourselves
   if (this.f64[0] == 0.0 && this.u32[1] & 0x80000000)
-    return "-0";
+    return "-0.0";
 
-  return this.f64[0];
+  var s = this.f64[0].toString();
+  if (/^-?\d+$/.test(s))
+    s += ".0";
+  return s;
 }
 
 Op64.prototype.fromBin = function(str) {

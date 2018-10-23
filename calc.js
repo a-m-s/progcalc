@@ -18,51 +18,57 @@ var template=`
     <td>
       <p class="labelpara"></p>
       <p class="oppara"></p>
-      <p class="sizepara"></p>
+      <p class="hideable sizepara"></p>
       <p>
-        <button class="deletebutton"
+        <button class="hideable deletebutton"
           onClick="deleterow(this)">Delete</button>
       </p>
     </td>
     <td>
       <table class="convtable">
 	<tr>
-	  <td><input onInput="valchanged(this, \'Hex\', true)"
+	  <td><input onFocus="boxfocused(this, \'hexbox\')"
+		     onInput="valchanged(this, \'Hex\', true)"
 		     onChange="valchanged(this, \'Hex\', false)"
 		     placeholder="Hexadecimal" title="Hexadecimal"
-		     class="hexbox" size=64></input></td>
+		     class="hideable hexbox" size=64></input></td>
 	</tr>
 	<tr>
-	  <td><input onInput="valchanged(this, \'Oct\', true)"
+	  <td><input onFocus="boxfocused(this, \'octbox\')"
+		     onInput="valchanged(this, \'Oct\', true)"
 		     onChange="valchanged(this, \'Oct\', false)"
                      placeholder="Octal" title="Octal"
-		     class="octbox" size=64></input></td>
+		     class="hideable octbox" size=64></input></td>
 	</tr>
 	<tr>
-	  <td><input onInput="valchanged(this, \'SDec\', true)"
+	  <td><input onFocus="boxfocused(this, \'sdecbox\')"
+		     onInput="valchanged(this, \'SDec\', true)"
 		     onChange="valchanged(this, \'SDec\', false)"
 		     placeholder="Signed Decimal" title="Signed Decimal"
-		     class="sdecbox" size=64></input></td>
+		     class="hideable sdecbox primary" size=64></input></td>
 	</tr>
 	<tr>
-	  <td><input onInput="valchanged(this, \'UDec\', true)"
+	  <td><input onFocus="boxfocused(this, \'udecbox\')"
+		     onInput="valchanged(this, \'UDec\', true)"
 		     onChange="valchanged(this, \'UDec\', false)"
 		     placeholder="Unsigned Decimal"
 		     title="Unsigned Decimal"
-		     class="udecbox" size=64></input></td>
+		     class="hideable udecbox" size=64></input></td>
 	</tr>
 	<tr>
-	  <td><input onInput="valchanged(this, \'Float\', true)"
+	  <td><input onFocus="boxfocused(this, \'floatbox\')"
+		     onInput="valchanged(this, \'Float\', true)"
 		     onChange="valchanged(this, \'Float\', false)"
 		     placeholder="Floating Point Decimal"
 		     title="Floating Point Decimal"
-		     class="floatbox" size=64></input></td>
+		     class="hideable floatbox" size=64></input></td>
 	</tr>
 	<tr>
-	  <td><input onInput="valchanged(this, \'Bin\', true)"
+	  <td><input onFocus="boxfocused(this, \'binbox\')"
+		     onInput="valchanged(this, \'Bin\', true)"
 		     onChange="valchanged(this, \'Bin\', false)"
 		     placeholder="Binary" title="Binary"
-		     class="binbox" size=64></input></td>
+		     class="hideable binbox" size=64></input></td>
 	</tr>
       </table>
     </td>
@@ -122,6 +128,15 @@ var rowcount = 0;
 var rowarray = [];
 var left = null;
 var right = null;
+
+function boxfocused (box, name) {
+  var row = box.row;
+
+  // Make this box the primary field
+  row[row.primary].classList.remove("primary");
+  row.primary = name;
+  box.classList.add("primary");
+}
 
 function valchanged (box, radix, focused) {
   var row = box.row;
@@ -209,7 +224,8 @@ function rowname (index) {
 function addrow (size) {
   // Insert new row elements
   var tr = calculatorui.insertRow(-1);
-  tr.class = "calcrow";
+  tr.classList.add("calcrow");
+  tr.classList.add("expandable");
   tr.innerHTML = template;
 
   // Record element objects.
@@ -218,7 +234,8 @@ function addrow (size) {
     "name": rowname(rowcount),
     "tr": tr,
     "dependencies": [],
-    "deleted": false
+    "deleted": false,
+    "primary": "sdecbox"
   };
   for (var cls of elements) {
     var elm = tr.querySelector("." + cls);
@@ -259,6 +276,7 @@ function addrow_op(op) {
   left.dependencies.push(row);
   if (left !== right && right)
     right.dependencies.push(row);
+  boxfocused(row[left.primary], left.primary);
 
   var fp1 = (operators[op].fp1) ? "<sub>fp</sub>" : "";
   var fp2 = (operators[op].fp2) ? "<sub>fp</sub>" : "";
