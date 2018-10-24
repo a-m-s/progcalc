@@ -54,6 +54,7 @@
 	      <option id="modulus" value="modulus">Signed Modulus</option>
 	      <option id="udivide" value="udivide">Unsigned Divide</option>
 	      <option id="umodulus" value="umodulus">Unsigned Modulus</option>
+	      <option id="arightshift" value="arightshift">Arithmetic Shift Right (>>)</option>
 	      <option id="sext16" value="sext16">Sign Extend 16-bit</option>
 	      <option id="zext16" value="zext16">Zero Extend 16-bit</option>
 	      <option id="sext32" value="sext32">Sign Extend 32-bit</option>
@@ -102,6 +103,8 @@
 	    ><select id="binfn" onChange="this.value != '' && addrow_op(this.value);
 		document.getElementById('bindefault').selected=true" class="opselect">
 	      <option id="bindefault" value="" selected>Function ...</option>
+	      <option id="leftshift" value="leftshift">Shift Left</option>
+	      <option id="rightshift" value="rightshift">Logical Shift Right (>>>)</option>
 	      <option id="trunc8" value="trunc8">Truncate 8-bit</option>
 	      <option id="trunc16" value="trunc16">Truncate 16-bit</option>
 	      <option id="trunc32" value="trunc32">Truncate 32-bit</option>

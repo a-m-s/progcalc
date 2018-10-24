@@ -72,7 +72,7 @@ Op64.prototype.fromHex = function(str) {
 
   // Read numbers
   while (str[i] && /[0-9a-fA-F]/.test(str[i])) {
-    this.leftshift(this, 4);
+    this.leftshift(this, {i32: [4, 0]});
     bits += 4;
 
     if (/[0-9]/.test(str[i])) {
@@ -117,7 +117,7 @@ Op64.prototype.fromOct = function(str) {
 
   // Read numbers
   while (str[i] && /[0-7]/.test(str[i])) {
-    this.leftshift(this, 3);
+    this.leftshift(this, {i32: [3, 0]});
     bits += 3;
 
     this.add(this, {u32: [str.charCodeAt(i) - 48, 0]});
@@ -274,7 +274,7 @@ Op64.prototype.fromBin = function(str) {
 
   // Read numbers
   while (str[i] && /[0-1]/.test(str[i])) {
-    this.leftshift(this, 1);
+    this.leftshift(this, {i32: [1, 0]});
     bits += 1;
 
     this.add(this, {u32: [str.charCodeAt(i) - 48, 0]});
@@ -305,7 +305,7 @@ function udiv64(a, b) {
 
   // High word
   for (var i=31; i>=0; i--) {
-    remainder.leftshift(remainder, 1);
+    remainder.leftshift(remainder, {i32: [1, 0]});
     if (a.u32[1] & (1 << i))
       remainder.u32[0] |= 1;
     if (remainder.u32[1] > b.u32[1]
@@ -318,7 +318,7 @@ function udiv64(a, b) {
 
   // Low word
   for (var i=31; i>=0; i--) {
-    remainder.leftshift(remainder, 1);
+    remainder.leftshift(remainder, {i32: [1, 0]});
     if (a.u32[0] & (1 << i))
       remainder.u32[0] |= 1;
     if (remainder.u32[1] > b.u32[1]
@@ -382,6 +382,34 @@ Op64.prototype.and = function(a, b) {
   return this;
 }
 
+// Bitwise right shift
+Op64.prototype.arightshift = function(a, b) {
+  var bits = b.i32[0];
+  if (bits < 0) {
+    this.warning = "Negative shifts may be unsafe";
+    return this.leftshift(a, {i32: [-b.i32[0], 0]});
+  }
+  if (bits > 63)
+    this.warning = "Shifting more than 63 bits may be unsafe";
+
+  if (bits == 0) {
+    this.u32[0] = a.u32[0];
+    this.u32[1] = a.u32[1];
+  } else if (bits < 32) {
+    this.u32[1] = (a.i32[1] >> bits);
+    this.u32[0] = (a.u32[0] >>> bits) | (a.u32[1] << (32-bits));
+  } else if (bits < 64) {
+    this.u32[1] = (a.u32[1] & 0x80000000
+		   ? 0xffffffff
+		   : 0);
+    this.u32[0] = (a.i32[1] >> (bits-32));
+  } else {
+    this.u32[0] = 0;
+    this.u32[1] = 0;
+  }
+  return this;
+}
+
 // FP round up
 Op64.prototype.ceilfp = function(a) {
   this.f64[0] = Math.ceil(a.f64[0]);
@@ -428,9 +456,14 @@ Op64.prototype.floorfp = function(a) {
 }
 
 // Bitwise left shift
-Op64.prototype.leftshift = function(a, bits) {
-  if (bits < 0)
-    return this.rightshift(a, -bits);
+Op64.prototype.leftshift = function(a, b) {
+  var bits = b.i32[0];
+  if (bits < 0) {
+    this.warning = "Negative shifts may be unsafe; assuming logical shift";
+    return this.rightshift(a, {i32: [-b.i32[0], 0]});
+  }
+  if (bits > 63)
+    this.warning = "Shifting more than 63 bits may be unsafe";
 
   if (bits == 0) {
     this.u32[0] = a.u32[0];
@@ -479,11 +512,11 @@ Op64.prototype.multiply = function(a, b) {
   var product = new Op64();
   for (var i=0; i<32; i++) {
     if (a.u32[0] & (1<<i))
-      product.add(product, new Op64().leftshift(b, i));
+      product.add(product, new Op64().leftshift(b, {i32: [i, 0]}));
   }
   for (var i=0; i<32; i++) {
     if (a.u32[1] & (1<<i))
-      product.add(product, new Op64().leftshift(b, i+32));
+      product.add(product, new Op64().leftshift(b, {i32: [i+32, 0]}));
   }
   this.f64[0] = product.f64[0];
   return this;
@@ -519,6 +552,32 @@ Op64.prototype.not = function(a) {
 Op64.prototype.or = function(a, b) {
   this.u32[0] = a.u32[0] | b.u32[0];
   this.u32[1] = a.u32[1] | b.u32[1];
+  return this;
+}
+
+// Bitwise right shift
+Op64.prototype.rightshift = function(a, b) {
+  var bits = b.i32[0];
+  if (bits < 0) {
+    this.warning = "Negative shifts may be unsafe";
+    return this.leftshift(a, {i32: [-b.i32[0], 0]});
+  }
+  if (bits > 63)
+    this.warning = "Shifting more than 63 bits may be unsafe";
+
+  if (bits == 0) {
+    this.u32[0] = a.u32[0];
+    this.u32[1] = a.u32[1];
+  } else if (bits < 32) {
+    this.u32[1] = (a.u32[1] >>> bits);
+    this.u32[0] = (a.u32[0] >>> bits) | (a.u32[1] << (32-bits));
+  } else if (bits < 64) {
+    this.u32[1] = 0;
+    this.u32[0] = (a.u32[1] >>> (bits-32));
+  } else {
+    this.u32[0] = 0;
+    this.u32[1] = 0;
+  }
   return this;
 }
 
