@@ -1,0 +1,835 @@
+<!--Copyright (C) 2018  Andrew Stubbs
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    -->
+
+<html>
+  <head>
+    <title>
+      Unit tests.
+    </title>
+    <style>
+      .ok {color: green;}
+      .error {color: red;}
+    </style>
+  </head>
+  <body>
+    <script src="util.js"></script>
+    <script src="8bit.js"></script>
+    <script src="16bit.js"></script>
+    <script src="32bit.js"></script>
+    <script src="64bit.js"></script>
+    <script>
+      function testparse(type, base, val, outbase, outval) {
+	var s;
+	try {
+	  var a = new type();
+	  a["from"+base](val);
+	  s = a["to"+outbase]();
+	} catch {
+	  s = "error";
+	}
+	document.write("<td bgcolor="+(s === outval ? "green" : "red")
+	               + ">" + base + " '"+val+"' = " + outbase + " '"+s+"'</td>");
+      }
+      function testunop(op, type, base, val, outtype, outbase, outval) {
+	var s;
+	try {
+	  var a = new type();
+	  var b = new outtype();
+	  a["from"+base](val);
+	  b[op](a);
+	  s = b["to"+outbase]();
+	} catch {
+	  s = "error";
+	}
+	document.write("<td bgcolor="+(s === outval ? "green" : "red")
+	               + ">" + op + " '"+val+"' = '"+s+"'</td>");
+      }
+      function testbinop(op, type1, base1, val1, type2, base2, val2, outtype, outbase, outval) {
+	var s;
+	try {
+	  var a = new type1();
+	  var b = new type2();
+	  var c = new outtype();
+	  a["from"+base1](val1);
+	  b["from"+base2](val2);
+	  c[op](a, b);
+	  s = c["to"+outbase]();
+	} catch {
+	  s ="error";
+	}
+	document.write("<td bgcolor="+(s === outval ? "green" : "red")
+	               + ">'"+val1+"' " + op + " '"+val2+"' = '"+s+"'</td>");
+      }
+    </script>
+    <table>
+      <tr>
+	<th>8-bit</th>
+	<th>16-bit</th>
+	<th>32-bit</th>
+	<th>64-bit</th>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "", "SDec", "0");
+          testparse(Op16, "SDec", "", "SDec", "0");
+          testparse(Op32, "SDec", "", "SDec", "0");
+          testparse(Op64, "SDec", "", "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "", "UDec", "0");
+          testparse(Op16, "UDec", "", "UDec", "0");
+          testparse(Op32, "UDec", "", "UDec", "0");
+          testparse(Op64, "UDec", "", "UDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "", "Hex", "00");
+          testparse(Op16, "Hex", "", "Hex", "0000");
+          testparse(Op32, "Hex", "", "Hex", "00000000");
+          testparse(Op64, "Hex", "", "Hex", "0000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "", "Oct", "000");
+          testparse(Op16, "Oct", "", "Oct", "000000");
+          testparse(Op32, "Oct", "", "Oct", "00000000000");
+          testparse(Op64, "Oct", "", "Oct", "0000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "", "Bin", "00000000");
+          testparse(Op16, "Bin", "", "Bin", "0000000000000000");
+          testparse(Op32, "Bin", "", "Bin", "00000000000000000000000000000000");
+          testparse(Op64, "Bin", "", "Bin", "0000000000000000000000000000000000000000000000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "0", "SDec", "0");
+          testparse(Op16, "SDec", "0", "SDec", "0");
+          testparse(Op32, "SDec", "0", "SDec", "0");
+          testparse(Op64, "SDec", "0", "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "0", "UDec", "0");
+          testparse(Op16, "UDec", "0", "UDec", "0");
+          testparse(Op32, "UDec", "0", "UDec", "0");
+          testparse(Op64, "UDec", "0", "UDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "0", "Hex", "00");
+          testparse(Op16, "Hex", "0", "Hex", "0000");
+          testparse(Op32, "Hex", "0", "Hex", "00000000");
+          testparse(Op64, "Hex", "0", "Hex", "0000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "0", "Oct", "000");
+          testparse(Op16, "Oct", "0", "Oct", "000000");
+          testparse(Op32, "Oct", "0", "Oct", "00000000000");
+          testparse(Op64, "Oct", "0", "Oct", "0000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "0", "Bin", "00000000");
+          testparse(Op16, "Bin", "0", "Bin", "0000000000000000");
+          testparse(Op32, "Bin", "0", "Bin", "00000000000000000000000000000000");
+          testparse(Op64, "Bin", "0", "Bin", "0000000000000000000000000000000000000000000000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "-0", "SDec", "0");
+          testparse(Op16, "SDec", "-0", "SDec", "0");
+          testparse(Op32, "SDec", "-0", "SDec", "0");
+          testparse(Op64, "SDec", "-0", "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "-0", "UDec", "0");
+          testparse(Op16, "UDec", "-0", "UDec", "0");
+          testparse(Op32, "UDec", "-0", "UDec", "0");
+          testparse(Op64, "UDec", "-0", "UDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "-0", "Hex", "00");
+          testparse(Op16, "Hex", "-0", "Hex", "0000");
+          testparse(Op32, "Hex", "-0", "Hex", "00000000");
+          testparse(Op64, "Hex", "-0", "Hex", "0000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "-0", "Oct", "000");
+          testparse(Op16, "Oct", "-0", "Oct", "000000");
+          testparse(Op32, "Oct", "-0", "Oct", "00000000000");
+          testparse(Op64, "Oct", "-0", "Oct", "0000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "-0", "Bin", "00000000");
+          testparse(Op16, "Bin", "-0", "Bin", "0000000000000000");
+          testparse(Op32, "Bin", "-0", "Bin", "00000000000000000000000000000000");
+          testparse(Op64, "Bin", "-0", "Bin", "0000000000000000000000000000000000000000000000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "8", "SDec", "8");
+          testparse(Op16, "SDec", "8", "SDec", "8");
+          testparse(Op32, "SDec", "8", "SDec", "8");
+          testparse(Op64, "SDec", "8", "SDec", "8");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "8", "UDec", "8");
+          testparse(Op16, "UDec", "8", "UDec", "8");
+          testparse(Op32, "UDec", "8", "UDec", "8");
+          testparse(Op64, "UDec", "8", "UDec", "8");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "8", "Hex", "08");
+          testparse(Op16, "Hex", "8", "Hex", "0008");
+          testparse(Op32, "Hex", "8", "Hex", "00000008");
+          testparse(Op64, "Hex", "8", "Hex", "0000000000000008");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "8", "Oct", "000");
+          testparse(Op16, "Oct", "8", "Oct", "000000");
+          testparse(Op32, "Oct", "8", "Oct", "00000000000");
+          testparse(Op64, "Oct", "8", "Oct", "0000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "8", "Bin", "00000000");
+          testparse(Op16, "Bin", "8", "Bin", "0000000000000000");
+          testparse(Op32, "Bin", "8", "Bin", "00000000000000000000000000000000");
+          testparse(Op64, "Bin", "8", "Bin", "0000000000000000000000000000000000000000000000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "a", "SDec", "0");
+          testparse(Op16, "SDec", "a", "SDec", "0");
+          testparse(Op32, "SDec", "a", "SDec", "0");
+          testparse(Op64, "SDec", "a", "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "a", "UDec", "0");
+          testparse(Op16, "UDec", "a", "UDec", "0");
+          testparse(Op32, "UDec", "a", "UDec", "0");
+          testparse(Op64, "UDec", "a", "UDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "a", "Hex", "0a");
+          testparse(Op16, "Hex", "a", "Hex", "000a");
+          testparse(Op32, "Hex", "a", "Hex", "0000000a");
+          testparse(Op64, "Hex", "a", "Hex", "000000000000000a");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "a", "Oct", "000");
+          testparse(Op16, "Oct", "a", "Oct", "000000");
+          testparse(Op32, "Oct", "a", "Oct", "00000000000");
+          testparse(Op64, "Oct", "a", "Oct", "0000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "a", "Bin", "00000000");
+          testparse(Op16, "Bin", "a", "Bin", "0000000000000000");
+          testparse(Op32, "Bin", "a", "Bin", "00000000000000000000000000000000");
+          testparse(Op64, "Bin", "a", "Bin", "0000000000000000000000000000000000000000000000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "f", "Hex", "0f");
+          testparse(Op16, "Hex", "f", "Hex", "000f");
+          testparse(Op32, "Hex", "f", "Hex", "0000000f");
+          testparse(Op64, "Hex", "f", "Hex", "000000000000000f");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "g", "Hex", "00");
+          testparse(Op16, "Hex", "g", "Hex", "0000");
+          testparse(Op32, "Hex", "g", "Hex", "00000000");
+          testparse(Op64, "Hex", "g", "Hex", "0000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "256",                  "SDec", "0");
+          testparse(Op16, "UDec", "65536",                "SDec", "0");
+          testparse(Op32, "UDec", "4294967296",           "SDec", "0");
+          testparse(Op64, "UDec", "18446744073709551616", "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "100",               "Hex", "00");
+          testparse(Op16, "Hex", "10000",             "Hex", "0000");
+          testparse(Op32, "Hex", "100000000",         "Hex", "00000000");
+          testparse(Op64, "Hex", "10000000000000000", "Hex", "0000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "1000",                    "Oct", "000");
+          testparse(Op16, "Oct", "1000000",                 "Oct", "000000");
+          testparse(Op32, "Oct", "100000000000",            "Oct", "00000000000");
+          testparse(Op64, "Oct", "10000000000000000000000", "Oct", "0000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "100000000",                                                         "Bin", "00000000");
+          testparse(Op16, "Bin", "10000000000000000",                                                 "Bin", "0000000000000000");
+          testparse(Op32, "Bin", "100000000000000000000000000000000",                                 "Bin", "00000000000000000000000000000000");
+          testparse(Op64, "Bin", "10000000000000000000000000000000000000000000000000000000000000000", "Bin", "0000000000000000000000000000000000000000000000000000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "1", "SDec", "1");
+          testparse(Op16, "SDec", "1", "SDec", "1");
+          testparse(Op32, "SDec", "1", "SDec", "1");
+          testparse(Op64, "SDec", "1", "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "-1", "SDec", "-1");
+          testparse(Op16, "SDec", "-1", "SDec", "-1");
+          testparse(Op32, "SDec", "-1", "SDec", "-1");
+          testparse(Op64, "SDec", "-1", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "-1", "SDec", "-1");
+          testparse(Op16, "UDec", "-1", "SDec", "-1");
+          testparse(Op32, "UDec", "-1", "SDec", "-1");
+          testparse(Op64, "UDec", "-1", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "-1", "SDec", "-1");
+          testparse(Op16, "Hex", "-1", "SDec", "-1");
+          testparse(Op32, "Hex", "-1", "SDec", "-1");
+          testparse(Op64, "Hex", "-1", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "-1", "SDec", "-1");
+          testparse(Op16, "Oct", "-1", "SDec", "-1");
+          testparse(Op32, "Oct", "-1", "SDec", "-1");
+          testparse(Op64, "Oct", "-1", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "-1", "SDec", "-1");
+          testparse(Op16, "Bin", "-1", "SDec", "-1");
+          testparse(Op32, "Bin", "-1", "SDec", "-1");
+          testparse(Op64, "Bin", "-1", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "-1", "UDec", "255");
+          testparse(Op16, "SDec", "-1", "UDec", "65535");
+          testparse(Op32, "SDec", "-1", "UDec", "4294967295");
+          testparse(Op64, "SDec", "-1", "UDec", "18446744073709551615");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "-1", "Hex", "ff");
+          testparse(Op16, "SDec", "-1", "Hex", "ffff");
+          testparse(Op32, "SDec", "-1", "Hex", "ffffffff");
+          testparse(Op64, "SDec", "-1", "Hex", "ffffffffffffffff");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "-1", "Oct", "377");
+          testparse(Op16, "SDec", "-1", "Oct", "177777");
+          testparse(Op32, "SDec", "-1", "Oct", "37777777777");
+          testparse(Op64, "SDec", "-1", "Oct", "1777777777777777777777");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "-1", "Bin", "11111111");
+          testparse(Op16, "SDec", "-1", "Bin", "1111111111111111");
+          testparse(Op32, "SDec", "-1", "Bin", "11111111111111111111111111111111");
+          testparse(Op64, "SDec", "-1", "Bin", "1111111111111111111111111111111111111111111111111111111111111111");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "10101010",                                                         "SDec", "-86");
+          testparse(Op16, "Bin", "1010101010101010",                                                 "SDec", "-21846");
+          testparse(Op32, "Bin", "10101010101010101010101010101010",                                 "SDec", "-1431655766");
+          testparse(Op64, "Bin", "1010101010101010101010101010101010101010101010101010101010101010", "SDec", "-6148914691236517206");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "-86",                  "UDec", "170");
+          testparse(Op16, "SDec", "-21846",               "UDec", "43690");
+          testparse(Op32, "SDec", "-1431655766",          "UDec", "2863311530");
+          testparse(Op64, "SDec", "-6148914691236517206", "UDec", "12297829382473034410");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "170",                  "Hex", "aa");
+          testparse(Op16, "UDec", "43690",                "Hex", "aaaa");
+          testparse(Op32, "UDec", "2863311530",           "Hex", "aaaaaaaa");
+          testparse(Op64, "UDec", "12297829382473034410", "Hex", "aaaaaaaaaaaaaaaa");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "aa",               "Oct", "252");
+          testparse(Op16, "Hex", "aaaa",             "Oct", "125252");
+          testparse(Op32, "Hex", "aaaaaaaa",         "Oct", "25252525252");
+          testparse(Op64, "Hex", "aaaaaaaaaaaaaaaa", "Oct", "1252525252525252525252");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "252",                    "Bin", "10101010");
+          testparse(Op16, "Oct", "125252",                 "Bin", "1010101010101010");
+          testparse(Op32, "Oct", "25252525252",            "Bin", "10101010101010101010101010101010");
+          testparse(Op64, "Oct", "1252525252525252525252", "Bin", "1010101010101010101010101010101010101010101010101010101010101010");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "255",                  "SDec", "-1");
+          testparse(Op16, "SDec", "65535",                "SDec", "-1");
+          testparse(Op32, "SDec", "4294967295",           "SDec", "-1");
+          testparse(Op64, "SDec", "18446744073709551615", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "255",                  "SDec", "-1");
+          testparse(Op16, "UDec", "65535",                "SDec", "-1");
+          testparse(Op32, "UDec", "4294967295",           "SDec", "-1");
+          testparse(Op64, "UDec", "18446744073709551615", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "ff",               "SDec", "-1");
+          testparse(Op16, "Hex", "ffff",             "SDec", "-1");
+          testparse(Op32, "Hex", "ffffffff",         "SDec", "-1");
+          testparse(Op64, "Hex", "ffffffffffffffff", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "377",                    "SDec", "-1");
+          testparse(Op16, "Oct", "177777",                 "SDec", "-1");
+          testparse(Op32, "Oct", "37777777777",            "SDec", "-1");
+          testparse(Op64, "Oct", "1777777777777777777777", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "11111111",                                                         "SDec", "-1");
+          testparse(Op16, "Bin", "1111111111111111",                                                 "SDec", "-1");
+          testparse(Op32, "Bin", "11111111111111111111111111111111",                                 "SDec", "-1");
+          testparse(Op64, "Bin", "1111111111111111111111111111111111111111111111111111111111111111", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "    1    ", "SDec", "1");
+          testparse(Op16, "SDec", "    1    ", "SDec", "1");
+          testparse(Op32, "SDec", "    1    ", "SDec", "1");
+          testparse(Op64, "SDec", "    1    ", "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "    -1    ", "SDec", "-1");
+          testparse(Op16, "SDec", "    -1    ", "SDec", "-1");
+          testparse(Op32, "SDec", "    -1    ", "SDec", "-1");
+          testparse(Op64, "SDec", "    -1    ", "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "UDec", "    1    ", "SDec", "1");
+          testparse(Op16, "UDec", "    1    ", "SDec", "1");
+          testparse(Op32, "UDec", "    1    ", "SDec", "1");
+          testparse(Op64, "UDec", "    1    ", "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Hex", "    1    ", "SDec", "1");
+          testparse(Op16, "Hex", "    1    ", "SDec", "1");
+          testparse(Op32, "Hex", "    1    ", "SDec", "1");
+          testparse(Op64, "Hex", "    1    ", "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Oct", "    1    ", "SDec", "1");
+          testparse(Op16, "Oct", "    1    ", "SDec", "1");
+          testparse(Op32, "Oct", "    1    ", "SDec", "1");
+          testparse(Op64, "Oct", "    1    ", "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "Bin", "    1    ", "SDec", "1");
+          testparse(Op16, "Bin", "    1    ", "SDec", "1");
+          testparse(Op32, "Bin", "    1    ", "SDec", "1");
+          testparse(Op64, "Bin", "    1    ", "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "1junk", "SDec", "1");
+          testparse(Op16, "SDec", "1junk", "SDec", "1");
+          testparse(Op32, "SDec", "1junk", "SDec", "1");
+          testparse(Op64, "SDec", "1junk", "SDec", "1");
+        </script>
+      </tr>
+	<script>
+	  testparse(Op8,  "UDec", "1junk", "SDec", "1");
+          testparse(Op16, "UDec", "1junk", "SDec", "1");
+          testparse(Op32, "UDec", "1junk", "SDec", "1");
+          testparse(Op64, "UDec", "1junk", "SDec", "1");
+        </script>
+      </tr>
+	<script>
+	  testparse(Op8,  "Hex", "1junk", "SDec", "1");
+          testparse(Op16, "Hex", "1junk", "SDec", "1");
+          testparse(Op32, "Hex", "1junk", "SDec", "1");
+          testparse(Op64, "Hex", "1junk", "SDec", "1");
+        </script>
+      </tr>
+	<script>
+	  testparse(Op8,  "Oct", "1junk", "SDec", "1");
+          testparse(Op16, "Oct", "1junk", "SDec", "1");
+          testparse(Op32, "Oct", "1junk", "SDec", "1");
+          testparse(Op64, "Oct", "1junk", "SDec", "1");
+        </script>
+      </tr>
+	<script>
+	  testparse(Op8,  "Bin", "1junk", "SDec", "1");
+          testparse(Op16, "Bin", "1junk", "SDec", "1");
+          testparse(Op32, "Bin", "1junk", "SDec", "1");
+          testparse(Op64, "Bin", "1junk", "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testparse(Op8,  "SDec", "junk1", "SDec", "0");
+          testparse(Op16, "SDec", "junk1", "SDec", "0");
+          testparse(Op32, "SDec", "junk1", "SDec", "0");
+          testparse(Op64, "SDec", "junk1", "SDec", "0");
+        </script>
+      </tr>
+	<script>
+	  testparse(Op8,  "UDec", "junk1", "SDec", "0");
+          testparse(Op16, "UDec", "junk1", "SDec", "0");
+          testparse(Op32, "UDec", "junk1", "SDec", "0");
+          testparse(Op64, "UDec", "junk1", "SDec", "0");
+        </script>
+      </tr>
+	<script>
+	  testparse(Op8,  "Hex", "junk1", "SDec", "0");
+          testparse(Op16, "Hex", "junk1", "SDec", "0");
+          testparse(Op32, "Hex", "junk1", "SDec", "0");
+          testparse(Op64, "Hex", "junk1", "SDec", "0");
+        </script>
+      </tr>
+	<script>
+	  testparse(Op8,  "Oct", "junk1", "SDec", "0");
+          testparse(Op16, "Oct", "junk1", "SDec", "0");
+          testparse(Op32, "Oct", "junk1", "SDec", "0");
+          testparse(Op64, "Oct", "junk1", "SDec", "0");
+        </script>
+      </tr>
+	<script>
+	  testparse(Op8,  "Bin", "junk1", "SDec", "0");
+          testparse(Op16, "Bin", "junk1", "SDec", "0");
+          testparse(Op32, "Bin", "junk1", "SDec", "0");
+          testparse(Op64, "Bin", "junk1", "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testunop("negate", Op8,  "SDec", "1", Op8,  "SDec", "-1");
+          testunop("negate", Op16, "SDec", "1", Op16, "SDec", "-1");
+          testunop("negate", Op32, "SDec", "1", Op32, "SDec", "-1");
+          testunop("negate", Op64, "SDec", "1", Op64, "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testunop("negate", Op8,  "SDec", "127",                 Op8,  "SDec", "-127");
+          testunop("negate", Op16, "SDec", "32767",               Op16, "SDec", "-32767");
+          testunop("negate", Op32, "SDec", "2147483647",          Op32, "SDec", "-2147483647");
+          testunop("negate", Op64, "SDec", "9223372036854775807", Op64, "SDec", "-9223372036854775807");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testunop("negate", Op8,  "SDec", "0", Op8,  "SDec", "0");
+          testunop("negate", Op16, "SDec", "0", Op16, "SDec", "0");
+          testunop("negate", Op32, "SDec", "0", Op32, "SDec", "0");
+          testunop("negate", Op64, "SDec", "0", Op64, "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testunop("negate", Op8,  "SDec", "-128",                 Op8,  "SDec", "-128");
+          testunop("negate", Op16, "SDec", "-32768",               Op16, "SDec", "-32768");
+          testunop("negate", Op32, "SDec", "-2147483648",          Op32, "SDec", "-2147483648");
+          testunop("negate", Op64, "SDec", "-9223372036854775808", Op64, "SDec", "-9223372036854775808");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testunop("not", Op8,  "Hex", "0", Op8,  "Hex", "ff");
+          testunop("not", Op16, "Hex", "0", Op16, "Hex", "ffff");
+          testunop("not", Op32, "Hex", "0", Op32, "Hex", "ffffffff");
+          testunop("not", Op64, "Hex", "0", Op64, "Hex", "ffffffffffffffff");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testunop("not", Op8,  "Hex", "ff",               Op8,  "Hex", "00");
+          testunop("not", Op16, "Hex", "ffff",             Op16, "Hex", "0000");
+          testunop("not", Op32, "Hex", "ffffffff",         Op32, "Hex", "00000000");
+          testunop("not", Op64, "Hex", "ffffffffffffffff", Op64, "Hex", "0000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testunop("not", Op8,  "Hex", "aa",               Op8,  "Hex", "55");
+          testunop("not", Op16, "Hex", "aaaa",             Op16, "Hex", "5555");
+          testunop("not", Op32, "Hex", "aaaaaaaa",         Op32, "Hex", "55555555");
+          testunop("not", Op64, "Hex", "aaaaaaaaaaaaaaaa", Op64, "Hex", "5555555555555555");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("sext16", Op8,  "SDec", "1", Op16, "SDec", "1");
+          testunop("sext32", Op16, "SDec", "1", Op32, "SDec", "1");
+          testunop("sext64", Op32, "SDec", "1", Op64, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("sext16", Op8,  "SDec", "-1", Op16, "SDec", "-1");
+          testunop("sext32", Op16, "SDec", "-1", Op32, "SDec", "-1");
+          testunop("sext64", Op32, "SDec", "-1", Op64, "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("sext16", Op8, "Hex", "7f", Op16, "Hex", "007f");
+          testunop("sext32", Op8, "Hex", "7f", Op32, "Hex", "0000007f");
+          testunop("sext64", Op8, "Hex", "7f", Op64, "Hex", "000000000000007f");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("sext16", Op8, "Hex", "ff", Op16, "Hex", "ffff");
+          testunop("sext32", Op8, "Hex", "ff", Op32, "Hex", "ffffffff");
+          testunop("sext64", Op8, "Hex", "ff", Op64, "Hex", "ffffffffffffffff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("sext32", Op16, "Hex", "7fff", Op32, "Hex", "00007fff");
+          testunop("sext64", Op16, "Hex", "7fff", Op64, "Hex", "0000000000007fff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("sext32", Op16, "Hex", "ffff", Op32, "Hex", "ffffffff");
+          testunop("sext64", Op16, "Hex", "ffff", Op64, "Hex", "ffffffffffffffff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("sext64", Op32, "Hex", "7fffffff", Op64, "Hex", "000000007fffffff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("sext64", Op32, "Hex", "ffffffff", Op64, "Hex", "ffffffffffffffff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("sext16", Op8, "Hex", "40", Op16, "Hex", "0040");
+          testunop("sext32", Op8, "Hex", "40", Op32, "Hex", "00000040");
+          testunop("sext64", Op8, "Hex", "40", Op64, "Hex", "0000000000000040");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("sext16", Op8, "Hex", "80", Op16, "Hex", "ff80");
+          testunop("sext32", Op8, "Hex", "80", Op32, "Hex", "ffffff80");
+          testunop("sext64", Op8, "Hex", "80", Op64, "Hex", "ffffffffffffff80");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("sext32", Op16, "Hex", "4000", Op32, "Hex", "00004000");
+          testunop("sext64", Op16, "Hex", "4000", Op64, "Hex", "0000000000004000");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("sext32", Op16, "Hex", "8000", Op32, "Hex", "ffff8000");
+          testunop("sext64", Op16, "Hex", "8000", Op64, "Hex", "ffffffffffff8000");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("sext64", Op32, "Hex", "40000000", Op64, "Hex", "0000000040000000");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("sext64", Op32, "Hex", "80000000", Op64, "Hex", "ffffffff80000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("add", Op8,  "SDec", "1", Op8,  "SDec", "2", Op8,  "SDec", "3");
+          testbinop("add", Op16, "SDec", "1", Op16, "SDec", "2", Op16, "SDec", "3");
+          testbinop("add", Op32, "SDec", "1", Op32, "SDec", "2", Op32, "SDec", "3");
+          testbinop("add", Op64, "SDec", "1", Op64, "SDec", "2", Op64, "SDec", "3");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("add", Op8,  "SDec", "1", Op8,  "SDec", "-1", Op8,  "UDec", "0");
+	  testbinop("add", Op16, "SDec", "1", Op16, "SDec", "-1", Op16, "UDec", "0");
+	  testbinop("add", Op32, "SDec", "1", Op32, "SDec", "-1", Op32, "UDec", "0");
+	  testbinop("add", Op64, "SDec", "1", Op64, "SDec", "-1", Op64, "UDec", "0");
+        </script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("add", Op8,  "SDec", "-1", Op8,  "SDec", "-2", Op8,  "SDec", "-3");
+	  testbinop("add", Op16, "SDec", "-1", Op16, "SDec", "-2", Op16, "SDec", "-3");
+	  testbinop("add", Op32, "SDec", "-1", Op32, "SDec", "-2", Op32, "SDec", "-3");
+	  testbinop("add", Op64, "SDec", "-1", Op64, "SDec", "-2", Op64, "SDec", "-3");
+        </script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("add", Op8,  "SDec", "1", Op8,  "SDec", "127",                 Op8,  "SDec", "-128");
+	  testbinop("add", Op16, "SDec", "1", Op16, "SDec", "32767",               Op16, "SDec", "-32768");
+	  testbinop("add", Op32, "SDec", "1", Op32, "SDec", "2147483647",          Op32, "SDec", "-2147483648");
+	  testbinop("add", Op64, "SDec", "1", Op64, "SDec", "9223372036854775807", Op64, "SDec", "-9223372036854775808");
+        </script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("add", Op8,  "SDec", "1", Op8,  "SDec", "127",                 Op8,  "UDec", "128");
+	  testbinop("add", Op16, "SDec", "1", Op16, "SDec", "32767",               Op16, "UDec", "32768");
+	  testbinop("add", Op32, "SDec", "1", Op32, "SDec", "2147483647",          Op32, "UDec", "2147483648");
+	  testbinop("add", Op64, "SDec", "1", Op64, "SDec", "9223372036854775807", Op64, "UDec", "9223372036854775808");
+        </script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("add", Op8,  "SDec", "1", Op8,  "UDec", "255",                  Op8,  "UDec", "0");
+	  testbinop("add", Op16, "SDec", "1", Op16, "UDec", "65535",                Op16, "UDec", "0");
+	  testbinop("add", Op32, "SDec", "1", Op32, "UDec", "4294967295",           Op32, "UDec", "0");
+	  testbinop("add", Op64, "SDec", "1", Op64, "UDec", "18446744073709551615", Op64, "UDec", "0");
+        </script>
+      </tr>
+    </script>
+    </table>
+  </body>
+</html>

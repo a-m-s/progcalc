@@ -65,8 +65,8 @@ Op64.prototype.fromHex = function(str) {
     return false;
 
   // Minus sign?
-  if (/[-+]/.test(str[i])) {
-    neg = (str[i] == '-');
+  if (str[i] == '-') {
+    neg = true;
     i++;
   }
 
@@ -110,8 +110,8 @@ Op64.prototype.fromOct = function(str) {
     return false;
 
   // Minus sign?
-  if (/[-+]/.test(str[i])) {
-    neg = (str[i] == '-');
+  if (str[i] == '-') {
+    neg = true;
     i++;
   }
 
@@ -131,8 +131,8 @@ Op64.prototype.fromOct = function(str) {
 }
 
 Op64.prototype.toOct = function() {
-  return (zeropad((this.u32[1] >>> 2).toString(8), 10)
-          + (((this.u32[1] & 3) << 1) | (this.u32[0] >>> 31)).toString(8)
+  return (zeropad((this.u32[1] >>> 1).toString(8), 11)
+          + (((this.u32[1] & 1) << 2) | (this.u32[0] >>> 30)).toString(8)
           + zeropad((this.u32[0] & 07777777777).toString(8), 10));
 }
 
@@ -149,8 +149,8 @@ Op64.prototype.fromSDec = function(str) {
     return false;
 
   // Minus sign?
-  if (/[-+]/.test(str[i])) {
-    neg = (str[i] == '-');
+  if (str[i] == '-') {
+    neg = true;
     i++;
   }
 
@@ -267,8 +267,8 @@ Op64.prototype.fromBin = function(str) {
     return false;
 
   // Minus sign?
-  if (/[-+]/.test(str[i])) {
-    neg = (str[i] == '-');
+  if (str[i] == '-') {
+    neg = true;
     i++;
   }
 
@@ -591,7 +591,7 @@ Op64.prototype.roundfp = function(a) {
 Op64.prototype.sext64 = function(a) {
   if (a.size === 32)
     this.i32[0] = a.i32[0];
-  if (a.size === 16)
+  else if (a.size === 16)
     this.i32[0] = a.i16[0];
   else
     this.i32[0] = a.i8[0];
