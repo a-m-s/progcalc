@@ -20,5 +20,4 @@ Selecting a bare unsuffixed operator will interpret a variable as an integer. Se
 
 * Not many operators are implemented yet!
 * The green/orange indicator isn't perfect.
-* It's not yet possible to convert between bit-widths.
 * Javascript has some floating point behaviour that differs from other languages.
