@@ -41,7 +41,8 @@
 	  s = "error";
 	}
 	document.write("<td bgcolor="+(s === outval ? "green" : "red")
-	               + ">" + base + " '"+val+"' = " + outbase + " '"+s+"'</td>");
+		       + ">" + base + " '"+val+"' = " + outbase + " '"+s+"'<br>"
+		       + "<code>" + a.toBin() + "</code></td>");
       }
       function testunop(op, type, base, val, outtype, outbase, outval) {
 	var s;
@@ -55,7 +56,9 @@
 	  s = "error";
 	}
 	document.write("<td bgcolor="+(s === outval ? "green" : "red")
-	               + ">" + op + " '"+val+"' = '"+s+"'</td>");
+		       + ">" + op + " '"+val+"' = '"+s+"'<br>"
+		       + "<code>" + a.toBin() + "<br>"
+		       + b.toBin() + "</code></td>");
       }
       function testbinop(op, type1, base1, val1, type2, base2, val2, outtype, outbase, outval) {
 	var s;
@@ -71,7 +74,10 @@
 	  s ="error";
 	}
 	document.write("<td bgcolor="+(s === outval ? "green" : "red")
-	               + ">'"+val1+"' " + op + " '"+val2+"' = '"+s+"'</td>");
+		       + ">'"+val1+"' " + op + " '"+val2+"' = '"+s+"'<br>"
+		       + "<code>" + a.toBin() + "<br>"
+		       + b.toBin() + "<br>"
+		       + c.toBin() + "</code></td>");
       }
     </script>
     <table>
