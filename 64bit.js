@@ -518,7 +518,8 @@ Op64.prototype.multiply = function(a, b) {
     if (a.u32[1] & (1<<i))
       product.add(product, new Op64().leftshift(b, {i32: [i+32, 0]}));
   }
-  this.f64[0] = product.f64[0];
+  this.u32[0] = product.u32[0];
+  this.u32[1] = product.u32[1];
   return this;
 }
 
