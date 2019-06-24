@@ -784,6 +784,190 @@
         </script>
       </tr>
       <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("zext16", Op8,  "SDec", "1", Op16, "SDec", "1");
+          testunop("zext32", Op16, "SDec", "1", Op32, "SDec", "1");
+          testunop("zext64", Op32, "SDec", "1", Op64, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("zext16", Op8,  "SDec", "-1", Op16, "SDec", "255");
+          testunop("zext32", Op16, "SDec", "-1", Op32, "SDec", "65535");
+          testunop("zext64", Op32, "SDec", "-1", Op64, "SDec", "4294967295");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("zext16", Op8, "Hex", "7f", Op16, "Hex", "007f");
+          testunop("zext32", Op8, "Hex", "7f", Op32, "Hex", "0000007f");
+          testunop("zext64", Op8, "Hex", "7f", Op64, "Hex", "000000000000007f");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("zext16", Op8, "Hex", "ff", Op16, "Hex", "00ff");
+          testunop("zext32", Op8, "Hex", "ff", Op32, "Hex", "000000ff");
+          testunop("zext64", Op8, "Hex", "ff", Op64, "Hex", "00000000000000ff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("zext32", Op16, "Hex", "7fff", Op32, "Hex", "00007fff");
+          testunop("zext64", Op16, "Hex", "7fff", Op64, "Hex", "0000000000007fff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("zext32", Op16, "Hex", "ffff", Op32, "Hex", "0000ffff");
+          testunop("zext64", Op16, "Hex", "ffff", Op64, "Hex", "000000000000ffff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("zext64", Op32, "Hex", "7fffffff", Op64, "Hex", "000000007fffffff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("zext64", Op32, "Hex", "ffffffff", Op64, "Hex", "00000000ffffffff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("zext16", Op8, "Hex", "40", Op16, "Hex", "0040");
+          testunop("zext32", Op8, "Hex", "40", Op32, "Hex", "00000040");
+          testunop("zext64", Op8, "Hex", "40", Op64, "Hex", "0000000000000040");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("zext16", Op8, "Hex", "80", Op16, "Hex", "0080");
+          testunop("zext32", Op8, "Hex", "80", Op32, "Hex", "00000080");
+          testunop("zext64", Op8, "Hex", "80", Op64, "Hex", "0000000000000080");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("zext32", Op16, "Hex", "4000", Op32, "Hex", "00004000");
+          testunop("zext64", Op16, "Hex", "4000", Op64, "Hex", "0000000000004000");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("zext32", Op16, "Hex", "8000", Op32, "Hex", "00008000");
+          testunop("zext64", Op16, "Hex", "8000", Op64, "Hex", "0000000000008000");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("zext64", Op32, "Hex", "40000000", Op64, "Hex", "0000000040000000");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("zext64", Op32, "Hex", "80000000", Op64, "Hex", "0000000080000000");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("trunc8",  Op16, "SDec", "1",  Op8, "SDec", "1");
+          testunop("trunc16", Op32, "SDec", "1", Op16, "SDec", "1");
+          testunop("trunc32", Op64, "SDec", "1", Op32, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("trunc8",  Op16, "SDec", "-1", Op8,  "SDec", "-1");
+          testunop("trunc16", Op32, "SDec", "-1", Op16, "SDec", "-1");
+          testunop("trunc32", Op64, "SDec", "-1", Op32, "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("trunc8",  Op16, "SDec", "-1", Op8,  "Hex", "ff");
+          testunop("trunc16", Op32, "SDec", "-1", Op16, "Hex", "ffff");
+          testunop("trunc32", Op64, "SDec", "-1", Op32, "Hex", "ffffffff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("trunc8",  Op32, "SDec", "1", Op8,  "SDec", "1");
+          testunop("trunc16", Op64, "SDec", "1", Op16, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("trunc8",  Op32, "SDec", "-1", Op8,  "Hex", "ff");
+          testunop("trunc16", Op64, "SDec", "-1", Op16, "Hex", "ffff");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("trunc8", Op32, "SDec", "-1", Op8, "SDec", "-1");
+          testunop("trunc16", Op64, "SDec", "-1", Op16, "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("trunc8", Op64, "SDec", "1", Op8, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("trunc8", Op64, "SDec", "-1", Op8, "SDec", "-1");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testunop("trunc8", Op64, "SDec", "-1", Op8, "Hex", "ff");
+        </script>
+      </tr>
+      <tr>
 	<script>
 	  testbinop("add", Op8,  "SDec", "1", Op8,  "SDec", "2", Op8,  "SDec", "3");
           testbinop("add", Op16, "SDec", "1", Op16, "SDec", "2", Op16, "SDec", "3");
