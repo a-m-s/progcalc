@@ -39,7 +39,7 @@
 	  s = a["to"+outbase]();
 
 	  // Ignore the return value if the value is meant to change
-	  if (outval !== val)
+	  if (outval !== val || base !== outbase)
 	    match = true;
 	} catch {
 	  s = "error";
