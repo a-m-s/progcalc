@@ -238,7 +238,11 @@ Op64.prototype.toUDec = function() {
 }
 
 Op64.prototype.fromFloat = function(val) {
-  this.f64[0] = val;
+  if (/^inf$/i.test(val) || /^infinity/i.test(val))
+    val = "Infinity";
+  else if (/^-inf$/i.test(val) || /^-infinity/i.test(val))
+    val = "-Infinity";
+  this.f64[0] = parseFloat(val);
   return (this.f64[0].toString() === val);
 }
 

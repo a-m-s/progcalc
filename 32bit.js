@@ -87,7 +87,11 @@ Op32.prototype.toUDec = function() {
 }
 
 Op32.prototype.fromFloat = function(val) {
-  this.f32[0] = val;
+  if (/^inf$/i.test(val) || /^infinity/i.test(val))
+    val = "Infinity";
+  else if (/^-inf$/i.test(val) || /^-infinity/i.test(val))
+    val = "-Infinity";
+  this.f32[0] = parseFloat(val);
   return (this.f32[0] == val);
 }
 

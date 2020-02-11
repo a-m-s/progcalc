@@ -587,6 +587,7 @@
           testparse(Op64, "SDec", "junk1", "SDec", "0");
         </script>
       </tr>
+      <tr>
 	<script>
 	  testparse(Op8,  "UDec", "junk1", "SDec", "0");
           testparse(Op16, "UDec", "junk1", "SDec", "0");
@@ -594,6 +595,7 @@
           testparse(Op64, "UDec", "junk1", "SDec", "0");
         </script>
       </tr>
+      <tr>
 	<script>
 	  testparse(Op8,  "Hex", "junk1", "SDec", "0");
           testparse(Op16, "Hex", "junk1", "SDec", "0");
@@ -601,6 +603,7 @@
           testparse(Op64, "Hex", "junk1", "SDec", "0");
         </script>
       </tr>
+      <tr>
 	<script>
 	  testparse(Op8,  "Oct", "junk1", "SDec", "0");
           testparse(Op16, "Oct", "junk1", "SDec", "0");
@@ -608,11 +611,188 @@
           testparse(Op64, "Oct", "junk1", "SDec", "0");
         </script>
       </tr>
+      <tr>
 	<script>
 	  testparse(Op8,  "Bin", "junk1", "SDec", "0");
           testparse(Op16, "Bin", "junk1", "SDec", "0");
           testparse(Op32, "Bin", "junk1", "SDec", "0");
           testparse(Op64, "Bin", "junk1", "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "0.0", "Float", "0.0");
+          testparse(Op64, "Float", "0.0", "Float", "0.0");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "-0.0", "Float", "-0.0");
+          testparse(Op64, "Float", "-0.0", "Float", "-0.0");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "1.0", "Float", "1.0");
+          testparse(Op64, "Float", "1.0", "Float", "1.0");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "1.5", "Float", "1.5");
+          testparse(Op64, "Float", "1.5", "Float", "1.5");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "1.5000000", "Float", "1.5");
+          testparse(Op64, "Float", "1.5000000", "Float", "1.5");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "-1.0", "Float", "-1.0");
+          testparse(Op64, "Float", "-1.0", "Float", "-1.0");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "1", "Float", "1.0");
+          testparse(Op64, "Float", "1", "Float", "1.0");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "-1", "Float", "-1.0");
+          testparse(Op64, "Float", "-1", "Float", "-1.0");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "1.0E10", "Float", "10000000000.0");
+          testparse(Op64, "Float", "1.0E20", "Float", "100000000000000000000.0");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "6.25e-2", "Float", "0.0625");
+          testparse(Op64, "Float", "1.0E-6", "Float", "0.000001");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "5.960464477539063e-8", "Float", "5.960464477539063e-8");
+          testparse(Op64, "Float", "1.0E-7", "Float", "1e-7");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "3.552713678800501e-15", "Float", "3.552713678800501e-15");
+          testparse(Op64, "Float", "0.0000001", "Float", "1e-7");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "Infinity", "Float", "Infinity");
+          testparse(Op64, "Float", "Infinity", "Float", "Infinity");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "Inf", "Float", "Infinity");
+          testparse(Op64, "Float", "Inf", "Float", "Infinity");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "-Infinity", "Float", "-Infinity");
+          testparse(Op64, "Float", "-Infinity", "Float", "-Infinity");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "-Inf", "Float", "-Infinity");
+          testparse(Op64, "Float", "-Inf", "Float", "-Infinity");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "inf", "Float", "Infinity");
+          testparse(Op64, "Float", "inf", "Float", "Infinity");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "-inf", "Float", "-Infinity");
+          testparse(Op64, "Float", "-inf", "Float", "-Infinity");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "infinity", "Float", "Infinity");
+          testparse(Op64, "Float", "infinity", "Float", "Infinity");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "NaN", "Float", "NaN");
+          testparse(Op64, "Float", "NaN", "Float", "NaN");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "nan", "Float", "NaN");
+          testparse(Op64, "Float", "nan", "Float", "NaN");
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+          testparse(Op32, "Float", "-NaN", "Float", "NaN");
+          testparse(Op64, "Float", "-NaN", "Float", "NaN");
         </script>
       </tr>
       <tr>
@@ -1018,6 +1198,104 @@
 	  testbinop("add", Op32, "SDec", "1", Op32, "UDec", "4294967295",           Op32, "UDec", "0");
 	  testbinop("add", Op64, "SDec", "1", Op64, "UDec", "18446744073709551615", Op64, "UDec", "0");
         </script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "1.0", Op32, "Float", "-1.0", Op32, "Hex", "00000000");
+	  testbinop("addfp", Op64, "Float", "1.0", Op64, "Float", "-1.0", Op64, "Hex", "0000000000000000");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "0.0", Op32, "Float", "-0.0", Op32, "Float", "0.0");
+	  testbinop("addfp", Op64, "Float", "0.0", Op64, "Float", "-0.0", Op64, "Float", "0.0");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "1.0", Op32, "Float", "-0.0", Op32, "Float", "1.0");
+	  testbinop("addfp", Op64, "Float", "1.0", Op64, "Float", "-0.0", Op64, "Float", "1.0");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "1.0", Op32, "Float", "1.5", Op32, "Float", "2.5");
+	  testbinop("addfp", Op64, "Float", "1.0", Op64, "Float", "1.5", Op64, "Float", "2.5");
+	</script>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "1.0", Op32, "Float", "NaN", Op32, "Float", "NaN");
+	  testbinop("addfp", Op64, "Float", "1.0", Op64, "Float", "NaN", Op64, "Float", "NaN");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "NaN", Op32, "Float", "NaN", Op32, "Float", "NaN");
+	  testbinop("addfp", Op64, "Float", "NaN", Op64, "Float", "NaN", Op64, "Float", "NaN");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "NaN", Op32, "Float", "1.0", Op32, "Float", "NaN");
+	  testbinop("addfp", Op64, "Float", "NaN", Op64, "Float", "1.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "Infinity", Op32, "Float", "1.0", Op32, "Float", "Infinity");
+	  testbinop("addfp", Op64, "Float", "Infinity", Op64, "Float", "1.0", Op64, "Float", "Infinity");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "Infinity", Op32, "Float", "Infinity", Op32, "Float", "Infinity");
+	  testbinop("addfp", Op64, "Float", "Infinity", Op64, "Float", "Infinity", Op64, "Float", "Infinity");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "-Infinity", Op32, "Float", "Infinity", Op32, "Float", "NaN");
+	  testbinop("addfp", Op64, "Float", "-Infinity", Op64, "Float", "Infinity", Op64, "Float", "NaN");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("addfp", Op32, "Float", "Infinity", Op32, "Float", "-Infinity", Op32, "Float", "NaN");
+	  testbinop("addfp", Op64, "Float", "Infinity", Op64, "Float", "-Infinity", Op64, "Float", "NaN");
+	</script>
       </tr>
     </script>
     </table>
