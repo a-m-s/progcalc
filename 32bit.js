@@ -91,8 +91,10 @@ Op32.prototype.fromFloat = function(val) {
     val = "Infinity";
   else if (/^-inf$/i.test(val) || /^-infinity/i.test(val))
     val = "-Infinity";
+  else if (/^nan$/i.test(val))
+    val = "NaN";
   this.f32[0] = parseFloat(val);
-  return (this.f32[0] == val);
+  return (this.toFloat() === val);
 }
 
 Op32.prototype.toFloat = function() {

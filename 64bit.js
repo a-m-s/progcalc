@@ -242,8 +242,10 @@ Op64.prototype.fromFloat = function(val) {
     val = "Infinity";
   else if (/^-inf$/i.test(val) || /^-infinity/i.test(val))
     val = "-Infinity";
+  else if (/^nan$/i.test(val))
+    val = "NaN";
   this.f64[0] = parseFloat(val);
-  return (this.f64[0].toString() === val);
+  return (this.toFloat() === val);
 }
 
 Op64.prototype.toFloat = function() {

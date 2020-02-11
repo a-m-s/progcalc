@@ -35,14 +35,22 @@
 	var s;
 	try {
 	  var a = new type();
-	  a["from"+base](val);
+	  var match = a["from"+base](val);
 	  s = a["to"+outbase]();
+
+	  // Ignore the return value if the value is meant to change
+	  if (outval !== val)
+	    match = true;
 	} catch {
 	  s = "error";
 	}
-	document.write("<td bgcolor="+(s === outval ? "green" : "red")
+	document.write("<td bgcolor="+(s === outval
+				       ? (match ? "green" : "orange")
+				       : "red")
 		       + ">" + base + " '"+val+"' = " + outbase + " '"+s+"'<br>"
-		       + "<code>" + a.toBin() + "</code></td>");
+		       + "<code>" + a.toBin() + "</code>"
+		       + (match ? "" : "<br><i>Unexpected inexact parse warning</i>")
+		       + "</td>");
       }
       function testunop(op, type, base, val, outtype, outbase, outval) {
 	var s;
