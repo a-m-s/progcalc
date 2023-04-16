@@ -1359,6 +1359,63 @@
 	<td bgcolor=green></td>
 	<td bgcolor=green></td>
 	<script>
+	  testunop("roundfp", Op32, "Float", "1.7", Op32, "Float", "2.0");
+	  testunop("roundfp", Op64, "Float", "1.7", Op64, "Float", "2.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("roundfp", Op32, "Float", "0.1", Op32, "Float", "0.0");
+	  testunop("roundfp", Op64, "Float", "0.1", Op64, "Float", "0.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("roundfp", Op32, "Float", "-0.7", Op32, "Float", "-1.0");
+	  testunop("roundfp", Op64, "Float", "-0.7", Op64, "Float", "-1.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("roundfp", Op32, "Float", "-0.1", Op32, "Float", "-0.0");
+	  testunop("roundfp", Op64, "Float", "-0.1", Op64, "Float", "-0.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("roundfp", Op32, "Float", "NaN", Op32, "Float", "NaN");
+	  testunop("roundfp", Op64, "Float", "NaN", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("roundfp", Op32, "Float", "Infinity", Op32, "Float", "Infinity");
+	  testunop("roundfp", Op64, "Float", "Infinity", Op64, "Float", "Infinity");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testunop("roundfp", Op32, "Float", "-Infinity", Op32, "Float", "-Infinity");
+	  testunop("roundfp", Op64, "Float", "-Infinity", Op64, "Float", "-Infinity");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
 	  testunop("negatefp", Op32, "Float", "1.0", Op32, "Float", "-1.0");
 	  testunop("negatefp", Op64, "Float", "1.0", Op64, "Float", "-1.0");
 	</script>
