@@ -903,6 +903,23 @@
       </tr>
 
       <tr>
+	<script>
+	  testbinop("or", Op8,  "Hex", "f",        Op8,  "Hex", "f0",               Op8,  "Hex", "ff");
+          testbinop("or", Op16, "Hex", "ff",       Op16, "Hex", "ff00",             Op16, "Hex", "ffff");
+          testbinop("or", Op32, "Hex", "ffff",     Op32, "Hex", "ffff0000",         Op32, "Hex", "ffffffff");
+          testbinop("or", Op64, "Hex", "ffffffff", Op64, "Hex", "ffffffff00000000", Op64, "Hex", "ffffffffffffffff");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("or", Op8,  "Hex", "f",        Op8,  "Hex", "a0",               Op8,  "Hex", "af");
+          testbinop("or", Op16, "Hex", "ff",       Op16, "Hex", "aa00",             Op16, "Hex", "aaff");
+          testbinop("or", Op32, "Hex", "ffff",     Op32, "Hex", "aaaa0000",         Op32, "Hex", "aaaaffff");
+          testbinop("or", Op64, "Hex", "ffffffff", Op64, "Hex", "aaaaaaaa00000000", Op64, "Hex", "aaaaaaaaffffffff");
+        </script>
+      </tr>
+      
+      <tr>
 	<td bgcolor=green></td>
 	<script>
 	  testunop("sext16", Op8,  "SDec", "1", Op16, "SDec", "1");
