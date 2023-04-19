@@ -835,6 +835,7 @@
           testunop("negate", Op64, "SDec", "-9223372036854775808", Op64, "SDec", "-9223372036854775808");
         </script>
       </tr>
+
       <tr>
 	<script>
 	  testunop("not", Op8,  "Hex", "0", Op8,  "Hex", "ff");
@@ -859,6 +860,48 @@
           testunop("not", Op64, "Hex", "aaaaaaaaaaaaaaaa", Op64, "Hex", "5555555555555555");
         </script>
       </tr>
+
+      <tr>
+	<script>
+	  testbinop("and", Op8,  "Hex", "f",        Op8,  "Hex", "f0",               Op8,  "Hex", "00");
+          testbinop("and", Op16, "Hex", "ff",       Op16, "Hex", "ff00",             Op16, "Hex", "0000");
+          testbinop("and", Op32, "Hex", "ffff",     Op32, "Hex", "ffff0000",         Op32, "Hex", "00000000");
+          testbinop("and", Op64, "Hex", "ffffffff", Op64, "Hex", "ffffffff00000000", Op64, "Hex", "0000000000000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("and", Op8,  "Hex", "f",        Op8,  "Hex", "f",        Op8,  "Hex", "0f");
+          testbinop("and", Op16, "Hex", "ff",       Op16, "Hex", "ff",       Op16, "Hex", "00ff");
+          testbinop("and", Op32, "Hex", "ffff",     Op32, "Hex", "ffff",     Op32, "Hex", "0000ffff");
+          testbinop("and", Op64, "Hex", "ffffffff", Op64, "Hex", "ffffffff", Op64, "Hex", "00000000ffffffff");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("and", Op8,  "Hex", "f",        Op8,  "Hex", "a",        Op8,  "Hex", "0a");
+          testbinop("and", Op16, "Hex", "ff",       Op16, "Hex", "aa",       Op16, "Hex", "00aa");
+          testbinop("and", Op32, "Hex", "ffff",     Op32, "Hex", "aaaa",     Op32, "Hex", "0000aaaa");
+          testbinop("and", Op64, "Hex", "ffffffff", Op64, "Hex", "aaaaaaaa", Op64, "Hex", "00000000aaaaaaaa");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("and", Op8,  "Hex", "a",        Op8,  "Hex", "f",        Op8,  "Hex", "0a");
+          testbinop("and", Op16, "Hex", "aa",       Op16, "Hex", "ff",       Op16, "Hex", "00aa");
+          testbinop("and", Op32, "Hex", "aaaa",     Op32, "Hex", "ffff",     Op32, "Hex", "0000aaaa");
+          testbinop("and", Op64, "Hex", "aaaaaaaa", Op64, "Hex", "ffffffff", Op64, "Hex", "00000000aaaaaaaa");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("and", Op8,  "Hex", "ff",               Op8,  "Hex", "ff",               Op8,  "Hex", "ff");
+          testbinop("and", Op16, "Hex", "ffff",             Op16, "Hex", "ffff",             Op16, "Hex", "ffff");
+          testbinop("and", Op32, "Hex", "ffffffff",         Op32, "Hex", "ffffffff",         Op32, "Hex", "ffffffff");
+          testbinop("and", Op64, "Hex", "ffffffffffffffff", Op64, "Hex", "ffffffffffffffff", Op64, "Hex", "ffffffffffffffff");
+        </script>
+      </tr>
+
       <tr>
 	<td bgcolor=green></td>
 	<script>
@@ -1517,7 +1560,6 @@
 	  testunop("negatefp", Op64, "Float", "NaN", Op64, "Float", "NaN");
 	</script>
       </tr>
-    </script>
     </table>
   </body>
 </html>
