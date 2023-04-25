@@ -920,6 +920,39 @@
       </tr>
       
       <tr>
+	<script>
+	  testbinop("xor", Op8,  "Hex", "f",        Op8,  "Hex", "f0",               Op8,  "Hex", "ff");
+          testbinop("xor", Op16, "Hex", "ff",       Op16, "Hex", "ff00",             Op16, "Hex", "ffff");
+          testbinop("xor", Op32, "Hex", "ffff",     Op32, "Hex", "ffff0000",         Op32, "Hex", "ffffffff");
+          testbinop("xor", Op64, "Hex", "ffffffff", Op64, "Hex", "ffffffff00000000", Op64, "Hex", "ffffffffffffffff");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("xor", Op8,  "Hex", "f",        Op8,  "Hex", "a0",               Op8,  "Hex", "af");
+          testbinop("xor", Op16, "Hex", "ff",       Op16, "Hex", "aa00",             Op16, "Hex", "aaff");
+          testbinop("xor", Op32, "Hex", "ffff",     Op32, "Hex", "aaaa0000",         Op32, "Hex", "aaaaffff");
+          testbinop("xor", Op64, "Hex", "ffffffff", Op64, "Hex", "aaaaaaaa00000000", Op64, "Hex", "aaaaaaaaffffffff");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("xor", Op8,  "Hex", "f",        Op8,  "Hex", "ff",               Op8,  "Hex", "f0");
+          testbinop("xor", Op16, "Hex", "ff",       Op16, "Hex", "ffff",             Op16, "Hex", "ff00");
+          testbinop("xor", Op32, "Hex", "ffff",     Op32, "Hex", "ffffffff",         Op32, "Hex", "ffff0000");
+          testbinop("xor", Op64, "Hex", "ffffffff", Op64, "Hex", "ffffffffffffffff", Op64, "Hex", "ffffffff00000000");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("xor", Op8,  "Hex", "ff",               Op8,  "Hex", "a0",               Op8,  "Hex", "5f");
+          testbinop("xor", Op16, "Hex", "ffff",             Op16, "Hex", "aa00",             Op16, "Hex", "55ff");
+          testbinop("xor", Op32, "Hex", "ffffffff",         Op32, "Hex", "aaaa0000",         Op32, "Hex", "5555ffff");
+          testbinop("xor", Op64, "Hex", "ffffffffffffffff", Op64, "Hex", "aaaaaaaa00000000", Op64, "Hex", "55555555ffffffff");
+        </script>
+      </tr>
+      
+      <tr>
 	<td bgcolor=green></td>
 	<script>
 	  testunop("sext16", Op8,  "SDec", "1", Op16, "SDec", "1");
