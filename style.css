@@ -16,6 +16,8 @@
 
 body {
   text-align: center;
+  /* Add padding to the bottom to prevent fixed operators panel from hiding content */
+  padding-bottom: 11em; /* Adjust this value if the panel height changes */
 }
 
 table {
