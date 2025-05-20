@@ -197,3 +197,22 @@ Op8.prototype.xor = function(a, b) {
   this.u8[0] = a.u8[0] ^ b.u8[0];
   return this;
 }
+
+Op8.prototype.leftshift = function(a, b) {
+  var bits = b.i8[0];
+  if (bits < 0) {
+    this.warning = "Negative shifts may be unsafe; assuming logical right shift";
+    var pos_bits = -bits;
+    if (pos_bits >= 8) {
+      this.u8[0] = 0;
+    } else {
+      this.u8[0] = a.u8[0] >>> pos_bits;
+    }
+  } else if (bits >= 8) {
+    this.warning = "Shifting more than 7 bits may be unsafe";
+    this.u8[0] = 0;
+  } else {
+    this.u8[0] = a.u8[0] << bits;
+  }
+  return this;
+};

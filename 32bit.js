@@ -293,3 +293,22 @@ Op32.prototype.zext32 = function(a) {
     this.u32[0] = a.u8[0];
   return this;
 }
+
+Op32.prototype.leftshift = function(a, b) {
+  var bits = b.i32[0];
+  if (bits < 0) {
+    this.warning = "Negative shifts may be unsafe; assuming logical right shift";
+    var pos_bits = -bits;
+    if (pos_bits >= 32) {
+      this.u32[0] = 0;
+    } else {
+      this.u32[0] = a.u32[0] >>> pos_bits;
+    }
+  } else if (bits >= 32) {
+    this.warning = "Shifting more than 31 bits may be unsafe";
+    this.u32[0] = 0;
+  } else {
+    this.u32[0] = a.u32[0] << bits;
+  }
+  return this;
+};

@@ -465,7 +465,7 @@ Op64.prototype.floorfp = function(a) {
 Op64.prototype.leftshift = function(a, b) {
   var bits = b.i32[0];
   if (bits < 0) {
-    this.warning = "Negative shifts may be unsafe; assuming logical shift";
+    this.warning = "Negative shifts may be unsafe; assuming logical right shift";
     return this.rightshift(a, {i32: [-b.i32[0], 0]});
   }
   if (bits > 63)
