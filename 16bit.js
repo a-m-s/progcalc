@@ -232,3 +232,22 @@ Op16.prototype.leftshift = function(a, b) {
   }
   return this;
 };
+
+Op16.prototype.rightshift = function(a, b) {
+  var bits = b.i16[0];
+  if (bits < 0) {
+    this.warning = "Negative shifts may be unsafe; assuming logical left shift";
+    var pos_bits = -bits;
+    if (pos_bits >= 16) {
+      this.u16[0] = 0;
+    } else {
+      this.u16[0] = a.u16[0] << pos_bits;
+    }
+  } else if (bits >= 16) {
+    this.warning = "Shifting more than 15 bits may be unsafe";
+    this.u16[0] = 0;
+  } else {
+    this.u16[0] = a.u16[0] >>> bits;
+  }
+  return this;
+};
