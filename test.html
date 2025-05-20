@@ -1491,6 +1491,161 @@
 
       <tr>
 	<script>
+	  testbinop("arightshift", Op8,  "SDec", "8", Op8, "SDec", "1", Op8,  "SDec", "4");
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "8", Op16, "SDec", "1", Op16, "SDec", "4");
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "8", Op32, "SDec", "1", Op32, "SDec", "4");
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "8", Op64, "SDec", "1", Op64, "SDec", "4");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "8", Op8, "SDec", "3", Op8,  "SDec", "1");
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "8", Op16, "SDec", "3", Op16, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "8", Op32, "SDec", "3", Op32, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "8", Op64, "SDec", "3", Op64, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "8", Op8, "SDec", "0", Op8,  "SDec", "8");
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "8", Op16, "SDec", "0", Op16, "SDec", "8");
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "8", Op32, "SDec", "0", Op32, "SDec", "8");
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "8", Op64, "SDec", "0", Op64, "SDec", "8");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "8", Op8, "SDec", "8", Op8,  "SDec", "0");
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "8", Op16, "SDec", "16", Op16, "SDec", "0");
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "8", Op32, "SDec", "32", Op32, "SDec", "0");
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "8", Op64, "SDec", "64", Op64, "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "-2", Op8, "SDec", "1", Op8,  "SDec", "-1"); // 11111110 >> 1 = 11111111
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "-2", Op16, "SDec", "1", Op16, "SDec", "-1"); // 1111111111111110 >> 1 = 1111111111111111
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "-2", Op32, "SDec", "1", Op32, "SDec", "-1"); // 1111...1110 >> 1 = 1111...1111
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "-2", Op64, "SDec", "1", Op64, "SDec", "-1"); // 1111...1110 >> 1 = 1111...1111
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "-1", Op8, "SDec", "1", Op8,  "SDec", "-1"); // 11111111 >> 1 = 11111111
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "-1", Op16, "SDec", "1", Op16, "SDec", "-1"); // 1111... >> 1 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "-1", Op32, "SDec", "1", Op32, "SDec", "-1"); // 1111... >> 1 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "-1", Op64, "SDec", "1", Op64, "SDec", "-1"); // 1111... >> 1 = 1111...
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "-1", Op8, "SDec", "7", Op8,  "SDec", "-1"); // 11111111 >> 7 = 11111111
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "-1", Op16, "SDec", "15", Op16, "SDec", "-1"); // 1111... >> 15 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "-1", Op32, "SDec", "31", Op32, "SDec", "-1"); // 1111... >> 31 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "-1", Op64, "SDec", "63", Op64, "SDec", "-1"); // 1111... >> 63 = 1111...
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "-1", Op8, "SDec", "8", Op8,  "SDec", "-1"); // 11111111 >> 8 = 11111111
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "-1", Op16, "SDec", "16", Op16, "SDec", "-1"); // 1111... >> 16 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "-1", Op32, "SDec", "32", Op32, "SDec", "-1"); // 1111... >> 32 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "-1", Op64, "SDec", "64", Op64, "SDec", "-1"); // 1111... >> 64 = 1111...
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "1", Op8, "SDec", "-1", Op8,  "SDec", "2"); // Should behave like left shift 1
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "1", Op16, "SDec", "-1", Op16, "SDec", "2"); // Should behave like left shift 1
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "1", Op32, "SDec", "-1", Op32, "SDec", "2"); // Should behave like left shift 1
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "1", Op64, "SDec", "-1", Op64, "SDec", "2"); // Should behave like left shift 1
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "Hex", "80", Op8, "SDec", "1", Op8,  "Hex", "c0"); // 10000000 >> 1 = 11000000
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "Hex", "8000", Op16, "SDec", "1", Op16, "Hex", "c000"); // 1000... >> 1 = 1100...
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "Hex", "80000000", Op32, "SDec", "1", Op32, "Hex", "c0000000"); // 1000... >> 1 = 1100...
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "1", Op64, "Hex", "c000000000000000"); // 1000... >> 1 = 1100...
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "32", Op64, "Hex", "ffffffff80000000"); // 1000...0000 >> 32 = 1111...1111_1000...0000
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "33", Op64, "Hex", "ffffffffc0000000"); // 1000...0000 >> 33 = 1111...1111_1100...0000
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "0000000100000000", Op64, "SDec", "32", Op64, "Hex", "0000000000000001"); // 0000...0001_0000...0000 >> 32 = 0000...0000_0000...0001
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "0000000100000000", Op64, "SDec", "33", Op64, "Hex", "0000000000000000"); // 0000...0001_0000...0000 >> 33 = 0000...0000_0000...0000
+	</script>
+      </tr>
+
+      <tr>
+	<script>
 	  testbinop("add", Op8,  "SDec", "1", Op8,  "SDec", "2", Op8,  "SDec", "3");
           testbinop("add", Op16, "SDec", "1", Op16, "SDec", "2", Op16, "SDec", "3");
           testbinop("add", Op32, "SDec", "1", Op32, "SDec", "2", Op32, "SDec", "3");

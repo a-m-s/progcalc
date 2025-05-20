@@ -409,6 +409,9 @@ Op64.prototype.arightshift = function(a, b) {
 		   ? 0xffffffff
 		   : 0);
     this.u32[0] = (a.i32[1] >> (bits-32));
+  } else if (a.u32[1] & 0x80000000) {
+    this.u32[0] = 0xffffffff;
+    this.u32[1] = 0xffffffff;
   } else {
     this.u32[0] = 0;
     this.u32[1] = 0;
