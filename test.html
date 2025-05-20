@@ -1630,15 +1630,33 @@
         </script>
       </tr>
       <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
 	<script>
 	  testbinop("arightshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "32", Op64, "Hex", "ffffffff80000000"); // 1000...0000 >> 32 = 1111...1111_1000...0000
 	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
 	<script>
 	  testbinop("arightshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "33", Op64, "Hex", "ffffffffc0000000"); // 1000...0000 >> 33 = 1111...1111_1100...0000
 	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
 	<script>
 	  testbinop("arightshift", Op64, "Hex", "0000000100000000", Op64, "SDec", "32", Op64, "Hex", "0000000000000001"); // 0000...0001_0000...0000 >> 32 = 0000...0000_0000...0001
 	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
 	<script>
 	  testbinop("arightshift", Op64, "Hex", "0000000100000000", Op64, "SDec", "33", Op64, "Hex", "0000000000000000"); // 0000...0001_0000...0000 >> 33 = 0000...0000_0000...0000
 	</script>
@@ -1792,6 +1810,824 @@
 	<script>
 	  testbinop("addfp", Op32, "Float", "Infinity", Op32, "Float", "-Infinity", Op32, "Float", "NaN");
 	  testbinop("addfp", Op64, "Float", "Infinity", Op64, "Float", "-Infinity", Op64, "Float", "NaN");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("subtractfp", Op32, "Float", "5.0", Op32, "Float", "2.0", Op32, "Float", "3.0");
+	  testbinop("subtractfp", Op64, "Float", "5.0", Op64, "Float", "2.0", Op64, "Float", "3.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("subtractfp", Op32, "Float", "2.0", Op32, "Float", "5.0", Op32, "Float", "-3.0");
+	  testbinop("subtractfp", Op64, "Float", "2.0", Op64, "Float", "5.0", Op64, "Float", "-3.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("subtractfp", Op32, "Float", "1.0", Op32, "Float", "1.0", Op32, "Hex", "00000000");
+	  testbinop("subtractfp", Op64, "Float", "1.0", Op64, "Float", "1.0", Op64, "Hex", "0000000000000000");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("subtractfp", Op32, "Float", "0.0", Op32, "Float", "0.0", Op32, "Hex", "00000000");
+	  testbinop("subtractfp", Op64, "Float", "0.0", Op64, "Float", "0.0", Op64, "Hex", "0000000000000000");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("subtractfp", Op32, "Float", "0.0", Op32, "Float", "-0.0", Op32, "Hex", "00000000");
+	  testbinop("subtractfp", Op64, "Float", "0.0", Op64, "Float", "-0.0", Op64, "Hex", "0000000000000000");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("subtractfp", Op32, "Float", "NaN", Op32, "Float", "1.0", Op32, "Float", "NaN");
+	  testbinop("subtractfp", Op64, "Float", "NaN", Op64, "Float", "1.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("subtractfp", Op32, "Float", "Infinity", Op32, "Float", "1.0", Op32, "Float", "Infinity");
+	  testbinop("subtractfp", Op64, "Float", "Infinity", Op64, "Float", "1.0", Op64, "Float", "Infinity");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("subtractfp", Op32, "Float", "Infinity", Op32, "Float", "Infinity", Op32, "Float", "NaN");
+	  testbinop("subtractfp", Op64, "Float", "Infinity", Op64, "Float", "Infinity", Op64, "Float", "NaN");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("multiplyfp", Op32, "Float", "2.0", Op32, "Float", "3.0", Op32, "Float", "6.0");
+	  testbinop("multiplyfp", Op64, "Float", "2.0", Op64, "Float", "3.0", Op64, "Float", "6.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("multiplyfp", Op32, "Float", "-2.0", Op32, "Float", "3.0", Op32, "Float", "-6.0");
+	  testbinop("multiplyfp", Op64, "Float", "-2.0", Op64, "Float", "3.0", Op64, "Float", "-6.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("multiplyfp", Op32, "Float", "0.0", Op32, "Float", "5.0", Op32, "Hex", "00000000");
+	  testbinop("multiplyfp", Op64, "Float", "0.0", Op64, "Float", "5.0", Op64, "Hex", "0000000000000000");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("multiplyfp", Op32, "Float", "NaN", Op32, "Float", "5.0", Op32, "Float", "NaN");
+	  testbinop("multiplyfp", Op64, "Float", "NaN", Op64, "Float", "5.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("multiplyfp", Op32, "Float", "Infinity", Op32, "Float", "2.0", Op32, "Float", "Infinity");
+	  testbinop("multiplyfp", Op64, "Float", "Infinity", Op64, "Float", "2.0", Op64, "Float", "Infinity");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("multiplyfp", Op32, "Float", "Infinity", Op32, "Float", "0.0", Op32, "Float", "NaN");
+	  testbinop("multiplyfp", Op64, "Float", "Infinity", Op64, "Float", "0.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("dividefp", Op32, "Float", "6.0", Op32, "Float", "3.0", Op32, "Float", "2.0");
+	  testbinop("dividefp", Op64, "Float", "6.0", Op64, "Float", "3.0", Op64, "Float", "2.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("dividefp", Op32, "Float", "-6.0", Op32, "Float", "3.0", Op32, "Float", "-2.0");
+	  testbinop("dividefp", Op64, "Float", "-6.0", Op64, "Float", "3.0", Op64, "Float", "-2.0");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("dividefp", Op32, "Float", "5.0", Op32, "Float", "0.0", Op32, "Float", "Infinity");
+	  testbinop("dividefp", Op64, "Float", "5.0", Op64, "Float", "0.0", Op64, "Float", "Infinity");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("dividefp", Op32, "Float", "-5.0", Op32, "Float", "0.0", Op32, "Float", "-Infinity");
+	  testbinop("dividefp", Op64, "Float", "-5.0", Op64, "Float", "0.0", Op64, "Float", "-Infinity");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("dividefp", Op32, "Float", "0.0", Op32, "Float", "0.0", Op32, "Float", "NaN");
+	  testbinop("dividefp", Op64, "Float", "0.0", Op64, "Float", "0.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("dividefp", Op32, "Float", "NaN", Op32, "Float", "5.0", Op32, "Float", "NaN");
+	  testbinop("dividefp", Op64, "Float", "NaN", Op64, "Float", "5.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("dividefp", Op32, "Float", "Infinity", Op32, "Float", "Infinity", Op32, "Float", "NaN");
+	  testbinop("dividefp", Op64, "Float", "Infinity", Op64, "Float", "Infinity", Op64, "Float", "NaN");
+	</script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("subtract", Op8,  "SDec", "5", Op8,  "SDec", "2", Op8,  "SDec", "3");
+	  testbinop("subtract", Op16, "SDec", "5", Op16, "SDec", "2", Op16, "SDec", "3");
+	  testbinop("subtract", Op32, "SDec", "5", Op32, "SDec", "2", Op32, "SDec", "3");
+	  testbinop("subtract", Op64, "SDec", "5", Op64, "SDec", "2", Op64, "SDec", "3");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("subtract", Op8,  "SDec", "2", Op8,  "SDec", "5", Op8,  "SDec", "-3");
+	  testbinop("subtract", Op16, "SDec", "2", Op16, "SDec", "5", Op16, "SDec", "-3");
+	  testbinop("subtract", Op32, "SDec", "2", Op32, "SDec", "5", Op32, "SDec", "-3");
+	  testbinop("subtract", Op64, "SDec", "2", Op64, "SDec", "5", Op64, "SDec", "-3");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("subtract", Op8,  "SDec", "1", Op8,  "SDec", "-1", Op8,  "SDec", "2");
+	  testbinop("subtract", Op16, "SDec", "1", Op16, "SDec", "-1", Op16, "SDec", "2");
+	  testbinop("subtract", Op32, "SDec", "1", Op32, "SDec", "-1", Op32, "SDec", "2");
+	  testbinop("subtract", Op64, "SDec", "1", Op64, "SDec", "-1", Op64, "SDec", "2");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("subtract", Op8,  "SDec", "-128", Op8,  "SDec", "1", Op8,  "SDec", "127"); // -128 - 1 = -129 (wraps to 127)
+	  testbinop("subtract", Op16, "SDec", "-32768", Op16, "SDec", "1", Op16, "SDec", "32767"); // -32768 - 1 = -32769 (wraps to 32767)
+	  testbinop("subtract", Op32, "SDec", "-2147483648", Op32, "SDec", "1", Op32, "SDec", "2147483647"); // -2147483648 - 1 = -2147483649 (wraps to 2147483647)
+	  testbinop("subtract", Op64, "SDec", "-9223372036854775808", Op64, "SDec", "1", Op64, "SDec", "9223372036854775807"); // -2^63 - 1 = -2^63-1 (wraps to 2^63-1)
+	</script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("multiply", Op8,  "SDec", "2", Op8,  "SDec", "3", Op8,  "SDec", "6");
+	  testbinop("multiply", Op16, "SDec", "2", Op16, "SDec", "3", Op16, "SDec", "6");
+	  testbinop("multiply", Op32, "SDec", "2", Op32, "SDec", "3", Op32, "SDec", "6");
+	  testbinop("multiply", Op64, "SDec", "2", Op64, "SDec", "3", Op64, "SDec", "6");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("multiply", Op8,  "SDec", "-2", Op8,  "SDec", "3", Op8,  "SDec", "-6");
+	  testbinop("multiply", Op16, "SDec", "-2", Op16, "SDec", "3", Op16, "SDec", "-6");
+	  testbinop("multiply", Op32, "SDec", "-2", Op32, "SDec", "3", Op32, "SDec", "-6");
+	  testbinop("multiply", Op64, "SDec", "-2", Op64, "SDec", "3", Op64, "SDec", "-6");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("multiply", Op8,  "SDec", "-2", Op8,  "SDec", "-3", Op8,  "SDec", "6");
+	  testbinop("multiply", Op16, "SDec", "-2", Op16, "SDec", "-3", Op16, "SDec", "6");
+	  testbinop("multiply", Op32, "SDec", "-2", Op32, "SDec", "-3", Op32, "SDec", "6");
+	  testbinop("multiply", Op64, "SDec", "-2", Op64, "SDec", "-3", Op64, "SDec", "6");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("multiply", Op8,  "SDec", "127", Op8,  "SDec", "2", Op8,  "SDec", "-2"); // 127 * 2 = 254 (wraps to -2)
+	  testbinop("multiply", Op16, "SDec", "32767", Op16, "SDec", "2", Op16, "SDec", "-2"); // 32767 * 2 = 65534 (wraps to -2)
+	  testbinop("multiply", Op32, "SDec", "2147483647", Op32, "SDec", "2", Op32, "SDec", "-2"); // 2147483647 * 2 = 4294967294 (wraps to -2)
+	  testbinop("multiply", Op64, "SDec", "9223372036854775807", Op64, "SDec", "2", Op64, "SDec", "-2"); // 2^63-1 * 2 = 2^64-2 (wraps to -2)
+	</script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("divide", Op8,  "SDec", "6", Op8,  "SDec", "3", Op8,  "SDec", "2");
+	  testbinop("divide", Op16, "SDec", "6", Op16, "SDec", "3", Op16, "SDec", "2");
+	  testbinop("divide", Op32, "SDec", "6", Op32, "SDec", "3", Op32, "SDec", "2");
+	  testbinop("divide", Op64, "SDec", "6", Op64, "SDec", "3", Op64, "SDec", "2");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("divide", Op8,  "SDec", "-6", Op8,  "SDec", "3", Op8,  "SDec", "-2");
+	  testbinop("divide", Op16, "SDec", "-6", Op16, "SDec", "3", Op16, "SDec", "-2");
+	  testbinop("divide", Op32, "SDec", "-6", Op32, "SDec", "3", Op32, "SDec", "-2");
+	  testbinop("divide", Op64, "SDec", "-6", Op64, "SDec", "3", Op64, "SDec", "-2");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("divide", Op8,  "SDec", "7", Op8,  "SDec", "3", Op8,  "SDec", "2"); // Integer division truncates
+	  testbinop("divide", Op16, "SDec", "7", Op16, "SDec", "3", Op16, "SDec", "2");
+	  testbinop("divide", Op32, "SDec", "7", Op32, "SDec", "3", Op32, "SDec", "2");
+	  testbinop("divide", Op64, "SDec", "7", Op64, "SDec", "3", Op64, "SDec", "2");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("divide", Op8,  "SDec", "-7", Op8,  "SDec", "3", Op8,  "SDec", "-2"); // Integer division truncates towards zero
+	  testbinop("divide", Op16, "SDec", "-7", Op16, "SDec", "3", Op16, "SDec", "-2");
+	  testbinop("divide", Op32, "SDec", "-7", Op32, "SDec", "3", Op32, "SDec", "-2");
+	  testbinop("divide", Op64, "SDec", "-7", Op64, "SDec", "3", Op64, "SDec", "-2");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("divide", Op8,  "SDec", "128", Op8,  "SDec", "-1", Op8,  "SDec", "-128"); // -128 / -1 = 128 (wraps to -128)
+	  testbinop("divide", Op16, "SDec", "-32768", Op16, "SDec", "-1", Op16, "SDec", "-32768"); // -32768 / -1 = 32768 (wraps to -32768)
+	  testbinop("divide", Op32, "SDec", "-2147483648", Op32, "SDec", "-1", Op32, "SDec", "-2147483648"); // -2^31 / -1 = 2^31 (wraps to -2^31)
+	  testbinop("divide", Op64, "SDec", "-9223372036854775808", Op64, "SDec", "-1", Op64, "SDec", "-9223372036854775808"); // -2^63 / -1 = 2^63 (wraps to -2^63)
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("divide", Op8,  "SDec", "5", Op8,  "SDec", "0", Op8,  "SDec", "0"); // Divide by zero
+	  testbinop("divide", Op16, "SDec", "5", Op16, "SDec", "0", Op16, "SDec", "0");
+	  testbinop("divide", Op32, "SDec", "5", Op32, "SDec", "0", Op32, "SDec", "0");
+	  testbinop("divide", Op64, "SDec", "5", Op64, "SDec", "0", Op64, "SDec", "0");
+	</script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("modulus", Op8,  "SDec", "7", Op8,  "SDec", "3", Op8,  "SDec", "1");
+	  testbinop("modulus", Op16, "SDec", "7", Op16, "SDec", "3", Op16, "SDec", "1");
+	  testbinop("modulus", Op32, "SDec", "7", Op32, "SDec", "3", Op32, "SDec", "1");
+	  testbinop("modulus", Op64, "SDec", "7", Op64, "SDec", "3", Op64, "SDec", "1");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("modulus", Op8,  "SDec", "-7", Op8,  "SDec", "3", Op8,  "SDec", "-1"); // Remainder has same sign as dividend
+	  testbinop("modulus", Op16, "SDec", "-7", Op16, "SDec", "3", Op16, "SDec", "-1");
+	  testbinop("modulus", Op32, "SDec", "-7", Op32, "SDec", "3", Op32, "SDec", "-1");
+	  testbinop("modulus", Op64, "SDec", "-7", Op64, "SDec", "3", Op64, "SDec", "-1");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("modulus", Op8,  "SDec", "7", Op8,  "SDec", "-3", Op8,  "SDec", "1"); // Remainder has same sign as dividend
+	  testbinop("modulus", Op16, "SDec", "7", Op16, "SDec", "-3", Op16, "SDec", "1");
+	  testbinop("modulus", Op32, "SDec", "7", Op32, "SDec", "-3", Op32, "SDec", "1");
+	  testbinop("modulus", Op64, "SDec", "7", Op64, "SDec", "-3", Op64, "SDec", "1");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("modulus", Op8,  "SDec", "-7", Op8,  "SDec", "-3", Op8,  "SDec", "-1"); // Remainder has same sign as dividend
+	  testbinop("modulus", Op16, "SDec", "-7", Op16, "SDec", "-3", Op16, "SDec", "-1");
+	  testbinop("modulus", Op32, "SDec", "-7", Op32, "SDec", "-3", Op32, "SDec", "-1");
+	  testbinop("modulus", Op64, "SDec", "-7", Op64, "SDec", "-3", Op64, "SDec", "-1");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("modulus", Op8,  "SDec", "5", Op8,  "SDec", "0", Op8,  "SDec", "0"); // Modulo by zero
+	  testbinop("modulus", Op16, "SDec", "5", Op16, "SDec", "0", Op16, "SDec", "0");
+	  testbinop("modulus", Op32, "SDec", "5", Op32, "SDec", "0", Op32, "SDec", "0");
+	  testbinop("modulus", Op64, "SDec", "5", Op64, "SDec", "0", Op64, "SDec", "0");
+	</script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("udivide", Op8,  "UDec", "7", Op8,  "UDec", "3", Op8,  "UDec", "2");
+	  testbinop("udivide", Op16, "UDec", "7", Op16, "UDec", "3", Op16, "UDec", "2");
+	  testbinop("udivide", Op32, "UDec", "7", Op32, "UDec", "3", Op32, "UDec", "2");
+	  testbinop("udivide", Op64, "UDec", "7", Op64, "UDec", "3", Op64, "UDec", "2");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("udivide", Op8,  "UDec", "255", Op8,  "UDec", "2", Op8,  "UDec", "127"); // 255 / 2 = 127
+	  testbinop("udivide", Op16, "UDec", "65535", Op16, "UDec", "2", Op16, "UDec", "32767"); // 65535 / 2 = 32767
+	  testbinop("udivide", Op32, "UDec", "4294967295", Op32, "UDec", "2", Op32, "UDec", "2147483647"); // 2^32-1 / 2 = 2^31-1
+	  testbinop("udivide", Op64, "UDec", "18446744073709551615", Op64, "UDec", "2", Op64, "UDec", "9223372036854775807"); // 2^64-1 / 2 = 2^63-1
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("udivide", Op8,  "UDec", "5", Op8,  "UDec", "0", Op8,  "UDec", "0"); // Divide by zero
+	  testbinop("udivide", Op16, "UDec", "5", Op16, "UDec", "0", Op16, "UDec", "0");
+	  testbinop("udivide", Op32, "UDec", "5", Op32, "UDec", "0", Op32, "UDec", "0");
+	  testbinop("udivide", Op64, "UDec", "5", Op64, "UDec", "0", Op64, "UDec", "0");
+	</script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("umodulus", Op8,  "UDec", "7", Op8,  "UDec", "3", Op8,  "UDec", "1");
+	  testbinop("umodulus", Op16, "UDec", "7", Op16, "UDec", "3", Op16, "UDec", "1");
+	  testbinop("umodulus", Op32, "UDec", "7", Op32, "UDec", "3", Op32, "UDec", "1");
+	  testbinop("umodulus", Op64, "UDec", "7", Op64, "UDec", "3", Op64, "UDec", "1");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("umodulus", Op8,  "UDec", "255", Op8,  "UDec", "2", Op8,  "UDec", "1"); // 255 % 2 = 1
+	  testbinop("umodulus", Op16, "UDec", "65535", Op16, "UDec", "2", Op16, "UDec", "1"); // 65535 % 2 = 1
+	  testbinop("umodulus", Op32, "UDec", "4294967295", Op32, "UDec", "2", Op32, "UDec", "1"); // 2^32-1 % 2 = 1
+	  testbinop("umodulus", Op64, "UDec", "18446744073709551615", Op64, "UDec", "2", Op64, "UDec", "1"); // 2^64-1 % 2 = 1
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("umodulus", Op8,  "UDec", "5", Op8,  "UDec", "0", Op8,  "UDec", "0"); // Modulo by zero
+	  testbinop("umodulus", Op16, "UDec", "5", Op16, "UDec", "0", Op16, "UDec", "0");
+	  testbinop("umodulus", Op32, "UDec", "5", Op32, "UDec", "0", Op32, "UDec", "0");
+	  testbinop("umodulus", Op64, "UDec", "5", Op64, "UDec", "0", Op64, "UDec", "0");
+	</script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "SDec", "1", Op8, "SDec", "1", Op8,  "SDec", "2");
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "SDec", "1", Op16, "SDec", "1", Op16, "SDec", "2");
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "SDec", "1", Op32, "SDec", "1", Op32, "SDec", "2");
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "SDec", "1", Op64, "SDec", "1", Op64, "SDec", "2");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "SDec", "1", Op8, "SDec", "7", Op8,  "SDec", "-128"); // 1 << 7 = 128 (wraps to -128 signed)
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "SDec", "1", Op16, "SDec", "15", Op16, "SDec", "-32768"); // 1 << 15 = 32768 (wraps to -32768 signed)
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "SDec", "1", Op32, "SDec", "31", Op32, "SDec", "-2147483648"); // 1 << 31 = 2^31 (wraps to -2^31 signed)
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "SDec", "1", Op64, "SDec", "63", Op64, "SDec", "-9223372036854775808");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "SDec", "1", Op8, "SDec", "8", Op8,  "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "SDec", "1", Op16, "SDec", "16", Op16, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "SDec", "1", Op32, "SDec", "32", Op32, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "SDec", "1", Op64, "SDec", "64", Op64, "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "SDec", "-1", Op8, "SDec", "1", Op8,  "SDec", "-2");
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "SDec", "-1", Op16, "SDec", "1", Op16, "SDec", "-2");
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "SDec", "-1", Op32, "SDec", "1", Op32, "SDec", "-2");
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "SDec", "-1", Op64, "SDec", "1", Op64, "SDec", "-2");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "SDec", "-1", Op8, "SDec", "8", Op8,  "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "SDec", "-1", Op16, "SDec", "16", Op16, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "SDec", "-1", Op32, "SDec", "32", Op32, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "SDec", "-1", Op64, "SDec", "63", Op64, "SDec", "-9223372036854775808");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "SDec", "1", Op8, "SDec", "0", Op8,  "SDec", "1");
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "SDec", "1", Op16, "SDec", "0", Op16, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "SDec", "1", Op32, "SDec", "0", Op32, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "SDec", "1", Op64, "SDec", "0", Op64, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "SDec", "1", Op8, "SDec", "64", Op8,  "SDec", "0");
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "SDec", "1", Op16, "SDec", "64", Op16, "SDec", "0");
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "SDec", "1", Op32, "SDec", "64", Op32, "SDec", "0");
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "SDec", "1", Op64, "SDec", "64", Op64, "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "SDec", "1", Op8, "SDec", "-1", Op8,  "SDec", "0"); // Should behave like right shift 1
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "SDec", "1", Op16, "SDec", "-1", Op16, "SDec", "0"); // Should behave like right shift 1
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "SDec", "1", Op32, "SDec", "-1", Op32, "SDec", "0"); // Should behave like right shift 1
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "SDec", "1", Op64, "SDec", "-1", Op64, "SDec", "0"); // Should behave like right shift 1
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "SDec", "8", Op8, "SDec", "3", Op8,  "SDec", "64");
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "SDec", "8", Op16, "SDec", "3", Op16, "SDec", "64");
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "SDec", "8", Op32, "SDec", "3", Op32, "SDec", "64");
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "SDec", "8", Op64, "SDec", "3", Op64, "SDec", "64");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("leftshift", Op8,  "Hex", "80", Op8, "SDec", "1", Op8,  "Hex", "00");
+	</script>
+	<script>
+	  testbinop("leftshift", Op16, "Hex", "8000", Op16, "SDec", "1", Op16, "Hex", "0000");
+	</script>
+	<script>
+	  testbinop("leftshift", Op32, "Hex", "80000000", Op32, "SDec", "1", Op32, "Hex", "00000000");
+	</script>
+	<script>
+	  testbinop("leftshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "1", Op64, "Hex", "0000000000000000");
+        </script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("rightshift", Op8,  "SDec", "2", Op8, "SDec", "1", Op8,  "SDec", "1");
+	</script>
+	<script>
+	  testbinop("rightshift", Op16, "SDec", "2", Op16, "SDec", "1", Op16, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("rightshift", Op32, "SDec", "2", Op32, "SDec", "1", Op32, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("rightshift", Op64, "SDec", "2", Op64, "SDec", "1", Op64, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("rightshift", Op8,  "SDec", "1", Op8, "SDec", "7", Op8,  "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("rightshift", Op16, "SDec", "1", Op16, "SDec", "15", Op16, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("rightshift", Op32, "SDec", "1", Op32, "SDec", "31", Op32, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("rightshift", Op64, "SDec", "1", Op64, "SDec", "63", Op64, "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("rightshift", Op8,  "SDec", "1", Op8, "SDec", "8", Op8,  "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("rightshift", Op16, "SDec", "1", Op16, "SDec", "16", Op16, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("rightshift", Op32, "SDec", "1", Op32, "SDec", "32", Op32, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("rightshift", Op64, "SDec", "1", Op64, "SDec", "64", Op64, "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("rightshift", Op8,  "SDec", "-2", Op8, "SDec", "1", Op8,  "SDec", "127"); // -2 >>> 1 = 254 >>> 1 = 127
+	</script>
+	<script>
+	  testbinop("rightshift", Op16, "SDec", "-2", Op16, "SDec", "1", Op16, "SDec", "32767"); // -2 >>> 1 = 65534 >>> 1 = 32767
+	</script>
+	<script>
+	  testbinop("rightshift", Op32, "SDec", "-2", Op32, "SDec", "1", Op32, "SDec", "2147483647"); // -2 >>> 1 = 4294967294 >>> 1 = 2147483647
+	</script>
+	<script>
+	  testbinop("rightshift", Op64, "SDec", "-2", Op64, "SDec", "1", Op64, "SDec", "9223372036854775807"); // -2 >>> 1 = 18446744073709551614 >>> 1 = 9223372036854775807
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("rightshift", Op8,  "SDec", "-1", Op8, "SDec", "1", Op8,  "SDec", "127"); // -1 >>> 1 = 255 >>> 1 = 127
+	</script>
+	<script>
+	  testbinop("rightshift", Op16, "SDec", "-1", Op16, "SDec", "1", Op16, "SDec", "32767"); // -1 >>> 1 = 65535 >>> 1 = 32767
+	</script>
+	<script>
+	  testbinop("rightshift", Op32, "SDec", "-1", Op32, "SDec", "1", Op32, "SDec", "2147483647"); // -1 >>> 1 = 4294967295 >>> 1 = 2147483647
+	</script>
+	<script>
+	  testbinop("rightshift", Op64, "SDec", "-1", Op64, "SDec", "1", Op64, "SDec", "9223372036854775807"); // -1 >>> 1 = 18446744073709551615 >>> 1 = 9223372036854775807
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("rightshift", Op8,  "SDec", "1", Op8, "SDec", "0", Op8,  "SDec", "1");
+	</script>
+	<script>
+	  testbinop("rightshift", Op16, "SDec", "1", Op16, "SDec", "0", Op16, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("rightshift", Op32, "SDec", "1", Op32, "SDec", "0", Op32, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("rightshift", Op64, "SDec", "1", Op64, "SDec", "0", Op64, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("rightshift", Op8,  "SDec", "1", Op8, "SDec", "64", Op8,  "SDec", "0");
+	</script>
+	<script>
+	  testbinop("rightshift", Op16, "SDec", "1", Op16, "SDec", "64", Op16, "SDec", "0");
+	</script>
+	<script>
+	  testbinop("rightshift", Op32, "SDec", "1", Op32, "SDec", "64", Op32, "SDec", "0");
+	</script>
+	<script>
+	  testbinop("rightshift", Op64, "SDec", "1", Op64, "SDec", "64", Op64, "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("rightshift", Op8,  "SDec", "1", Op8, "SDec", "-1", Op8,  "SDec", "2"); // Should behave like left shift 1
+	</script>
+	<script>
+	  testbinop("rightshift", Op16, "SDec", "1", Op16, "SDec", "-1", Op16, "SDec", "2"); // Should behave like left shift 1
+	</script>
+	<script>
+	  testbinop("rightshift", Op32, "SDec", "1", Op32, "SDec", "-1", Op32, "SDec", "2"); // Should behave like left shift 1
+	</script>
+	<script>
+	  testbinop("rightshift", Op64, "SDec", "1", Op64, "SDec", "-1", Op64, "SDec", "2"); // Should behave like left shift 1
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("rightshift", Op8,  "Hex", "80", Op8, "SDec", "1", Op8,  "Hex", "40");
+	</script>
+	<script>
+	  testbinop("rightshift", Op16, "Hex", "8000", Op16, "SDec", "1", Op16, "Hex", "4000");
+	</script>
+	<script>
+	  testbinop("rightshift", Op32, "Hex", "80000000", Op32, "SDec", "1", Op32, "Hex", "40000000");
+	</script>
+	<script>
+	  testbinop("rightshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "1", Op64, "Hex", "4000000000000000");
+        </script>
+      </tr>
+
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "8", Op8, "SDec", "1", Op8,  "SDec", "4");
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "8", Op16, "SDec", "1", Op16, "SDec", "4");
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "8", Op32, "SDec", "1", Op32, "SDec", "4");
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "8", Op64, "SDec", "1", Op64, "SDec", "4");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "8", Op8, "SDec", "3", Op8,  "SDec", "1");
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "8", Op16, "SDec", "3", Op16, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "8", Op32, "SDec", "3", Op32, "SDec", "1");
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "8", Op64, "SDec", "3", Op64, "SDec", "1");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "8", Op8, "SDec", "0", Op8,  "SDec", "8");
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "8", Op16, "SDec", "0", Op16, "SDec", "8");
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "8", Op32, "SDec", "0", Op32, "SDec", "8");
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "8", Op64, "SDec", "0", Op64, "SDec", "8");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "8", Op8, "SDec", "8", Op8,  "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "8", Op16, "SDec", "16", Op16, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "8", Op32, "SDec", "32", Op32, "SDec", "0"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "8", Op64, "SDec", "64", Op64, "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "-2", Op8, "SDec", "1", Op8,  "SDec", "-1"); // 11111110 >> 1 = 11111111
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "-2", Op16, "SDec", "1", Op16, "SDec", "-1"); // 1111111111111110 >> 1 = 1111111111111111
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "-2", Op32, "SDec", "1", Op32, "SDec", "-1"); // 1111...1110 >> 1 = 1111...1111
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "-2", Op64, "SDec", "1", Op64, "SDec", "-1"); // 1111...1110 >> 1 = 1111...1111
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "-1", Op8, "SDec", "1", Op8,  "SDec", "-1"); // 11111111 >> 1 = 11111111
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "-1", Op16, "SDec", "1", Op16, "SDec", "-1"); // 1111... >> 1 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "-1", Op32, "SDec", "1", Op32, "SDec", "-1"); // 1111... >> 1 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "-1", Op64, "SDec", "1", Op64, "SDec", "-1"); // 1111... >> 1 = 1111...
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "-1", Op8, "SDec", "7", Op8,  "SDec", "-1"); // 11111111 >> 7 = 11111111
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "-1", Op16, "SDec", "15", Op16, "SDec", "-1"); // 1111... >> 15 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "-1", Op32, "SDec", "31", Op32, "SDec", "-1"); // 1111... >> 31 = 1111...
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "-1", Op64, "SDec", "63", Op64, "SDec", "-1"); // 1111... >> 63 = 1111...
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "-1", Op8, "SDec", "8", Op8,  "SDec", "-1"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "-1", Op16, "SDec", "16", Op16, "SDec", "-1"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "-1", Op32, "SDec", "32", Op32, "SDec", "-1"); // Shift >= size
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "-1", Op64, "SDec", "64", Op64, "SDec", "-1"); // Shift >= size
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "SDec", "1", Op8, "SDec", "-1", Op8,  "SDec", "2"); // Should behave like left shift 1
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "SDec", "1", Op16, "SDec", "-1", Op16, "SDec", "2"); // Should behave like left shift 1
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "SDec", "1", Op32, "SDec", "-1", Op32, "SDec", "2"); // Should behave like left shift 1
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "SDec", "1", Op64, "SDec", "-1", Op64, "SDec", "2"); // Should behave like left shift 1
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("arightshift", Op8,  "Hex", "80", Op8, "SDec", "1", Op8,  "Hex", "c0"); // 10000000 >> 1 = 11000000
+	</script>
+	<script>
+	  testbinop("arightshift", Op16, "Hex", "8000", Op16, "SDec", "1", Op16, "Hex", "c000"); // 1000... >> 1 = 1100...
+	</script>
+	<script>
+	  testbinop("arightshift", Op32, "Hex", "80000000", Op32, "SDec", "1", Op32, "Hex", "c0000000"); // 1000... >> 1 = 1100...
+	</script>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "1", Op64, "Hex", "c000000000000000"); // 1000... >> 1 = 1100...
+        </script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "32", Op64, "Hex", "ffffffff80000000"); // 1000...0000 >> 32 = 1111...1111_1000...0000
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "8000000000000000", Op64, "SDec", "33", Op64, "Hex", "ffffffffc0000000"); // 1000...0000 >> 33 = 1111...1111_1100...0000
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "0000000100000000", Op64, "SDec", "32", Op64, "Hex", "0000000000000001"); // 0000...0001_0000...0000 >> 32 = 0000...0000_0000...0001
+	</script>
+      </tr>
+      <tr>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<td bgcolor=green></td>
+	<script>
+	  testbinop("arightshift", Op64, "Hex", "0000000100000000", Op64, "SDec", "33", Op64, "Hex", "0000000000000000"); // 0000...0001_0000...0000 >> 33 = 0000...0000_0000...0000
 	</script>
       </tr>
 
