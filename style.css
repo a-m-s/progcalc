@@ -122,8 +122,10 @@ input.error {
 }
 
 .operators {
-  position: sticky;
+  position: fixed;
   bottom: 1em;
+  width: 100%;
+  z-index: 1000; /* Ensure it's on top */
 }
 
 .addbutton {
