@@ -144,7 +144,7 @@ Op8.prototype.modulus = function(a, b) {
 
 // Integer multiply
 Op8.prototype.multiply = function(a, b) {
-  this.u8[0] = a.u8[0] * b.u8[0];
+  this.i8[0] = a.i8[0] * b.i8[0];
   return this;
 }
 

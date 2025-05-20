@@ -148,7 +148,7 @@ Op16.prototype.modulus = function(a, b) {
 
 // Integer multiply
 Op16.prototype.multiply = function(a, b) {
-  this.u16[0] = a.u16[0] * b.u16[0];
+  this.i16[0] = a.i16[0] * b.i16[0];
   return this;
 }
 

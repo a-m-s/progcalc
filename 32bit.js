@@ -198,7 +198,7 @@ Op32.prototype.modulus = function(a, b) {
 
 // Integer multiply
 Op32.prototype.multiply = function(a, b) {
-  this.u32[0] = a.u32[0] * b.u32[0];
+  this.i32[0] = a.i32[0] * b.i32[0];
   return this;
 }
 
