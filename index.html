@@ -30,19 +30,19 @@
     </table>
 
     <div class="operators">
-      <button onClick="addrow(8)" class="addbutton">New 8-bit value</button
-      ><button onClick="addrow(16)" class="addbutton">New 16-bit value</button
-      ><button onClick="addrow(32)" class="addbutton">New 32-bit value</button
-      ><button onClick="addrow(64)" class="addbutton">New 64-bit value</button>
+      <button onClick="addrow(8)" class="addbutton">New 8-bit value</button>
+      <button onClick="addrow(16)" class="addbutton">New 16-bit value</button>
+      <button onClick="addrow(32)" class="addbutton">New 32-bit value</button>
+      <button onClick="addrow(64)" class="addbutton">New 64-bit value</button>
       <table>
 	<tr>
 	  <td align=right>Integer:</td>
 	  <td>
 	    <button id="add" onClick="addrow_op('add')"
-	      title="Integer Add" class="opbutton">&plus;</button
-	    ><button id="subtract" onClick="addrow_op('subtract')"
-	      title="Integer Subtract" class="opbutton">&minus;</button
-	    ><button id="multiply" onClick="addrow_op('multiply')"
+	      title="Integer Add" class="opbutton">&plus;</button>
+	    <button id="subtract" onClick="addrow_op('subtract')"
+	      title="Integer Subtract" class="opbutton">&minus;</button>
+	    <button id="multiply" onClick="addrow_op('multiply')"
 	      title="Integer Multiply" class="opbutton">&times;</button
 	    ><button id="divide" onClick="addrow_op('divide')"
 	      title="Integer Signed Divide" class="opbutton">&divide;</button
@@ -93,12 +93,12 @@
 	  <td align=right>Bitwise:</td>
 	  <td>
 	    <button id="not" onClick="addrow_op('not')"
-	      title="Bitwise Not" class="opbutton">&not;</button
-	    ><button id="and" onClick="addrow_op('and')"
-	      title="Bitwise And" class="opbutton">&and;</button
-	    ><button id="or" onClick="addrow_op('or')"
-	      title="Bitwise Or" class="opbutton">&or;</button
-	    ><button id="xor" onClick="addrow_op('xor')"
+	      title="Bitwise Not" class="opbutton">&not;</button>
+	    <button id="and" onClick="addrow_op('and')"
+	      title="Bitwise And" class="opbutton">&and;</button>
+	    <button id="or" onClick="addrow_op('or')"
+	      title="Bitwise Or" class="opbutton">&or;</button>
+	    <button id="xor" onClick="addrow_op('xor')"
 	      title="Bitwise Exclusive Or" class="opbutton">xor</button
 	    ><select id="binfn" onChange="this.value != '' && addrow_op(this.value);
 		document.getElementById('bindefault').selected=true" class="opselect">
