@@ -125,9 +125,11 @@ input.error {
 
 .operators {
   position: fixed;
-  bottom: 1em;
+  bottom: 0em;
   width: 100%;
   z-index: 1000; /* Ensure it's on top */
+  background-color: white;
+  opacity: 80%;
 }
 
 .addbutton {
