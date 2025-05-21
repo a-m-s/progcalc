@@ -151,6 +151,12 @@ Op32.prototype.abs = function(a) {
   return this;
 };
 
+// FP absolute value
+Op32.prototype.absfp = function(a) {
+  this.f32[0] = Math.abs(a.f32[0]);
+  return this;
+};
+
 // Integer add
 Op32.prototype.add = function(a, b) {
   this.u32[0] = a.u32[0] + b.u32[0];

@@ -381,6 +381,12 @@ Op64.prototype.abs = function(a) {
   return this;
 };
 
+// FP absolute value
+Op64.prototype.absfp = function(a) {
+  this.f64[0] = Math.abs(a.f64[0]);
+  return this;
+};
+
 // Integer add
 Op64.prototype.add = function(a, b) {
   var lo = a.u32[0] + b.u32[0];

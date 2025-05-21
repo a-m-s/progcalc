@@ -112,6 +112,7 @@ var operators = {
   floorfp: {type: "unop", symbol: "floor ", fp1: true},
   multiplyfp: {type: "binop", symbol: "&times;", fp1: true, fp2: true},
   negatefp: {type: "unop", symbol: "&minus;", fp1: true},
+  absfp: {type: "unop", symbol: "abs", fp1: true},
   subtractfp: {type: "binop", symbol: "&minus;", fp1: true, fp2: true},
   roundfp: {type: "unop", symbol: "round ", fp1: true},
 
