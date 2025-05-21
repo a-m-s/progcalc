@@ -365,6 +365,21 @@ function udiv64(a, b) {
 
    The operators are in alphabetical order.  */
 
+// Integer absolute value
+Op64.prototype.abs = function(a) {
+  // Check the sign bit (most significant bit of the high word)
+  var sign = !!(a.u32[1] & 0x80000000);
+
+  if (sign) {
+    // If negative, negate the number
+    this.negate(a);
+  } else {
+    // If non-negative, just copy the value
+    this.copy(a);
+  }
+  return this;
+};
+
 // Integer add
 Op64.prototype.add = function(a, b) {
   var lo = a.u32[0] + b.u32[0];

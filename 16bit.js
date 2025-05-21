@@ -120,6 +120,12 @@ Op16.prototype.toBin = function() {
 
    The operators are in alphabetical order.  */
 
+// Integer absolute value
+Op16.prototype.abs = function(a) {
+  this.i16[0] = Math.abs(a.i16[0]);
+  return this;
+};
+
 // Integer add
 Op16.prototype.add = function(a, b) {
   this.u16[0] = a.u16[0] + b.u16[0];

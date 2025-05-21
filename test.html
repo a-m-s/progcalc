@@ -953,6 +953,49 @@
       </tr>
       
       <tr>
+	<script>
+	  // Test abs operator
+	  testunop("abs", Op8,  "SDec", "5", Op8,  "SDec", "5");
+          testunop("abs", Op16, "SDec", "5", Op16, "SDec", "5");
+          testunop("abs", Op32, "SDec", "5", Op32, "SDec", "5");
+          testunop("abs", Op64, "SDec", "5", Op64, "SDec", "5");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testunop("abs", Op8,  "SDec", "-5", Op8,  "SDec", "5");
+          testunop("abs", Op16, "SDec", "-5", Op16, "SDec", "5");
+          testunop("abs", Op32, "SDec", "-5", Op32, "SDec", "5");
+          testunop("abs", Op64, "SDec", "-5", Op64, "SDec", "5");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  testunop("abs", Op8,  "SDec", "0", Op8,  "SDec", "0");
+          testunop("abs", Op16, "SDec", "0", Op16, "SDec", "0");
+          testunop("abs", Op32, "SDec", "0", Op32, "SDec", "0");
+          testunop("abs", Op64, "SDec", "0", Op64, "SDec", "0");
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  // Test min signed value. Math.abs(min_signed) wraps around in signed types.
+	  testunop("abs", Op8,  "SDec", "-128", Op8,  "SDec", "-128");
+          testunop("abs", Op16, "SDec", "-32768", Op16, "SDec", "-32768");
+          testunop("abs", Op32, "SDec", "-2147483648", Op32, "SDec", "-2147483648");
+          testunop("abs", Op64, "SDec", "-9223372036854775808", Op64, "SDec", "-9223372036854775808"); // Note: 2^63 is outside signed range, negate wraps
+        </script>
+      </tr>
+      <tr>
+	<script>
+	  // Test max signed value
+	  testunop("abs", Op8,  "SDec", "127", Op8,  "SDec", "127");
+          testunop("abs", Op16, "SDec", "32767", Op16, "SDec", "32767");
+          testunop("abs", Op32, "SDec", "2147483647", Op32, "SDec", "2147483647");
+          testunop("abs", Op64, "SDec", "9223372036854775807", Op64, "SDec", "9223372036854775807");
+        </script>
+      </tr>
+      <tr>
 	<td bgcolor=green></td>
 	<script>
 	  testunop("sext16", Op8,  "SDec", "1", Op16, "SDec", "1");

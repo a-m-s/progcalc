@@ -116,6 +116,12 @@ Op8.prototype.toBin = function() {
 
    The operators are in alphabetical order.  */
 
+// Integer absolute value
+Op8.prototype.abs = function(a) {
+  this.i8[0] = Math.abs(a.i8[0]);
+  return this;
+};
+
 // Integer add
 Op8.prototype.add = function(a, b) {
   this.u8[0] = a.u8[0] + b.u8[0];

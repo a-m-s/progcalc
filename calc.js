@@ -94,6 +94,7 @@ var operators = {
   divide: {type: "binop", symbol: "&divide;"},
   multiply: {type: "binop", symbol: "&times;"},
   negate: {type: "unop", symbol: "&minus;"},
+  abs: {type: "unop", symbol: "abs"},
   subtract: {type: "binop", symbol: "&minus;"},
   modulus: {type: "binop", symbol: "mod"},
   udivide: {type: "binop", symbol: "&divide;<sub>u</sub>"},

@@ -145,6 +145,12 @@ Op32.prototype.toBin = function() {
 
    The operators are in alphabetical order.  */
 
+// Integer absolute value
+Op32.prototype.abs = function(a) {
+  this.i32[0] = Math.abs(a.i32[0]);
+  return this;
+};
+
 // Integer add
 Op32.prototype.add = function(a, b) {
   this.u32[0] = a.u32[0] + b.u32[0];
