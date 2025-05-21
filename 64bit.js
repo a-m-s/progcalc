@@ -31,7 +31,8 @@ var Op64 = function() {
 Op64.prototype.size = 64;
 
 Op64.prototype.copy = function(o) {
-  this.f64[0] = o.f64[0];
+  this.u32[0] = o.u32[0];
+  this.u32[1] = o.u32[1];
   return this;
 }
 
