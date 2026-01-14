@@ -2942,6 +2942,159 @@
 	  testunop("absfp", Op64, "Float", "NaN", Op64, "Float", "NaN");
 	</script>
       </tr>
+
+      <!-- Fmod tests -->
+      <tr>
+	<script>
+	  // Test fmod operator - basic cases
+	  testbinop("fmod", Op32, "Float", "5.0", Op32, "Float", "3.0", Op32, "Float", "2.0");
+	  testbinop("fmod", Op64, "Float", "5.0", Op64, "Float", "3.0", Op64, "Float", "2.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "7.5", Op32, "Float", "2.5", Op32, "Float", "0.0");
+	  testbinop("fmod", Op64, "Float", "7.5", Op64, "Float", "2.5", Op64, "Float", "0.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "10.0", Op32, "Float", "3.0", Op32, "Float", "1.0");
+	  testbinop("fmod", Op64, "Float", "10.0", Op64, "Float", "3.0", Op64, "Float", "1.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "-5.0", Op32, "Float", "3.0", Op32, "Float", "-2.0");
+	  testbinop("fmod", Op64, "Float", "-5.0", Op64, "Float", "3.0", Op64, "Float", "-2.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "5.0", Op32, "Float", "-3.0", Op32, "Float", "2.0");
+	  testbinop("fmod", Op64, "Float", "5.0", Op64, "Float", "-3.0", Op64, "Float", "2.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "-5.0", Op32, "Float", "-3.0", Op32, "Float", "-2.0");
+	  testbinop("fmod", Op64, "Float", "-5.0", Op64, "Float", "-3.0", Op64, "Float", "-2.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "0.0", Op32, "Float", "3.0", Op32, "Float", "0.0");
+	  testbinop("fmod", Op64, "Float", "0.0", Op64, "Float", "3.0", Op64, "Float", "0.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "3.0", Op32, "Float", "5.0", Op32, "Float", "3.0");
+	  testbinop("fmod", Op64, "Float", "3.0", Op64, "Float", "5.0", Op64, "Float", "3.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "1.0", Op32, "Float", "1.0", Op32, "Float", "0.0");
+	  testbinop("fmod", Op64, "Float", "1.0", Op64, "Float", "1.0", Op64, "Float", "0.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "2.5", Op32, "Float", "0.5", Op32, "Float", "0.0");
+	  testbinop("fmod", Op64, "Float", "2.5", Op64, "Float", "0.5", Op64, "Float", "0.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "3.14159", Op32, "Float", "1.0", Op32, "Float", "0.14159011840820312");
+	  testbinop("fmod", Op64, "Float", "3.14159", Op64, "Float", "1.0", Op64, "Float", "0.14158999999999988");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "100.0", Op32, "Float", "7.0", Op32, "Float", "2.0");
+	  testbinop("fmod", Op64, "Float", "100.0", Op64, "Float", "7.0", Op64, "Float", "2.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "1.5", Op32, "Float", "0.1", Op32, "Float", "0.09999997913837433");
+	  testbinop("fmod", Op64, "Float", "1.5", Op64, "Float", "0.1", Op64, "Float", "0.09999999999999992");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "Infinity", Op32, "Float", "3.0", Op32, "Float", "NaN");
+	  testbinop("fmod", Op64, "Float", "Infinity", Op64, "Float", "3.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "3.0", Op32, "Float", "Infinity", Op32, "Float", "3.0");
+	  testbinop("fmod", Op64, "Float", "3.0", Op64, "Float", "Infinity", Op64, "Float", "3.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "NaN", Op32, "Float", "3.0", Op32, "Float", "NaN");
+	  testbinop("fmod", Op64, "Float", "NaN", Op64, "Float", "3.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "3.0", Op32, "Float", "NaN", Op32, "Float", "NaN");
+	  testbinop("fmod", Op64, "Float", "3.0", Op64, "Float", "NaN", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "3.0", Op32, "Float", "0.0", Op32, "Float", "NaN");
+	  testbinop("fmod", Op64, "Float", "3.0", Op64, "Float", "0.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "-0.0", Op32, "Float", "3.0", Op32, "Float", "-0.0");
+	  testbinop("fmod", Op64, "Float", "-0.0", Op64, "Float", "3.0", Op64, "Float", "-0.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "3.0", Op32, "Float", "-0.0", Op32, "Float", "NaN");
+	  testbinop("fmod", Op64, "Float", "3.0", Op64, "Float", "-0.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "0.0", Op32, "Float", "0.0", Op32, "Float", "NaN");
+	  testbinop("fmod", Op64, "Float", "0.0", Op64, "Float", "0.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "-0.0", Op32, "Float", "-0.0", Op32, "Float", "NaN");
+	  testbinop("fmod", Op64, "Float", "-0.0", Op64, "Float", "-0.0", Op64, "Float", "NaN");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "1e10", Op32, "Float", "3.0", Op32, "Float", "1.0");
+	  testbinop("fmod", Op64, "Float", "1e10", Op64, "Float", "3.0", Op64, "Float", "1.0");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "1e-10", Op32, "Float", "3.0", Op32, "Float", "1.000000013351432e-10");
+	  testbinop("fmod", Op64, "Float", "1e-10", Op64, "Float", "3.0", Op64, "Float", "1e-10");
+	</script>
+      </tr>
+      <tr>
+	<script>
+	  testbinop("fmod", Op32, "Float", "123.456", Op32, "Float", "78.9", Op32, "Float", "44.555999755859375");
+	  testbinop("fmod", Op64, "Float", "123.456", Op64, "Float", "78.9", Op64, "Float", "44.556");
+	</script>
+      </tr>
     </table>
   </body>
 </html>

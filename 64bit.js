@@ -538,6 +538,13 @@ Op64.prototype.modulus = function(a, b) {
   return this;
 }
 
+// FP modulus (fmod)
+Op64.prototype.fmod = function(a, b) {
+  if (b.f64[0] === 0) this.warning = "Divide by zero!"
+  this.f64[0] = a.f64[0] % b.f64[0];
+  return this;
+}
+
 // Integer multiply
 Op64.prototype.multiply = function(a, b) {
   var product = new Op64();

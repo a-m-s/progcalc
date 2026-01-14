@@ -97,6 +97,7 @@ var operators = {
   abs: {type: "unop", symbol: "abs"},
   subtract: {type: "binop", symbol: "&minus;"},
   modulus: {type: "binop", symbol: "mod"},
+  fmod: {type: "binop", symbol: "fmod"},
   udivide: {type: "binop", symbol: "&divide;<sub>u</sub>"},
   umodulus: {type: "binop", symbol: "mod<sub>u</sub>"},
   sext16: {type: "unop", symbol: "sext", output: new Op16()},

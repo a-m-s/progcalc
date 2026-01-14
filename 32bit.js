@@ -208,6 +208,13 @@ Op32.prototype.modulus = function(a, b) {
   return this;
 }
 
+// FP modulus (fmod)
+Op32.prototype.fmod = function(a, b) {
+  if (b.f32[0] === 0) this.warning = "Divide by zero!"
+  this.f32[0] = a.f32[0] % b.f32[0];
+  return this;
+}
+
 // Integer multiply
 Op32.prototype.multiply = function(a, b) {
   this.i32[0] = a.i32[0] * b.i32[0];
